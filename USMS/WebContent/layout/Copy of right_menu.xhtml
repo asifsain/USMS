@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+
+
+</h:head>
+
+<body>
+
+<table width="400">
+        <tbody>
+            <tr>
+                <td><span onclick="changePage('Kate')" onmouseout="changePage('')">Kate</span></td>
+                <td><span onmouseover="changePage('John')" onmouseout="changePage('')">John</span></td>
+                <td><span onmouseover="changePage('Alex')" onmouseout="changePage('')">Alex</span></td>
+            </tr>
+            <tr>
+                <td colspan="3">Name: <b> <h:outputText id="showname" value="#{menuBean.test}" /> </b></td>
+            </tr>
+        </tbody>
+    </table>
+<h:form>
+		<a4j:jsFunction name="changePage" render="showname" actionListener="#{menuBean.doAction}" >
+			<a4j:param name="name" assignTo="#{menuBean.test}"></a4j:param>
+		</a4j:jsFunction>
+	
+	<h:inputText value="#{menuBean.test}">
+            <a4j:ajax event="keyup" render="showname" />
+        </h:inputText>
+	
+	<ol id="emp_management_add"
+		style="visibility: hidden; width: 100%; position: absolute;">
+		
+		
+		
+		<li><h:commandButton value="File Details"  onmouseover="changePage('newest page')" actionListener="#{menuBean.doAction}" >
+		
+				<a4j:ajax render="@all"> </a4j:ajax>
+		
+		</h:commandButton></li>
+		<li>Communication Details</li>
+		<li 
+			onclick="changePage('asd')">Bank
+			Account Details</li>
+		<li>Salary Details</li>
+		<li>Family Details</li>
+	</ol>
+
+
+	<ol id="emp_management_update"
+		style="visibility: hidden; width: 100%; position: absolute;">
+		<li>File Details</li>
+		<li>Communication Details</li>
+		<li>Bank Account Details</li>
+		<li>Salary Details</li>
+		<li>Family Details</li>
+
+	</ol>
+
+	<ol id="emp_management_view"
+		style="visibility: hidden; width: 100%; position: absolute;">
+		<li>File Details</li>
+		<li>Communication Details</li>
+		<li>Bank Account Details</li>
+		<li>Salary Details</li>
+		<li>Family Details</li>
+		<li>Air Ticket Reimbursement</li>
+		<li>Emirates ID Reimbursement</li>
+	</ol>
+	
+	</h:form>
+</body>
+</html>

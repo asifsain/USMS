@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:my="http://java.sun.com/jsf/composite/components"> 
+   
+<h:head>
+</h:head> 
+
+<h:body style="margin-top: 0px;">
+<ui:composition>
+	 <ui:include src="/application/register_employee/registerEmployeeCommon.xhtml"></ui:include>
+	 <h:outputScript name="file.js" library="javascript"></h:outputScript>
+	  <table style="padding-top: 0px; padding-left: 10px; width:450px; margin-top: 0px" >
+	      <tr>
+	      <td>
+	        <h:outputText value="From Date :"></h:outputText>
+	      </td>
+	      <td>
+	        <rich:calendar id="fromDate" styleClass="requiredClass" value="#{salaryProcess.model.fromDate}" cellWidth="24px" cellHeight="22px"  inputStyle="width:80px"
+	         ></rich:calendar>
+	        </td>
+	       
+	        <td>
+	         <h:outputText value="To Date :"></h:outputText>
+	         </td>
+	         <td>
+	        <rich:calendar id="toDate" value="#{salaryProcess.model.toDate}"  styleClass="requiredClass" cellWidth="24px" cellHeight="22px"  inputStyle="width:80px"
+	         onchange="salaryProcess();"></rich:calendar>
+	       </td>
+	           </tr>
+	 
+	   
+	
+	    
+			<tr > 
+		 	    <td><h:outputText value="Month:" /></td>
+			     <td style="height:100px;vertical-align: middle;">
+			       <h:selectOneMenu  value="#{salaryProcess.model.month}" >
+                       <f:selectItems value="#{salaryProcess.model.months}"></f:selectItems>
+                   </h:selectOneMenu>
+			     
+			     </td>
+				
+		  		  <td><h:outputText value="Year:" /></td>
+				
+                   <td style="height:100px;vertical-align: middle;">
+                    <h:selectOneMenu value="#{salaryProcess.model.year}" >
+                     <f:selectItems value="#{salaryProcess.model.years}"></f:selectItems>
+                     
+                     </h:selectOneMenu>
+                   
+                   </td>
+                   <td><a4j:commandButton value="Search" execute="@form"    oncomplete="showEmpDeail()" actionListener="#{salaryProcess.selectAllEmployee}"
+ 							render="table,processbtn"  style="min-height: 20px; min-width: 50px; font-size: 12px;"/></td> 
+                  
+			  </tr>
+         </table>
+            
+<div align="right" id="salProcess" style="visibility:hidden; float:left;right:50px;top:200px;height:100%; width:600px; margin-left:20px;">
+
+ <rich:dataTable  value="#{salaryProcess.model.empList}"  var="record"  id="table" style="width:100%;height:100%;text-align:center"
+    rowClasses="searchTableOddRow,searchTableEvenRow" rows="10"
+    onRowMouseOver="this.style.backgroundColor='#B5F3FB'"
+    onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+     <rich:column  width="15%" >
+     <f:facet name="header" >
+       <h:outputText  value="Select"  ></h:outputText>
+      
+     </f:facet>
+       <h:selectBooleanCheckbox value="#{record.flag}" disabled="#{!record.flag}"></h:selectBooleanCheckbox>
+    </rich:column >
+       <rich:column  width="15%" >
+     <f:facet name="header"  >
+       <h:outputText  value="Emp No" ></h:outputText>
+       </f:facet>
+       <h:outputText value="#{record.empNo}"></h:outputText>
+    </rich:column>
+     <rich:column   width="10%">
+      <f:facet name="header">
+       <h:outputText  value="Emp Name" ></h:outputText> 
+      </f:facet>
+       <h:outputText  value="#{record.firstName}"></h:outputText>
+    </rich:column>
+    
+     
+     <rich:column  width="10%">
+     <f:facet name="header">
+      <h:outputText  value="Month Salary" ></h:outputText>
+     </f:facet>
+        <h:outputText value="#{record.empSalaryInfos.total}" ></h:outputText>
+    </rich:column>
+     <rich:column  width="25%">
+     <f:facet name="header">
+      <h:outputText  value="Adjustment Amount" ></h:outputText>
+     </f:facet>
+      <a4j:commandLink value="#{record.totalAdj}" execute="@form" oncomplete="#{rich:component('myModalPanel')}.show();" 
+        render="modeltable" action="#{salaryProcess.selectAdjustmentDetail}" style="font-weight:bold">
+         <f:setPropertyActionListener target="#{salaryProcess.model.empInfo}" value="#{record}"></f:setPropertyActionListener>
+      </a4j:commandLink>
+
+    </rich:column> 
+       <rich:column  width="10%">
+     <f:facet name="header">
+      <h:outputText  value="Total Amount" ></h:outputText>
+     </f:facet>
+        <h:outputText value="#{record.tatalPayable}" ></h:outputText>
+    </rich:column>
+     
+       
+     <rich:column  width="25%" >
+     <f:facet name="header">
+      <h:outputText  value="Status" ></h:outputText>
+     </f:facet>
+      <h:outputText  value="#{record.salayStatus}"></h:outputText>
+      
+    </rich:column>
+     <f:facet name="footer">
+         <rich:dataScroller id="scroller" />     
+     </f:facet>
+    
+    </rich:dataTable>
+    <br />
+    <a4j:commandButton  id="processbtn"  value="Process" style="min-height: 25px; min-width: 80px; font-size: 16px;"
+      actionListener="#{salaryProcess.bulkSalaryProcess}" render="table"/>
+    </div>
+    
+       <script >
+       
+			        var showEmpDeail=  function() {
+				   
+				     document.getElementById('salProcess').style.visibility="visible";
+				
+				   
+                    };
+                  
+                   
+                   
+                   
+        </script>
+       
+               
+ <rich:popupPanel id="myModalPanel" autosized="true" zindex="2000" height="200" width="500" onmaskclick="#{rich:component('myModalPanel')}.hide()">
+       <f:facet name="header">
+            <h:outputText value="Adjustment Detail" />
+        </f:facet>
+      <f:facet name="controls">
+            <h:outputLink value="#" onclick="#{rich:component('myModalPanel')}.hide(); return false;">
+                X
+            </h:outputLink>
+        </f:facet>
+   
+    <div id="myModalDiv">
+     
+       <rich:dataTable  value="#{salaryProcess.model.adjustmentList}"  var="adjustment"  id="modeltable" style="width:100%;height:100%;text-align:center">
+           <rich:column  width="40%">
+            <f:facet name="header">
+              <h:outputText  value="Type " ></h:outputText>
+           </f:facet>
+         <h:outputText value="#{adjustment.adjType}"></h:outputText>
+           </rich:column>
+             <rich:column   width="20%">
+         <f:facet name="header">
+            <h:outputText  value="Date" ></h:outputText> 
+         </f:facet>
+           <h:outputText  value="#{adjustment.adjDt}" converter="javax.faces.DateTime"></h:outputText>
+        </rich:column>
+       <rich:column  width="20%">
+         <f:facet name="header">
+       <h:outputText  value="Amount" ></h:outputText>
+        </f:facet>
+           <h:outputText value="#{adjustment.amt}" ></h:outputText>
+       </rich:column>
+        <rich:column  width="20%">
+         <f:facet name="header">
+       <h:outputText  value="Debit/Credit" ></h:outputText>
+        </f:facet>
+           <h:outputText value="#{adjustment.amtAdjFlag eq 'D' ? 'Debit' : 'Credit'}" ></h:outputText>
+       </rich:column>
+       
+       <rich:column  width="20%">
+         <f:facet name="header">
+       <h:outputText  value="Aproved By" ></h:outputText>
+        </f:facet>
+           <h:outputText value="#{adjustment.apprBy}" ></h:outputText>
+       </rich:column>
+     
+   
+    </rich:dataTable>
+          </div>
+      </rich:popupPanel> 
+      
+         
+</ui:composition> 
+</h:body>
+</html>

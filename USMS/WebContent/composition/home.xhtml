@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/templates/application_template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	
+			<ui:define name="pageTitle">Title
+						
+			</ui:define>
+		
+			<ui:define name="pageHeader"> 
+				<ui:include src="/layout/header.xhtml"></ui:include>
+			</ui:define>
+			
+			<ui:define name="leftMenu">
+				<ui:include src="/layout/left_menu.xhtml"></ui:include>
+			</ui:define>
+			
+			<ui:define name="centreContent">
+				<ui:include src="/layout/centre.xhtml"></ui:include>
+			</ui:define>
+			
+			<ui:define name="rightMenu">
+				<ui:include src="/layout/right_menu.xhtml"></ui:include>
+			</ui:define>
+			
+			<ui:define name="pageFooter">
+				<ui:include src="/layout/footer.xhtml"></ui:include>
+			</ui:define>
+			
+	</ui:composition>
+

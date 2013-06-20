@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+   
+<h:head></h:head> 
+<body>
+<ui:composition>
+    <ui:include src="/application/register_employee/registerEmployeeCommon.xhtml"></ui:include>
+    
+    	<table id="Salary Details" style="padding-top: 20px; padding-left: 20px">
+
+			<tr>
+			
+				<td><h:outputText value="Salary Details" styleClass="FormHeading" /></td>
+			</tr>
+
+			<tr>
+				<td><h:outputText value="Basic" /></td>
+				<td><h:inputText styleClass="inputText" value="#{employee.model.empSalInfo.basic}" id="basicSal" disabled="#{menuBean.mode eq 'view'}"
+				/></td>
+				
+			</tr>
+			<tr>
+				<td><h:outputText value="Transport" /></td>
+				<td><h:inputText styleClass="inputText" value="#{employee.model.empSalInfo.transport}" id="trasnportSal" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+			</tr>
+			<tr>
+				<td><h:outputText value="Housing" /></td>
+				<td><h:inputText styleClass="inputText" value="#{employee.model.empSalInfo.housing}"  id="housingSal" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+			</tr>
+			<tr>
+				<td><h:outputText value="Other Allowance" /></td>
+				<td style="padding-bottom: 15px"><h:inputText styleClass="inputText" value="#{employee.model.empSalInfo.otherAllow}" disabled="#{menuBean.mode eq 'view'}" id="totalOther"/></td>
+
+			</tr>
+			<tr>
+		  		<td colspan="2"><h:outputText value="--------------------------------------" /></td>
+				
+
+			</tr>
+			<tr>
+				<td><h:outputText value="Total" /></td>
+				<td style="font-weight: bold; text-align: right;">
+				<h:inputText value="#{employee.model.empSalInfo.total}" id="total">
+<!-- 				   <f:ajax event="change" execute="@this" render="total"/> -->
+                 </h:inputText></td>
+                 
+
+			</tr>
+
+	<tr>
+				<td colspan="7" style="padding-top: 15px;">
+					<center>
+							<h:button  value="Reset" style="min-height: 25px;	min-width: 80px; font-size: 16px; "/> &nbsp;&nbsp;&nbsp;
+							<a4j:commandButton id="salaryFile" value="Save"    execute="@form"
+							 actionListener="#{employee.updateEmployee}" style="min-height: 25px; min-width: 80px; font-size: 16px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
+							<a4j:commandButton value="Next" actionListener="#{employee.updateSalaryDetails}" render="centreContentForm" oncomplete="navToFamily();" style="min-height: 25px; min-width: 80px; font-size: 16px;"/>
+					</center>
+				</td>
+			</tr>
+
+		</table>
+    	<script>
+	
+			
+				var navToFamily =  function() {
+					//alert("reached");
+					alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
+					if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true')
+						changeCenterPage('/application/register_employee/family.xhtml','family_item');
+					else
+						alert("Validation Not Passed From Server Side")
+					};
+					
+			 $(document).ready(function(){
+						 
+             //iterate through each textboxes and add keyup
+		       $(".inputText").each(function() {
+		 
+		            $(this).keyup(function(){
+		            	calculateSum();
+		            }); 
+		        });
+		 
+	          });
+           
+			 function calculateSum() {
+				   var sum = 0;
+			        //iterate through each textboxes and add the values
+			        $(".inputText").each(function() {
+			            //add only if the value is number
+			             if(this.value.length!=0){
+			              if(!isNaN(this.value) ) {
+			            	 sum += parseFloat(this.value);
+			            
+			               }
+			              else{
+			            	 alert("Plese Enter Number only");
+			            	 this.value="";
+			                 return false;
+			              }
+			             }
+			        });
+			    //   $(".outputText").text(sum.toFixed(2));
+			       document.getElementById('centreContentForm:total').value=sum.toFixed(2)
+			    
+			    }
+			 
+			
+			 
+		   
+	
+					
+			
+			</script>
+    </ui:composition>
+</body> 
+</html>

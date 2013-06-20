@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+
+<ui:composition>
+<div>
+	<div id="accordion" style="background:yellow; ">
+		<h3>Employee Management</h3>
+		<div style="background:aqua; padding:0px;">
+			<ol style="font-size: 11px;  padding-left:0px; ">
+				<li id="item1" >Register New</li>
+				<li id="item2" onclick="changePage('/application/update_employee/search.xhtml')">Update Existing</li>
+				<li id="item3" onclick="changePage('/application/update_employee/search.xhtml')">View Existing</li>
+			</ol>
+		</div>
+		<h3>Salary Processing</h3>
+		<div style="padding:0px;">
+			<ol style="font-size: 11px;  padding-left:0px; width: 100% ">
+				<li id="item4" onclick="resetRightMenu()">Adjustments</li>
+				<li id="item5" onclick="resetRightMenu()">Monthly Salary</li>
+				<li id="item6" onclick="resetRightMenu()">Pay Slip</li>
+				<li id="item7" onclick="resetRightMenu()">Salary Payment Instruction</li>
+			    <li id="item8" onclick="resetRightMenu()">HR Documents</li>
+			</ol>
+		</div>
+		<h3>Inquiry</h3>
+		<div style="padding:0px;">
+			<ol style="font-size: 11px; width: 100%">
+				<li id="item9" onclick="resetRightMenu()">Passport Expiry</li>
+				<li id="item10" onclick="resetRightMenu()">Visa Expiry</li>
+				<li id="item11" onclick="resetRightMenu()">Labour Card Expiry</li>
+			</ol>
+		</div>	
+	</div>
+</div>
+
+	<script>
+
+	function setMgmtSubmenuMode(mode) {
+
+		
+		//alert('reached mgmt sub menu set mode');
+		
+		switch(mode){
+		  case 'add': 
+			  //alert('hi');
+			  //alert('hi2');
+			 	 $J("#emp_mgmt_submenu").children().each(function() {
+
+			 			$J(this).removeClass('ui-selected');
+			 		 
+					   	if(this.id == "airticket_item" || this.id == "eid_item")
+					       	this.style.visibility = "hidden";
+				       	else
+					       	this.style.visibility = "visible";
+				       
+				    });
+			 	
+									
+
+			  break;
+		  case 'update': 
+			  $J("#emp_mgmt_submenu").children().each(function() {
+
+				  	$J(this).removeClass('ui-selected');
+				  
+				   	if(this.id == "airticket_item" || this.id == "eid_item")
+				       	this.style.visibility = "hidden";
+			       	else
+				       	this.style.visibility = "visible";
+			       
+			    });
+
+			  break;
+		  case 'view': 
+			  $J("#emp_mgmt_submenu").children().each(function() {
+				  		$J(this).removeClass('ui-selected');
+				       	this.style.visibility = "visible";
+			    });
+
+			  break;
+			  
+		  case 'none': 
+			  $J("#emp_mgmt_submenu").children().each(function() {
+				  		$J(this).removeClass('ui-selected');
+				   	   	this.style.visibility = "hidden";
+			    });
+
+			  break;
+		}
+	 }
+
+	$J("#item1").not('.emptyMessage').click(function() {
+		setMgmtSubmenuMode("add");
+		changeCenterPage('/application/register_employee/file.xhtml','file_item');
+		changeMode("add");
+		//$J("#emp_mgmt_submenu")
+		//$J("#emp_management_add").css("visibility", "visible");
+		//$J("#emp_management_update").css("visibility", "hidden");
+		//$J("#emp_management_view").css("visibility", "hidden");
+		
+		
+	});
+	$J("#item2").click(function() {  
+
+		setMgmtSubmenuMode("update");
+		changeMode("update");
+		//$J("#emp_management_add").css("visibility", "hidden");
+		//$J("#emp_management_update").css("visibility", "visible");
+		//$J("#emp_management_view").css("visibility", "hidden");
+		
+	});
+	$J("#item3").click(function() {  
+
+		setMgmtSubmenuMode("view");
+		changeMode("view");
+		//$J("#emp_management_add").css("visibility", "hidden");
+		//$J("#emp_management_update").css("visibility", "hidden");
+		//$J("#emp_management_view").css("visibility", "visible");
+		
+	});
+
+	function resetRightMenu()
+	{
+		setMgmtSubmenuMode("none");
+//			$J("#emp_management_add").css("visibility", "hidden");
+//			$J("#emp_management_update").css("visibility", "hidden");
+//			$J("#emp_management_view").css("visibility", "hidden");
+	}
+	
+	$J("#item4").click(function() {  
+		changePage('/application/update_employee/search.xhtml');
+		changeMode("saladj");
+		//setMgmtSubmenuMode("view");
+		//$J("#emp_management_add").css("visibility", "hidden");
+		//$J("#emp_management_update").css("visibility", "hidden");
+		//$J("#emp_management_view").css("visibility", "visible");
+		
+	});
+
+	$J("#item5").click(function() {  
+		changePage('/application/salary_process/salary_process.xhtml');
+		changeMode("salary_procee");
+		//setMgmtSubmenuMode("view");
+		//$J("#emp_management_add").css("visibility", "hidden");
+		//$J("#emp_management_update").css("visibility", "hidden");
+		//$J("#emp_management_view").css("visibility", "visible");
+		
+	});
+	$J("#item6").click(function() {  
+		changePage('/application/salary_process/payslip.xhtml');
+		changeMode("payslip");
+		//setMgmtSubmenuMode("view");
+		//$J("#emp_management_add").css("visibility", "hidden");
+		//$J("#emp_management_update").css("visibility", "hidden");
+		//$J("#emp_management_view").css("visibility", "visible");
+		
+	});
+	
+	$J("#item8").click(function() {  
+		changePage('/application/hrdocuments/hr_documents.xhtml');
+		changeMode("hrdocument");
+		//setMgmtSubmenuMode("view");
+		//$J("#emp_management_add").css("visibility", "hidden");
+		//$J("#emp_management_update").css("visibility", "hidden");
+		//$J("#emp_management_view").css("visibility", "visible");
+		
+	});
+
+</script>
+	
+</ui:composition>
+
+</html>

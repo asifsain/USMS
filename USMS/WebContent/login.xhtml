@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<style>
+		.input-text {
+			font-size: 16px;
+			background-color: #FBEFEF;
+		}
+	
+	</style>
+
+</h:head>
+<h:body>
+
+	<h:form>
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			&nbsp;
+			<br></br>
+		<br></br>
+		<br></br>
+		<br></br>
+		<center>
+			<div style="width: 400px; height: 200px; background-color: #A4A4A4">
+
+				<div
+					style="background-color: #6E6E6E; height: 40px; color: white; font-family: sans-serif; font-size: 25px;">
+					<label>Company Name</label>
+				</div>
+				
+				<table
+					style="color: black; font-family: sans-serif; font-size: 16px">
+					<tr><td colspan="2" style="height: 15px"></td></tr>
+					<tr>
+						<td><h:outputText value="Login" /></td>
+						<td><h:inputText 
+								style="background-color: #FBEFEF; font-size: 16px;" /></td>
+					</tr>
+					<tr>
+						<td><h:outputText value="Password" /></td>
+						<td><h:inputText 
+								style="background-color: #FBEFEF; font-size: 16px;" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="padding-top: 2px"><center>
+								<h:commandButton value="Login" actionListener="#{menuBean.login}" action="composition/home"
+									style="width: 100%; height: 30px; font-size: 16px " />
+							</center></td>
+					</tr>
+				</table>
+
+			</div>
+		</center>
+	</h:form>
+
+</h:body>
+</html>

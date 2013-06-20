@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:loadBundle basename="com.usms.properties.resources" var="msg" />
+<h:head>
+	<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
+
+	<link rel="stylesheet"
+		href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	
+	<script>
+			var $J = jQuery.noConflict();
+</script>
+	<style type="text/css">
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: navy;
+	
+}
+
+.header {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	background-color: red;
+}
+
+.bottom {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	text-align: center;
+	vertical-align: middle;
+	color: #8E969D;
+}
+
+.FormHeading {
+	font-weight: bold;
+	font-size: 16px;
+}
+</style>
+
+
+	<style>
+#feedback {
+	font-size: 1.4em;
+}
+
+ol .ui-selecting {
+	background: #FECA40;
+	height: 100%;
+}
+
+ol .ui-selected {
+	background: #F39814;
+	color: white;
+	height: 100%;
+}
+
+ol {
+	list-style-type: none;
+	width: 100%;
+	padding-left: 0px;
+}
+
+ol li {
+	margin: 3px;
+	padding: 0.4em;
+	font-size: 1.4em;
+	height: 100%;
+}
+</style>
+
+	<script>
+	    $J(function() {
+	        $J( "ol" ).selectable();
+	    });
+	    $J(function() {        
+	        $J( "#accordion" ).accordion();    
+	    });
+	    
+    </script>
+
+
+
+</h:head>
+
+<body>
+
+<div style=" height: 100%; width: 100%; top: 0px; left: 0px; overflow: auto; position: fixed;">
+	<div style="background-color: orange;  height: 100%; width: 100%; top: 0px; left: 0px; min-height: 820px; min-width: 1620px; overflow: auto">
+		<!-- <input type="text" class="inputText" style="background-color: #FBEFEF; font-size: 60px;	font-weight: bolder; text-indent: 50px;	height: 60px;	color: red;" value="asdfad" /> -->
+		<!-- <input type="text" class="inputText" value="asdfad" /> -->
+		
+		
+		
+		<div id="header" class="header" 
+			style="background-color: red; min-height: 80px; min-width: 1620px; height: 10%; width: 100%">
+
+			<ui:insert name="pageHeader">Page Header</ui:insert>
+		</div>
+
+		<div style="float: left; width: 85%; background-color:aqua; height: 80%; min-height: 660px; position: static;" >
+			<div id="leftMenu" class="leftMenu"
+				style="background-color: green; float: left; min-height: 660px;  height: 100%; width: 15%">
+				<ui:insert name="leftMenu">Left Menu</ui:insert>
+			</div>
+			<div id="centreContent" class="centreContent" style="background-color: yellow; min-height: 660px;  overflow:auto;    height: 100%; width: 85%">
+				<ui:insert name="centreContent">Center Content</ui:insert>
+			</div>
+		</div>
+		
+		
+		<div id="rightMenu" class="rightMenu"
+			style="background-color: grey; float: right; min-height: 660px; min-width: 210px; height: 80%; width: 15%;">
+			<ui:insert name="rightMenu">Right Menu</ui:insert>
+		</div>
+
+
+
+
+		<div id="footer" class="footer"
+			style="background-color: blue; min-height: 80px; min-width: 1620px; height: 10%; width: 100%; clear: both;">
+			<ui:insert name="pageFooter">Page Footer</ui:insert>
+		</div>
+
+	</div>
+</div>
+	<h:outputStylesheet name="application.css" library="css"></h:outputStylesheet>
+	<h:outputScript name="right_menu.js" library="javascript"></h:outputScript>
+	
+</body>
+
+</html>

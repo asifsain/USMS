@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<ui:composition>
+		<ui:include src="/application/register_employee/registerEmployeeCommon.xhtml"></ui:include>
+			<table id="Bank Details"
+				style="padding-top: 20px; padding-left: 20px">
+
+				<tr>
+					<td><h:outputText value="Bank Details"
+							styleClass="FormHeading" /></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Bank Name" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.empBankInfo.bankName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:outputText value="Account Holders Name" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.empBankInfo.accHldrName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="Branch" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.empBankInfo.branch}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+				</tr>
+				<tr>
+					<td><h:outputText value="IBAN No" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.empBankInfo.ibanNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:outputText value="Central Bank Routing Code" /></td>
+					<td><h:inputText id="cntrlCode" styleClass="inputText" value="#{employee.model.empBankInfo.cbrCode}" disabled="#{menuBean.mode eq 'view'}">
+					  <f:validateLength maximum="9" minimum="9"></f:validateLength>
+					</h:inputText></td>
+                    <h:message for="cntrlCode" showDetail="false" showSummary="true"></h:message>
+				</tr>
+
+				<tr> 
+					<td colspan="7" style="padding-top: 15px;">
+						<center>
+							<h:button value="Reset"
+								style="min-height: 25px;	min-width: 80px; font-size: 16px; " />
+							   &nbsp;&nbsp;&nbsp;
+							 <a4j:commandButton id="bankFile" value="Save"    execute="@form"  actionListener="#{employee.updateEmployee}" 
+							 style="min-height: 25px; min-width: 80px; font-size: 16px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
+							<a4j:commandButton value="Next" oncomplete="navToSalary();" render="centreContentForm" actionListener="#{employee.updateBankDetails}" style="min-height: 25px; min-width: 80px; font-size: 16px;"/>
+						</center>
+					</td>
+				</tr>
+
+			</table>
+			<script >
+	
+			
+				var navToSalary =  function() {
+					//alert("reached");
+					alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
+					if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true')
+						changeCenterPage('/application/register_employee/salary.xhtml','sal_item');
+					else
+						alert("Validation Not Passed From Server Side")
+					};
+			
+			</script>
+	</ui:composition>
+</body>
+</html>

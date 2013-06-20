@@ -1,0 +1,137 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+
+
+
+
+
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+
+
+
+<style>
+
+
+ol .ui-selecting {
+	background: #FECA40;
+}
+
+ol .ui-selected {
+	background: #F39814;
+	color: white;
+}
+
+ol {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 60%;
+}
+
+ol li {
+	margin: 3px;
+	padding: 0.4em;
+	font-size: 1.4em;
+	height: 18px;
+}
+</style>
+
+	<style type="text/css">
+body {
+	
+	
+	position: absolute;
+	
+
+}
+
+
+</style>
+
+<script>
+			var $J = jQuery.noConflict();
+</script>
+	<script>
+		$J(function() {
+		    $J( "ol" ).selectable();
+		});
+	</script>
+	<script>
+        $J(function() {        
+            $J( "#accordion" ).accordion();    
+        });
+	 </script>
+
+
+</head>
+<body>
+
+	<form>
+		<div id="accordion">
+			<h3>Employee Management</h3>
+			<div>
+				<ol id="ol1" style="font-size: 11px; width: 100%">
+					<li id="item1" onclick="alert('HI')">Register New</li>
+					<li id="item2">Update Existing</li>
+					<li id="item3">View Existing</li>
+				</ol>
+			</div>
+			<h3>Salary Processing</h3>
+			<div>
+				<ol style="font-size: 11px; width: 100%">
+					<li id="item4">Adjustments</li>
+
+				</ol>
+			</div>
+			<h3>Inquiry</h3>
+			<div>
+				<ol style="font-size: 11px; width: 100%">
+					<li id="item7">Passport Expiry</li>
+
+				</ol>
+			</div>
+
+		</div>
+
+		<button onclick="alert('clicked the button')">click</button>
+		<ol style="font-size: 11px; width: 100%">
+			<li id="item1" onclick="alert('HI')">Register New</li>
+			<li id="item2">Update Existing</li>
+			<li id="item3">View Existing</li>
+		</ol>
+	</form>
+	<script>
+		$J("#item1").click(function() {  
+
+			alert('hiw mand');
+			
+		});
+		$J("#item2").click(function() {  
+
+			alert('hiw mand');
+			
+		});
+		$J("#item3").click(function() {  
+
+			alert('hiw mand');
+			
+		});
+
+		
+
+	</script>
+</body>
+</html>

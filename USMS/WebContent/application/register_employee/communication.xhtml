@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<ui:composition>
+			<ui:include src="/application/register_employee/registerEmployeeCommon.xhtml"></ui:include>
+			<table id="Communication_Details_Permanent"
+				style="padding-top: 20px; padding-left: 20px">
+				<tr>
+					<td colspan="4"><h:outputText value="Communication Permanent"
+							styleClass="FormHeading" /></td>
+				</tr>
+		  		<tr>
+					<td><h:outputText value="Address Line 1" /></td>
+					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"   value="#{employee.model.permAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="Address Line 2" /></td>
+					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"   value="#{employee.model.permAddr.addr2}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr> 
+				<tr>
+					<td><h:outputText value="City" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.permAddr.city}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="State" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.permAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+					<td>&nbsp;</td>
+
+					<td><h:outputText value="Postal Code" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.permAddr.postalCode}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="Country" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.permAddr.country}" disabled="#{menuBean.mode eq 'view'}" /></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="Contact Person First Name" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.permAddr.contPrsnFName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+					<td>&nbsp;</td>
+
+					<td><h:outputText value="Relation" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.permAddr.rel}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="Contact Person Last Name" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.permAddr.contPrsnLName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+					<td>&nbsp;</td>
+
+					<td><h:outputText value="Tel No" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.permAddr.telNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+			</table>
+
+			<table id="Communication_Details_Local"
+				style="padding-top: 20px; padding-left: 20px">
+				<tr>
+					<td colspan="4"><h:outputText value="Communication Local"
+							styleClass="FormHeading" /></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Address Line 1" /></td>
+					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"   value="#{employee.model.localAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Address Line 2" /></td>
+					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"  value="#{employee.model.localAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="City" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.localAddr.city}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="State" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.localAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+					<td>&nbsp;</td>
+
+					<td><h:outputText value="Postal Code" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.localAddr.postalCode}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Country" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.localAddr.country}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+			</table>
+
+			<table id="Communication_Details_Emergency"
+				style="padding-top: 20px; padding-left: 20px">
+				<tr>
+					<td colspan="4"><h:outputText value="Communication Emergency"
+							styleClass="FormHeading" /></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Address Line 1" /></td>
+					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"  value="#{employee.model.emgrAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Address Line 2" /></td>
+					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"   value="#{employee.model.emgrAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="City" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.emgrAddr.city}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="State" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.emgrAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+					<td>&nbsp;</td>
+
+					<td><h:outputText value="Postal Code" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.emgrAddr.postalCode}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Country" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.emgrAddr.country}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Contact Person First Name" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.emgrAddr.contPrsnFName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+					<td>&nbsp;</td>
+
+					<td><h:outputText value="Relation" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.emgrAddr.rel}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td><h:outputText value="Contact Person Last Name" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.emgrAddr.contPrsnLName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+					<td>&nbsp;</td>
+
+					<td><h:outputText value="Tel No" /></td>
+					<td><h:inputText styleClass="inputText" value="#{employee.model.emgrAddr.telNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				</tr>
+
+				<tr>
+					<td colspan="7" style="padding-top: 15px;">
+						<center>
+							<h:button value="Reset"
+								style="min-height: 25px;	min-width: 80px; font-size: 16px; " />
+							 &nbsp;&nbsp;&nbsp;
+					    	<a4j:commandButton id="communicationFile" value="Save"   
+					    	 execute="@form"  actionListener="#{employee.updateEmployee}" style="min-height: 25px; min-width: 80px; font-size: 16px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
+							<a4j:commandButton value="Next" actionListener="#{employee.updateCommunicationDetails}" render="centreContentForm" oncomplete="navToBank()" style="min-height: 25px; min-width: 80px; font-size: 16px;"/>
+						</center>
+					</td>
+				</tr>
+			</table>
+		
+		<script >
+	
+			
+			var navToBank =  function() {
+				//alert("reached");
+				alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
+				if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true')
+					changeCenterPage('/application/register_employee/bank.xhtml','comm_item');
+				else
+					alert("Validation Not Passed From Server Side")
+				};
+			
+		</script>
+	</ui:composition>
+</body>
+</html>

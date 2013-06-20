@@ -1,0 +1,26 @@
+<ui:component
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:cc="http://java.sun.com/jsf/composite"
+>
+   <cc:interface componentType="coreservlets.DateComponent1" >
+      <cc:attribute  name="value" type="java.util.Date" />
+   </cc:interface>
+ 
+   <cc:implementation>
+       
+      <h:selectOneMenu id="day" converter="javax.faces.Integer" style="visibility:hidden;">  
+           <f:selectItems value="#{dateChoices.days}"/>
+      </h:selectOneMenu> 
+        
+      <h:selectOneMenu id="month" converter="javax.faces.Integer" style="visibility:hidden;">
+           <f:selectItems value="#{dateChoices.months}"/>
+      </h:selectOneMenu>
+      <h:selectOneMenu id="year" converter="javax.faces.Integer" >
+           <f:selectItems value="#{dateChoices.years}"/>
+      </h:selectOneMenu>
+    
+   </cc:implementation>
+</ui:component>

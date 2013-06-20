@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+
+
+</h:head>
+
+<body>
+	<ui:composition>
+		<h:form>
+		
+			<div style="position: relative; ">
+			
+				<h:inputHidden id="emp_mgmt_mode"  />
+				
+				<ol id="emp_mgmt_submenu"
+					style="position: absolute; width: 100%; font-size: 11px;">
+
+					<li id="file_item" style="visibility: hidden;" 
+						onclick="changePage('/application/register_employee/file.xhtml')">File
+						Details</li>
+					<li id="comm_item" style="visibility: hidden;"
+						onclick="changePage('/application/register_employee/communication.xhtml')">Communication
+						Details</li>
+					<li id="bank_item" style="visibility: hidden;"
+						onclick="changePage('/application/register_employee/bank.xhtml')">Bank
+						Account Details</li>
+					<li id="sal_item" style="visibility: hidden;"
+						onclick="changePage('/application/register_employee/salary.xhtml')">Salary
+						Details</li>
+					<li id="family_item" style="visibility: hidden;" 
+						onclick="changePage('/application/register_employee/family.xhtml')">Family
+						Details</li>
+					<li id="airticket_item" style="visibility: hidden;">Air Ticket Reimbursement</li>
+					<li id="eid_item" style="visibility: hidden;">Emirates ID Reimbursement</li>
+				</ol>
+				
+<!-- 				<ol id="emp_management_add"  -->
+<!-- 					style="visibility: hidden; position: absolute; width: 100%; font-size: 11px;"> -->
+
+<!-- 					<li id="file_item1" -->
+<!-- 						onclick="changePage('/application/register_employee/file.xhtml')">File -->
+<!-- 						Details</li> -->
+<!-- 					<li id="comm_item1" -->
+<!-- 						onclick="changePage('/application/register_employee/communication.xhtml')">Communication -->
+<!-- 						Details</li> -->
+<!-- 					<li id="bank_item1" -->
+<!-- 						onclick="changePage('/application/register_employee/bank.xhtml')">Bank -->
+<!-- 						Account Details</li> -->
+<!-- 					<li -->
+<!-- 						onclick="changePage('/application/register_employee/salary.xhtml')">Salary -->
+<!-- 						Details</li> -->
+<!-- 					<li -->
+<!-- 						onclick="changePage('/application/register_employee/family.xhtml')">Family -->
+<!-- 						Details</li> -->
+<!-- 				</ol> -->
+
+
+<!-- 				<ol id="emp_management_update" -->
+<!-- 					style="visibility: hidden; position: absolute; width: 100%; font-size: 11px;"> -->
+<!-- 					<li>File Details</li> -->
+<!-- 					<li>Communication Details</li> -->
+<!-- 					<li>Bank Account Details</li> -->
+<!-- 					<li>Salary Details</li> -->
+<!-- 					<li>Family Details</li> -->
+
+<!-- 				</ol> -->
+
+<!-- 				<ol id="emp_management_view" -->
+<!-- 					style="visibility: hidden; position: absolute; width: 100%; font-size: 11px;"> -->
+<!-- 					<li>File Details</li> -->
+<!-- 					<li>Communication Details</li> -->
+<!-- 					<li>Bank Account Details</li> -->
+<!-- 					<li>Salary Details</li> -->
+<!-- 					<li>Family Details</li> -->
+<!-- 					<li>Air Ticket Reimbursement</li> -->
+<!-- 					<li>Emirates ID Reimbursement</li> -->
+<!-- 				</ol> -->
+
+			</div>
+			<h:commandButton value="change page to file" actionListener="#{menuBean.changePageFile}" />
+		</h:form>
+	</ui:composition>
+</body>
+</html>

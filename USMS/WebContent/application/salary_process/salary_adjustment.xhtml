@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:my="http://java.sun.com/jsf/composite/components"> 
+   
+<h:head></h:head> 
+
+<h:body>
+<ui:composition>
+	<ui:include src="/application/register_employee/registerEmployeeCommon.xhtml"></ui:include>
+   <table id="Salary_adjustment" style="padding-top: 20px; padding-left: 20px; width:500px">
+
+			<tr>
+				<td><h:outputText value="Adjustment Detail" styleClass="FormHeading" /></td>
+			</tr>
+               <tr>
+				<td><h:outputText value="Employee Id" /></td>
+				<td><h:inputText styleClass="inputText" value="#{salaryProcess.model.empInfo.empNo}"   disabled="true"/></td>
+
+			</tr>
+			<tr>
+				<td><h:outputText value="Employee Name" /></td>
+				<td><h:inputText styleClass="inputText" value="#{salaryProcess.model.empInfo.firstName}"  disabled="true" /></td>
+
+			</tr>
+			
+			<tr>
+				<td><h:outputText value="Adjustment Type" /></td>
+				<td><h:selectOneMenu  id="adjustmentType"   value="#{salaryProcess.model.empSalAdj.adjType}" style="width: 80%; background-color: #FBEFEF; font-size: 16px;  text-indent: 5px;">
+				    <f:selectItem itemLabel="Medical Reimb - Employee" itemValue="medicalReimb_employee"/>
+					<f:selectItem itemLabel="Medical Reimb - Child 1" itemValue="medicalReimb_Child1"/>
+					<f:selectItem itemLabel="Medical Reimb - Child 2" itemValue="medicalReimb_Child2"/>
+					<f:selectItem itemLabel="Medical Reimb - Spouse" itemValue="medicalReimb_Spouse"/>
+					<f:selectItem itemLabel="Emirates Id - Employee" itemValue="emiratesid_Employee"/>
+					<f:selectItem itemLabel="Emirates Id - Child 1" itemValue="emiratesid_Child1"/>
+					<f:selectItem itemLabel="Emirates Id - Child 2" itemValue="emiratesid_Child2"/>
+					<f:selectItem itemLabel="Emirates Id - Spouse" itemValue="emiratesid_Spouse"/>
+					<f:selectItem itemLabel="Air Ticket - Employee" itemValue="airticket_Employee"/>
+					<f:selectItem itemLabel="Air Ticket - Child 1" itemValue="airTicket_Child1"/>
+					<f:selectItem itemLabel="Air Ticket - Child 2" itemValue="airTicket_Child 2"/>
+					<f:selectItem itemLabel="Air Ticket - Spouse" itemValue="airTicket_Spouse"/>
+				
+				 </h:selectOneMenu></td>
+				
+			</tr>
+			<tr>
+				<td><h:outputText value="Adjustment Date" /></td>
+				<td><rich:calendar   inputClass="inputText" value="#{salaryProcess.model.empSalAdj.adjDt}" id="arjDate"></rich:calendar></td>
+
+			</tr>
+			<tr>
+				<td><h:outputText value="Adjustment Amount" /></td>
+				<td><h:inputText styleClass="inputText" value="#{salaryProcess.model.empSalAdj.amt}"  id="adjAmount" onblur="validateNumber(this)" /> </td>
+            </tr>
+                <tr>
+                <td>&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;</td>
+                <td>
+                <h:selectOneRadio value="#{salaryProcess.model.empSalAdj.amtAdjFlag}">
+                 <f:selectItem itemLabel="Debit" itemValue="D"></f:selectItem>
+                 <f:selectItem itemLabel="Credit" itemValue="C"></f:selectItem>
+                </h:selectOneRadio>
+                </td> 
+               
+			</tr>
+			<tr>
+				<td><h:outputText value="Adjustment Description"/></td>
+				<td style="padding-bottom: 15px"><h:inputText styleClass="inputText" value="#{salaryProcess.model.empSalAdj.desc2}" id="adjDescription"/></td>
+
+			</tr>
+
+				<tr>
+				<td><h:outputText value="Aproved By" /></td>
+				<td><h:inputText styleClass="inputText" value="#{salaryProcess.model.empSalAdj.apprBy}"  id="aproveBy" /></td>
+
+			</tr>
+			 <tr>
+				<td><h:outputText value="File Upload"/></td>
+				<td><rich:fileUpload  id="softCopy" acceptedTypes="jpg,pdf, gif, png, bmp,txt,xls,xlsx" execute="@this" fileUploadListener="#{salaryProcess.salAdjSoftFileUploadListener}"
+                		 ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1"   style="width:250px;" >
+               		 	<a4j:ajax event="uploadcomplete" execute="@none"/>
+               		 	<f:attribute name="fileType" value=" Salary_Adjustment"/>
+               		 	<f:attribute name="ownerType" value="employee" />
+           		 </rich:fileUpload></td>
+           		 
+
+			</tr>
+		
+			
+
+	<tr>
+				<td colspan="7" style="padding-top: 15px;">
+					<center>
+<!-- 							<h:button  value="Reset"  style="min-height: 25px;	min-width: 80px; font-size: 16px; "/>  -->
+							<a4j:commandButton style="min-height: 25px;	min-width: 80px; font-size: 16px; " value="Reset" execute="@this" render="@form" actionListener="#{salaryProcess.resetAdjustment}"/>
+							&nbsp;&nbsp;&nbsp;
+							<a4j:commandButton id="savebtn" value="Save"    execute="@form"   actionListener="#{salaryProcess.saveSalAdj}"
+							  style="min-height: 25px; min-width: 80px; font-size: 16px;" />
+					</center>
+				</td>
+			</tr>
+            </table>
+            <br/>
+            
+            <table style="padding-top: 20px; padding-left: 20px; width:800px">
+             <tr >
+				<td style="width:200px;vertical-align: middle;"><h:outputText value="Adjustment History"  styleClass="FormHeading" /></td>
+							  
+			</tr>
+			</table>
+			  <table style="padding-top: 10px; padding-left: 20px; width:300px">
+			<tr > 
+			    <td><h:outputText value="Month:" /></td>
+			     <td style="height:100px;vertical-align: middle;">
+<!-- 			     <my:inputDate  value="#{salaryProcess.model.selectedMonth}"  ></my:inputDate> -->
+			         <h:selectOneMenu  value="#{salaryProcess.model.month}" >
+                       <f:selectItems value="#{salaryProcess.model.months}"></f:selectItems>
+                     
+                     </h:selectOneMenu>
+			     </td>
+				  
+				  <td><h:outputText value="Year:" /></td>
+				
+                   <td style="height:100px;vertical-align: middle;">
+<!--                    <my:inputYear value="#{salaryProcess.model.selectedYear}"></my:inputYear> -->
+                     <h:selectOneMenu value="#{salaryProcess.model.year}" >
+                     <f:selectItems value="#{salaryProcess.model.years}"></f:selectItems>
+                     
+                     </h:selectOneMenu>
+                   
+                   
+                   </td>
+                   <td>&nbps;</td>
+                      
+                     <td><a4j:commandButton value="Search" execute="@form"   actionListener="#{salaryProcess.selectSalAdj}" oncomplete="showHistry()" 
+ 							render="table"  style="min-height: 20px; min-width: 50px; font-size: 12px;"/></td> 
+                
+			  </tr>
+           </table>
+            
+<div align="right" id="salArjustnent" style="visibility:hidden; float:left;right:50px;top:200px;height:100%; width:500px; margin-left:20px;">
+
+ <rich:dataTable  value="#{salaryProcess.model.salaryArjList}"  var="record"  id="table" style="width:100%;height:100%;text-align:center"
+    styleClass="searchTable"
+    headerClass="searchTableHeader"
+    rowClasses="searchTableOddRow,searchTableEvenRow">
+       <rich:column  width="15%">
+     <f:facet name="header">
+       <h:outputText  value="Adjustment Type" ></h:outputText>
+       </f:facet>
+       <h:outputText value="#{record.adjType}"></h:outputText>
+    </rich:column>
+     <rich:column   width="10%">
+      <f:facet name="header">
+       <h:outputText  value="Debit/Credit" ></h:outputText> 
+      </f:facet>
+       <h:outputText  value="#{record.amtAdjFlag eq 'D' ? 'Debit' : 'Credit'}"></h:outputText>
+    </rich:column>
+    
+     
+     <rich:column  width="10%">
+     <f:facet name="header">
+      <h:outputText  value="Date" ></h:outputText>
+     </f:facet>
+        <h:outputText value="#{record.adjDt}" converter="javax.faces.DateTime"></h:outputText>
+    </rich:column>
+     <rich:column  width="25%">
+     <f:facet name="header">
+      <h:outputText  value="Adjustment Amount" ></h:outputText>
+     </f:facet>
+        <h:outputText value="#{record.amt}"></h:outputText>
+    </rich:column>
+     <rich:column  width="15%">
+     <f:facet name="header">
+      <h:outputText  value="Approved By" ></h:outputText>
+     </f:facet>
+        <h:outputText value="#{record.apprBy}"></h:outputText>
+    </rich:column>
+    
+     <rich:column  width="25%" >
+     <f:facet name="header">
+      <h:outputText  value="View/Download" ></h:outputText>
+     </f:facet>
+       <h:commandLink   execute="@this" action="#{salaryProcess.salAdjSoftFileDownload}" disabled="#{record.softFilePath eq null}">
+             <f:setPropertyActionListener target="#{salaryProcess.model.empSalAdj}" value="#{record}"></f:setPropertyActionListener>
+            <h:graphicImage  value="/resources/images/editrecord.gif"/>
+       </h:commandLink>
+      
+    </rich:column>
+  
+  
+    </rich:dataTable>
+    </div>
+		 
+		      <script >
+			        var showHistry =  function() {
+				   
+				     document.getElementById('salArjustnent').style.visibility="visible";
+				   
+                   };
+                   
+                   
+                   
+               </script>
+    	
+    </ui:composition>
+</h:body> 
+          
+</html>

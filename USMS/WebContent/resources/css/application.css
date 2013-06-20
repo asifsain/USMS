@@ -1,0 +1,50 @@
+.inputText{
+					background-color: #FBEFEF; 
+					font-size: 60px;
+					font-weight: bolder;
+					text-indent: 15px;
+					min-height: 20px;
+					min-width: 170px;
+					max-width: 100%;
+					color: red;
+					font-style: italic;
+					font-stretch: wider;
+					font: 60px;
+			}
+.disabled{
+	background-color: #968f8f;
+  }
+  
+/*   added by tariq */
+  .searchTable{   
+   border-collapse:collapse;
+   border:1px solid #000000;
+}
+
+.searchTableHeader{
+   text-align:center;
+   background:none repeat scroll 0 0 #B5B5B5;
+   border-bottom:1px solid #000000;  
+   padding:2px;
+}
+
+.searchTableOddRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #FFFFFFF;	
+}
+
+.searchTableEvenRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #D3D3D3;
+  }
+  
+  .dataTableHeader{
+ background-color: #BFD6FA;
+}
+ 
+.dataTableHeaderText {
+ font-weight:bold;
+ font-family:Arial;
+ font-size:11px;
+ color: #1D4F76;
+}
