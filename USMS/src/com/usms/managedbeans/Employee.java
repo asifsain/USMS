@@ -534,7 +534,7 @@ public class Employee {
 	 public void resetViewModel()
 	 {
 	   System.out.println("In the resetModelView");
-	   String mode=FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("mode");
+	   String mode=(String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("mode");
 	   if(mode.equalsIgnoreCase("add"))
 	     {
 	      model=new EmployeeViewModel("register");
