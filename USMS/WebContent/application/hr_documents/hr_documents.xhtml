@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:my="http://java.sun.com/jsf/composite/components">  
+     
+  
+<h:head></h:head> 
+<h:body>
+  <ui:composition>
+	  <ui:include src="/application/register_employee/registerEmployeeCommon.xhtml"></ui:include>
+ 
+    <div style="float:left;">
+     <table>
+      <tr>
+       <td>
+       <h:outputText value="Type Of Document"></h:outputText>&nbsp;&nbsp;
+		</td>
+		<td>	  
+			   <h:selectOneMenu  value="#{documentGenerationMB.docModel.hrDocuments.docType}">
+			     <f:selectItem itemLabel="General Experice Letter" itemValue="GENERAL_EXP_LETTER"></f:selectItem>
+			     <f:selectItem itemLabel="End Service Experice Letter" itemValue="END_SERVICE_EXP_LETTER"></f:selectItem>
+			     <f:selectItem itemLabel="Final Settlement" itemValue="FINAL_SETELMENT"></f:selectItem>
+			     <f:selectItem itemLabel="Salary Certificate" itemValue="SALARY_CERTIFICATE"></f:selectItem>
+			     <f:selectItem itemLabel="Beneficiary Detail" itemValue="BENEFICIARY_DETAIL"></f:selectItem>
+			   <a4j:ajax event="change" listener="#{documentGenerationMB.disableView}" render="pdftable"></a4j:ajax>
+			 </h:selectOneMenu>
+	   </td>   
+		</tr>
+		<tr> 
+			<td style="text-align: left: ;">  
+	      <h:outputText value="Date"></h:outputText>	</td>	  
+       <td>
+          <rich:calendar value="#{documentGenerationMB.docModel.hrDocuments.date}"></rich:calendar> 
+       </td> 
+         </tr>	
+          </table>
+          
+    	<label>Employee ID/Name</label>&nbsp;&nbsp;
+   		<h:inputText value="#{documentGenerationMB.docModel.name}" id="empid"/>
+   		<a4j:commandButton action="#{documentGenerationMB.searchAllEmployee}" value="Search"  render="pdftable" execute="@form"  id="btnSearch" oncomplete="showEmpDeail()" />
+           
+    </div>
+    <br/> <br/>  <br/> <br/> <br/><br/><br/>
+   
+  
+     
+    <div  id="salarySlip" style="visibility:hidden; float:left; right:5px;top:20px;height:50%; width:400px; margin-left:20px;">
+     <rich:dataTable value="#{documentGenerationMB.docModel.empList}" var="pdfrecord"  id="pdftable" style="width:100%;text-align:center">
+    
+      <rich:column   width="25%">
+       <f:facet name="header"><h:outputText  value="Select" ></h:outputText> 
+      </f:facet>
+      <h:selectBooleanCheckbox value="#{pdfrecord.flag}" disabled="#{!pdfrecord.flag}">
+<!--         <a4j:ajax event="change" render="pdftable"></a4j:ajax> -->
+     </h:selectBooleanCheckbox>
+      </rich:column>
+     <rich:column   width="25%">
+       <f:facet name="header"><h:outputText  value="ID" ></h:outputText> 
+     </f:facet>
+      <h:outputText  value="#{pdfrecord.empNo}"></h:outputText> 
+       </rich:column>
+     <rich:column   width="25%">
+     <f:facet name="header">
+    <h:outputText  value="NAME" ></h:outputText> 
+     </f:facet>
+      <h:outputText  value="#{pdfrecord.firstName}"></h:outputText>
+     </rich:column>
+     
+
+      <rich:column   width="25%">
+       <f:facet name="header">
+         <h:outputText  value="View" ></h:outputText> 
+       </f:facet>
+     
+        <h:commandLink    value="View" target="_blank" id="view_Experience_Letter" action="#{documentGenerationMB.viewpdfDocuments}"
+         disabled="#{pdfrecord.flag}" >
+         <f:setPropertyActionListener target="#{documentGenerationMB.docModel.empInfo}" value="#{pdfrecord}" ></f:setPropertyActionListener>
+          
+        </h:commandLink>  
+  
+     </rich:column>
+      </rich:dataTable>
+    <br></br>
+     <div align="right">
+      <a4j:commandButton render="pdftable" execute="@form" style="min-height: 25px; min-width: 80px; font-size: 16px;" value="Generate" actionListener="#{documentGenerationMB.generatePDFDocument}" id="btn_Sal_Slip"></a4j:commandButton> &nbsp;&nbsp;
+     
+    </div >  
+    </div>       
+
+         <script >
+
+           $(document).ready(function(){
+			
+
+               });
+       
+        var showEmpDeail=  function() {
+		   
+		     document.getElementById('salarySlip').style.visibility="visible";
+		
+		   
+         };
+                 
+  </script>
+    
+  
+   
+      
+  </ui:composition>
+</h:body> 
+
+     
+
+
+</html>
