@@ -14,8 +14,8 @@
    <h:form id="mainForm">
    <div style="float:left;">
    	<label>Employee ID/Employee Name</label>
-   		<h:inputText value="#{employee.model.empInfo.firstName}" id="empid"/>
-   		<a4j:commandButton action="#{employee.searchEmployee}" value="Search"  render="table" execute="@form"  id="btnSearch" oncomplete="navToComm()" />
+   		<h:inputText value="#{employeeMB.model.empInfo.firstName}" id="empid"/>
+   		<a4j:commandButton action="#{employeeMB.searchEmployee}" value="Search"  render="table" execute="@form"  id="btnSearch" oncomplete="navToComm()" />
            
   </div>
 <!--    added by tariq -->
@@ -24,7 +24,7 @@
   
 <div align="right" id="tablediv" style="visibility:hidden; float:left;right:50px;top:200px;height:100%; width:500px; margin-left:20px;">
 
- <rich:dataTable  value="#{employee.model.empList}"  var="record"  id="table" style="width:100%;height:100%;text-align:center"
+ <rich:dataTable  value="#{employeeMB.model.empList}"  var="record"  id="table" style="width:100%;height:100%;text-align:center"
     styleClass="searchTable"
    headerClass="searchTableHeader"
    rowClasses="searchTableOddRow,searchTableEvenRow">
@@ -53,7 +53,7 @@
      <f:facet name="header">
       <h:outputText  value="Action" ></h:outputText>
      </f:facet>
-       <a4j:commandLink     action="#{employee.selectEmployee}" execute="@this" oncomplete="navToFileDetail()" id="updateBtn" rendered="#{menuBean.mode !='saladj'}" >
+       <a4j:commandLink     action="#{employeeMB.selectEmployee}" execute="@this" oncomplete="navToFileDetail()" id="updateBtn" rendered="#{menuBean.mode !='saladj'}" >
           <f:setPropertyActionListener target="#{employee.model.empInfo}" value="#{record}"></f:setPropertyActionListener>
           <h:graphicImage      value="/resources/images/editrecord.gif"/>
        </a4j:commandLink>
@@ -66,7 +66,7 @@
   
     </rich:dataTable>
     </div>
-    <a4j:jsFunction  name="update" action="#{employee.updateEmployee}">
+    <a4j:jsFunction  name="update" action="#{employeeMB.updateEmployee}">
             
     </a4j:jsFunction>
     
