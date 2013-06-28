@@ -57,14 +57,14 @@
           <f:setPropertyActionListener target="#{employee.model.empInfo}" value="#{record}"></f:setPropertyActionListener>
           <h:graphicImage      value="/resources/images/editrecord.gif"/>
        </a4j:commandLink>
-       <a4j:commandLink   oncomplete="navToSalaryAdj()"  action="#{salaryProcess.selectEmployee}"  execute="@this"  id="salProcess" rendered="#{menuBean.mode eq 'saladj'}">
-          <f:setPropertyActionListener target="#{salaryProcess.model.empInfo}" value="#{record}"></f:setPropertyActionListener>
+       <a4j:commandLink   oncomplete="navToSalaryAdj()"  action="#{salaryProcessMB.selectEmployee}"  execute="@this"  id="salProcess" rendered="#{menuBean.mode eq 'saladj'}">
+          <f:setPropertyActionListener target="#{salaryProcessMB.model.empInfo}" value="#{record}"></f:setPropertyActionListener>
           <h:graphicImage     value="/resources/images/addrecord.gif"/>
        </a4j:commandLink>
     </rich:column>
   
   
-    </rich:dataTable>
+    </rich:dataTable>   
     </div>
     <a4j:jsFunction  name="update" action="#{employeeMB.updateEmployee}">
             
