@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:h="http://java.sun.com/jsf/html"
+	 xmlns:a4j="http://richfaces.org/a4j"
+	 xmlns:rich="http://richfaces.org/rich"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	
+		<h:inputHidden id="prevStepValidatedStatus" value="#{employeeMB.registrationAgent.prevStepValidationStatus}"  />
+<!-- 		<h:inputHidden id="mode" value="#{employee.registrationAgent.mode}"  /> -->
+		 &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; <rich:messages  globalOnly="true" layout="table" id="globalMsg">
+		 
+		</rich:messages>
+		 	 	 
+    <rich:popupPanel id="confirmation" width="250" height="150">
+            <f:facet name="header">Confirmation</f:facet>
+           <h:panelGrid>
+              <h:panelGrid columns="2">
+              <h:graphicImage value="/resources/images/error.png" />
+	         <h:outputText value="Are you sure?" style="FONT-SIZE: large;" />
+             </h:panelGrid>
+              <h:panelGroup>
+               <input type="button" value="OK"
+	          onclick="#{rich:component('confirmation')}.hide();return false" />
+	           <input type="button" value="Cancel"
+	          onclick="#{rich:component('confirmation')}.hide();return false" />
+               </h:panelGroup>
+             </h:panelGrid>
+        </rich:popupPanel> 
+       		 
+	
+</body>
+</html>
