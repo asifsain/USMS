@@ -9,7 +9,7 @@
 <h:head></h:head> 
 <body>
 <ui:composition>
-    <ui:include src="/application/register_employee/registerEmployeeCommon.xhtml"></ui:include>
+   <ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
     
     	<table id="Salary Details" style="padding-top: 20px; padding-left: 20px">
 
@@ -20,23 +20,23 @@
 
 			<tr>
 				<td><h:outputText value="Basic" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employee.model.empSalInfo.basic}" id="basicSal" disabled="#{menuBean.mode eq 'view'}"
+				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empSalInfo.basic}" id="basicSal" disabled="#{menuBean.mode eq 'view'}"
 				/></td>
 				
 			</tr>
 			<tr>
 				<td><h:outputText value="Transport" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employee.model.empSalInfo.transport}" id="trasnportSal" disabled="#{menuBean.mode eq 'view'}"/></td>
+				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empSalInfo.transport}" id="trasnportSal" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 			</tr>
 			<tr>
 				<td><h:outputText value="Housing" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employee.model.empSalInfo.housing}"  id="housingSal" disabled="#{menuBean.mode eq 'view'}"/></td>
+				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empSalInfo.housing}"  id="housingSal" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 			</tr>
 			<tr>
 				<td><h:outputText value="Other Allowance" /></td>
-				<td style="padding-bottom: 15px"><h:inputText styleClass="inputText" value="#{employee.model.empSalInfo.otherAllow}" disabled="#{menuBean.mode eq 'view'}" id="totalOther"/></td>
+				<td style="padding-bottom: 15px"><h:inputText styleClass="inputText" value="#{employeeMB.model.empSalInfo.otherAllow}" disabled="#{menuBean.mode eq 'view'}" id="totalOther"/></td>
 
 			</tr>
 			<tr>
@@ -47,7 +47,7 @@
 			<tr>
 				<td><h:outputText value="Total" /></td>
 				<td style="font-weight: bold; text-align: right;">
-				<h:inputText value="#{employee.model.empSalInfo.total}" id="total">
+				<h:inputText value="#{employeeMB.model.empSalInfo.total}" id="total">
 <!-- 				   <f:ajax event="change" execute="@this" render="total"/> -->
                  </h:inputText></td>
                  
@@ -59,8 +59,8 @@
 					<center>
 							<h:button  value="Reset" style="min-height: 25px;	min-width: 80px; font-size: 16px; "/> &nbsp;&nbsp;&nbsp;
 							<a4j:commandButton id="salaryFile" value="Save"    execute="@form"
-							 actionListener="#{employee.updateEmployee}" style="min-height: 25px; min-width: 80px; font-size: 16px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
-							<a4j:commandButton value="Next" actionListener="#{employee.updateSalaryDetails}" render="centreContentForm" oncomplete="navToFamily();" style="min-height: 25px; min-width: 80px; font-size: 16px;"/>
+							 actionListener="#{employeeMB.updateEmployee}" style="min-height: 25px; min-width: 80px; font-size: 16px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
+							<a4j:commandButton value="Next" actionListener="#{employeeMB.updateSalaryDetails}" render="centreContentForm" oncomplete="navToFamily();" style="min-height: 25px; min-width: 80px; font-size: 16px;"/>
 					</center>
 				</td>
 			</tr>
