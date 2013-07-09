@@ -13,17 +13,17 @@
 	<ui:composition>
 	
 	<h:outputScript name="family.js" library="javascript"></h:outputScript>
-		<ui:include src="/application/register_employee/registerEmployeeCommon.xhtml"></ui:include>
+		<ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
 			<table id="Family_Details:1" 
 				style="padding-top: 20px; padding-left: 20px; ">
 				
 				<tr>
-					<td><h:selectBooleanCheckbox id="cb_hasSpouse" value="#{employee.model.hasSpouse}" onclick="spouseSelected(this)" /> &nbsp; <h:outputText
+					<td><h:selectBooleanCheckbox id="cb_hasSpouse" value="#{employeeMB.model.hasSpouse}" onclick="spouseSelected(this)" /> &nbsp; <h:outputText
 							value="Family Details - Spouse" styleClass="FormHeading" /></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="First Name" /></td>
-					<td><h:inputText id="it_spouse_firstName" styleClass="inputText" value="#{employee.model.spouseInfo.firstName}" 
+					<td><h:inputText id="it_spouse_firstName" styleClass="inputText" value="#{employeeMB.model.spouseInfo.firstName}" 
 					disabled="#{menuBean.mode eq 'view'}" /></td>
 					
 					<td>&nbsp;</td>
@@ -32,16 +32,16 @@
 					<td><h:inputText id="it_spouse_middleName" styleClass="inputText" value="not available" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td><h:outputText value="Last Name" /></td>
-					<td><h:inputText id="it_spouse_lastName" styleClass="inputText" value="#{employee.model.spouseInfo.lastName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_spouse_lastName" styleClass="inputText" value="#{employeeMB.model.spouseInfo.lastName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="Passport No" /></td>
-					<td><h:inputText id="it_spouse_passportNo" styleClass="inputText" value="#{employee.model.spouseInfo.passportInfos.ppNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_spouse_passportNo" styleClass="inputText" value="#{employeeMB.model.spouseInfo.passportInfos.ppNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="spouse_upload_pasport" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employee.spousePassportCopyUploadListener}"
+					<td><rich:fileUpload  id="spouse_upload_pasport" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.spousePassportCopyUploadListener}"
                 		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="passport" />
@@ -51,12 +51,12 @@
 				</tr>
 				<tr>
 					<td><h:outputText value="Medical Insurance Card No" /></td>
-					<td><h:inputText id="it_spouse_miCardNo" styleClass="inputText" value="#{employee.model.spouseInfo.miInfos.cardNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_spouse_miCardNo" styleClass="inputText" value="#{employeeMB.model.spouseInfo.miInfos.cardNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="spouse_upload_medical" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employee.spousemiCopyUploadListener}"
+					<td><rich:fileUpload  id="spouse_upload_medical" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.spousemiCopyUploadListener}"
                 		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="miCard" />
@@ -68,12 +68,12 @@
 
 
 				<tr >
-					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employee.model.hasChild1}" id="cb_hasChild1" onclick="child1Selected(this)" /> &nbsp; <h:outputText
+					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employeeMB.model.hasChild1}" id="cb_hasChild1" onclick="child1Selected(this)" /> &nbsp; <h:outputText
 							value="Family Details - Child 1" styleClass="FormHeading" /></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="First Name" /></td>
-					<td><h:inputText id="it_child1_firstName" styleClass="inputText" value="#{employee.model.child1Info.firstName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child1_firstName" styleClass="inputText" value="#{employeeMB.model.child1Info.firstName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td>&nbsp;</td>
 
@@ -81,16 +81,16 @@
 					<td><h:inputText id="it_child1_middleName" styleClass="inputText" value="not available" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td><h:outputText value="Last Name" /></td>
-					<td><h:inputText id="it_child1_lastName" styleClass="inputText" value="#{employee.model.child1Info.lastName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child1_lastName" styleClass="inputText" value="#{employeeMB.model.child1Info.lastName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="Passport No" /></td>
-					<td><h:inputText id="it_child1_passportNo" styleClass="inputText" value="#{employee.model.child1Info.passportInfos.ppNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child1_passportNo" styleClass="inputText" value="#{employeeMB.model.child1Info.passportInfos.ppNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="child1_upload_passport" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employee.child1PassportCopyUploadListener}"
+					<td><rich:fileUpload  id="child1_upload_passport" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child1PassportCopyUploadListener}"
                 		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="passport" />
@@ -101,12 +101,12 @@
 				</tr>
 				<tr>
 					<td><h:outputText value="Medical Insurance Card No" /></td>
-					<td><h:inputText id="it_child1_miCardNo" styleClass="inputText" value="#{employee.model.child1Info.miInfos.cardNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child1_miCardNo" styleClass="inputText" value="#{employeeMB.model.child1Info.miInfos.cardNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="child1_upload_medical" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employee.child1miCopyUploadListener}"
+					<td><rich:fileUpload  id="child1_upload_medical" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child1miCopyUploadListener}"
                 		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="miCard" />
@@ -119,12 +119,12 @@
 
 
 				<tr>
-					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employee.model.hasChild2}" id="cb_hasChild2" onclick="child2Selected(this)"/> &nbsp; <h:outputText
+					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employeeMB.model.hasChild2}" id="cb_hasChild2" onclick="child2Selected(this)"/> &nbsp; <h:outputText
 							value="Family Details - Child 2" styleClass="FormHeading" /></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="First Name" /></td>
-					<td><h:inputText id="it_child2_firstName" styleClass="inputText" value="#{employee.model.child2Info.firstName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child2_firstName" styleClass="inputText" value="#{employeeMB.model.child2Info.firstName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td>&nbsp;</td>
 
@@ -132,16 +132,16 @@
 					<td><h:inputText id="it_child2_middleName" styleClass="inputText" value="not available"  disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td><h:outputText value="Last Name" /></td>
-					<td><h:inputText id="it_child2_lastName" styleClass="inputText" value="#{employee.model.child2Info.lastName}"  disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child2_lastName" styleClass="inputText" value="#{employeeMB.model.child2Info.lastName}"  disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="Passport No" /></td>
-					<td><h:inputText id="it_child2_passportNo" styleClass="inputText" value="#{employee.model.child2Info.passportInfos.ppNo}" disabled="#{menuBean.mode eq 'view'}" /></td>
+					<td><h:inputText id="it_child2_passportNo" styleClass="inputText" value="#{employeeMB.model.child2Info.passportInfos.ppNo}" disabled="#{menuBean.mode eq 'view'}" /></td>
 
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="child2_upload_passport" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employee.child2PassportCopyUploadListener}"
+					<td><rich:fileUpload  id="child2_upload_passport" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child2PassportCopyUploadListener}"
                 		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="passport" />
@@ -151,12 +151,12 @@
 				</tr>
 				<tr>
 					<td><h:outputText value="Medical Insurance Card No" /></td>
-					<td><h:inputText id="it_child2_miCardNo" styleClass="inputText" value="#{employee.model.child2Info.miInfos.cardNo}"  disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child2_miCardNo" styleClass="inputText" value="#{employeeMB.model.child2Info.miInfos.cardNo}"  disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="child2_upload_medical" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employee.child2miCopyUploadListener}"
+					<td><rich:fileUpload  id="child2_upload_medical" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child2miCopyUploadListener}"
                 		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="miCard" />
@@ -174,9 +174,9 @@
 								style="min-height: 25px;	min-width: 80px; font-size: 16px; " />
 							&nbsp;&nbsp;&nbsp;
 							<a4j:commandButton id="familyFile" value="Save"   
-							execute="@form"  actionListener="#{employee.updateEmployee}" style="min-height: 25px; min-width: 80px; font-size: 16px;"
+							execute="@form"  actionListener="#{employeeMB.updateEmployee}" style="min-height: 25px; min-width: 80px; font-size: 16px;"
 							rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
-							<h:commandButton value="Next"  actionListener="#{employee.updateFamilyDetails}"
+							<h:commandButton value="Next"  actionListener="#{employeeMB.updateFamilyDetails}"
 								 render="centreContentForm" disabled="#{menuBean.mode eq 'view'}"
 								style="min-height: 25px; min-width: 80px; font-size: 16px;" />
 						</center>

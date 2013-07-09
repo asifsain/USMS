@@ -9,7 +9,7 @@
 <h:head></h:head>
 <body>
 	<ui:composition>
-		<ui:include src="/application/register_employee/registerEmployeeCommon.xhtml"></ui:include>
+	<ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
 			<table id="Bank Details"
 				style="padding-top: 20px; padding-left: 20px">
 
@@ -20,20 +20,20 @@
 
 				<tr>
 					<td><h:outputText value="Bank Name" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employee.model.empBankInfo.bankName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empBankInfo.bankName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 					<td><h:outputText value="Account Holders Name" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employee.model.empBankInfo.accHldrName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empBankInfo.accHldrName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="Branch" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employee.model.empBankInfo.branch}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empBankInfo.branch}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 				</tr>
 				<tr>
 					<td><h:outputText value="IBAN No" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employee.model.empBankInfo.ibanNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empBankInfo.ibanNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
 					<td><h:outputText value="Central Bank Routing Code" /></td>
-					<td><h:inputText id="cntrlCode" styleClass="inputText" value="#{employee.model.empBankInfo.cbrCode}" disabled="#{menuBean.mode eq 'view'}">
+					<td><h:inputText id="cntrlCode" styleClass="inputText" value="#{employeeMB.model.empBankInfo.cbrCode}" disabled="#{menuBean.mode eq 'view'}">
 					  <f:validateLength maximum="9" minimum="9"></f:validateLength>
 					</h:inputText></td>
                     <h:message for="cntrlCode" showDetail="false" showSummary="true"></h:message>
@@ -45,9 +45,9 @@
 							<h:button value="Reset"
 								style="min-height: 25px;	min-width: 80px; font-size: 16px; " />
 							   &nbsp;&nbsp;&nbsp;
-							 <a4j:commandButton id="bankFile" value="Save"    execute="@form"  actionListener="#{employee.updateEmployee}" 
+							 <a4j:commandButton id="bankFile" value="Save"    execute="@form"  actionListener="#{employeeMB.updateEmployee}" 
 							 style="min-height: 25px; min-width: 80px; font-size: 16px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
-							<a4j:commandButton value="Next" oncomplete="navToSalary();" render="centreContentForm" actionListener="#{employee.updateBankDetails}" style="min-height: 25px; min-width: 80px; font-size: 16px;"/>
+							<a4j:commandButton value="Next" oncomplete="navToSalary();" render="centreContentForm" actionListener="#{employeeMB.updateBankDetails}" style="min-height: 25px; min-width: 80px; font-size: 16px;"/>
 						</center>
 					</td>
 				</tr>
