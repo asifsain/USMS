@@ -117,19 +117,26 @@ function disabledClassesProv(day){
 }
 
 var salaryProcess=function() {
-	 var iDate=document.getElementById('centreContentForm:fromDateInputDate').value;
-     var issueDate=new Date(iDate);
-     var expiryDate=new Date(document.getElementById("centreContentForm:toDateInputDate").value);
-    if(expiryDate<issueDate || iDate.length==0)
-       {
-       document.getElementById("centreContentForm:toDateInputDate").value="";
-  	   alert("To Date Should be greater than From Date");
-    	return false;
-  	
-      }
-   return true;
-  
 
-};
+	 var iDate=document.getElementById('centreContentForm:fromDateInputDate').value;
+    var issueDate=new Date(iDate);
+    var expiryDate=new Date(document.getElementById("centreContentForm:toDateInputDate").value);
+    if(iDate.length==0){
+   	     document.getElementById("centreContentForm:toDateInputDate").value="";
+	         alert("First Enter From Date");
+   	    return false;
+         } else if(expiryDate < issueDate){
+   	    document.getElementById("centreContentForm:toDateInputDate").value="";
+            alert("To Date Should be greater than From Date ");
+	        return false;
+        } else if (issueDate.getMonth()!= expiryDate.getMonth()){
+   	 document.getElementById("centreContentForm:toDateInputDate").value="";
+           alert("From Date and To Date Month Should be same");
+         return false;
+       } else 
+    return true;
+    
+
+};   
 
 

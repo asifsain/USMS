@@ -18,76 +18,102 @@
 
             font-style: italic;
 
-        }
+          }  
+      
 
  </style>
-	<ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
+
+	   <ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
 		<h:outputScript name="file.js" library="javascript"></h:outputScript>
-		<table id="Initial Details" 
-			style="padding-top: 20px; padding-left: 20px">
-			<tr>
-	  			<td colspan="2"><h:outputText value="File Details" styleClass="FormHeading" /></td>
+		<fieldset class="fieldset">
+		<legend class="legend"><font color="orange" size="4">File Details</font></legend>
+		<table id="Initial Details" class="table" cellpadding="10" 
+			>
+			<tbody>    
+		
+			<tr >  
+				<td style="width:100px"><h:outputText value="First Name:" /></td>
+				<td style="width:150px;" align="left"><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.firstName}" 
+				disabled="#{menuBean.mode eq 'view'}" id="FIRST_NAME" tabindex="1" required="true"  requiredMessage="Enter First Name"
+				maxlength="50" ></h:inputText>  
+				</td ><td style="width:140px;float: left; text-shadow:maroon;" align="left">
+				 <rich:message for="FIRST_NAME"></rich:message>
+			   </td>
+                   
+				 
+
+				<td style="width:100px"><h:outputText value="Middle Name:" /></td>
+				<td style="width:150px"><h:inputText styleClass="inputText" value="not available" 	maxlength="50" disabled="#{menuBean.mode eq 'view'}" tabindex="2"
+				/></td> 
+				<td style="width:140px " align="left">&nbps;</td> 
 			</tr>
-
 			<tr>
-				<td><h:outputText value="First Name" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.firstName}" disabled="#{menuBean.mode eq 'view'}" id="FIRST_NAME"
-				/></td>
+				<td style="width:100px"><h:outputText value="Last Name:" /></td>
+				<td style="width:150px"><h:inputText styleClass="inputText" 	maxlength="50" value="#{employeeMB.model.empInfo.lastName}" disabled="#{menuBean.mode eq 'view'}"
+				tabindex="3"/></td>
 
-				<td>&nbsp;</td>
+				<td style="width:100px">&nbps;</td>
 
-				<td><h:outputText value="Middle Name" /></td>
-				<td><h:inputText styleClass="inputText" value="1212" disabled="#{menuBean.mode eq 'view'}"
-				/></td>
-			</tr>
-			<tr>
-				<td><h:outputText value="Last Name" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.lastName}" disabled="#{menuBean.mode eq 'view'}"/></td>
-
-				<td>&nbsp;</td>
-
-				<td><h:outputText value="Date Of Joining" /></td>
-				<td>
-					<rich:calendar inputClass="inputText" value="#{employeeMB.model.empEmploymentInfo.joiningDt}" disabled="#{menuBean.mode eq 'view'}">
+				<td ><h:outputText value="Date Of Joining:" /></td>
+				<td style="width:150px">
+				 
+					 <rich:calendar id="JOING_DT" tabindex="4"  value="#{employeeMB.model.empEmploymentInfo.joiningDt}" disabled="#{menuBean.mode eq 'view'}"
+					 required="true" requiredMessage="Enter Date"  inputStyle="width: 60 px; height : 200 px;" datePattern="dd/MM/yyyy" enableManualInput="true">  
 					</rich:calendar>
-					
+					</td><td>  
+					<rich:message for="JOING_DT"></rich:message>
+			    	</td>
+			   
+  
+			</tr>  
+			<tr>
+				<td style="width:100px"><h:outputText value="Emp No:" /></td>
+				<td style="width:150px"><h:inputText id="txt_empNo" required="true"    requiredMessage="Enter Employee Number" maxlength="10" styleClass="inputText" value="#{employeeMB.model.empInfo.empNo}" disabled="#{menuBean.mode ne'add'}" tabindex="5">
+				 <a4j:ajax event="blur" listener="#{employeeMB.checkIdAvailibility}" onerror="duplicate();" render="txt_empNo"></a4j:ajax>
+				
+				</h:inputText>
+				</td ><td style="width:150px">
+				<rich:message  for="txt_empNo"></rich:message>  
 				</td>
 
+				
+
+				<td style="width:100px"><h:outputText value="Office Email Address:" /></td>
+				<td style="width:150px"><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.offEmail}" tabindex="6" id="txt_ofc_email" required="true" requiredMessage="Enter office Email"
+		 		disabled="#{menuBean.mode eq 'view'}" maxlength="100" onblur="return checkEmail(this);"/>
+				</td>
+				<td style="width:150px">
+				 <rich:message for="txt_ofc_email"></rich:message>   
+				</td>
 			</tr>
+
 			<tr>
-				<td><h:outputText value="Emp No" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.empNo}" disabled="true"/></td>
+				<td style="width:100px"><h:outputText value="Other Email Address 1:" /></td>
+				<td style="width:150px"><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.othEmail1}" tabindex="7"
+				 disabled="#{menuBean.mode eq 'view'}" maxlength="100" onblur="return checkEmail(this);" /></td>
 
-				<td>&nbsp;</td>
-
-				<td><h:outputText value="Office Email Address" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.offEmail}" disabled="#{menuBean.mode eq 'view'}"/></td>
-			</tr>
-
-			<tr>
-				<td><h:outputText value="Other Email Address 1" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.othEmail1}" disabled="#{menuBean.mode eq 'view'}"/></td>
-
-				<td>&nbsp;</td>
-
-				<td><h:outputText value="Other Email Address 2" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.othEmail2}" disabled="#{menuBean.mode eq 'view'}"/></td>
-			</tr>
-
+				  <td>&nbps;</td>
+  
+				<td style="width:100px"><h:outputText value="Other Email Address 2:" /></td>
+			 	<td style="width:150px"><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.othEmail2}" tabindex="8"
+				disabled="#{menuBean.mode eq 'view'}" maxlength="100" onblur="return checkEmail(this);"/></td>
+			  
+			    <td>&nbps;</td>
+			  </tr>
+			
+          </tbody>
 		</table>
-
-		<table id="Education Details"
-			style="padding-top: 20px; padding-left: 20px">
-
-			<tr>
-				<td colspan="2"><h:outputText value="Education Details"
-						styleClass="FormHeading" /></td>
-			</tr>
+		</fieldset>
+       <fieldset class="fieldset">
+		<legend class="legend" ><font color="orange" size="4">Education Details</font></legend>
+		<table id="Education Details" class="table" cellpadding="10"
+			  >
+			  <tbody>
 
 			<tr>
-				<td><h:outputText value="Highest Level" /></td>
-				<td><h:selectOneMenu style="width: 100%; background-color: #FBEFEF; font-size: 16px;  text-indent: 5px;" value="#{employeeMB.model.empEduInfo.degreeName}"
-				disabled="#{menuBean.mode eq 'view'}">
+				<td style="width:100px"><h:outputText value="Highest Level" /></td>
+				<td style="width:150px"><h:selectOneMenu styleClass="select" value="#{employeeMB.model.empEduInfo.degreeName}" tabindex="9"
+				   disabled="#{menuBean.mode eq 'view'}" id="drd_degree" required="true" requiredMessage="Enter the Highest Degree" >
 					<f:selectItem itemLabel="M.Tech" itemValue="mtech"/>
 					<f:selectItem itemLabel="M.C.A" itemValue="mca"/>
 					<f:selectItem itemLabel="B.Tech" itemValue="btech"/>
@@ -96,43 +122,52 @@
 					<f:selectItem itemLabel="12 Pass" itemValue="12pass"/>
 					<f:selectItem itemLabel="10 Pass" itemValue="10pass"/>
 					<f:selectItem itemLabel="Basic School" itemValue="basicschool"/>
-				</h:selectOneMenu></td>
+				</h:selectOneMenu>
+				</td ><td style="width:100px">
+				<rich:message for="drd_degree"></rich:message>
+				</td>
 
-				<td>&nbsp;</td>
+			
 
-				<td><h:outputText value="Year of Passing" /></td>
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.empEduInfo.yearOfPassing}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				<td style="width:100px"><h:outputText value="Year of Passing" /></td>
+				<td style="width:150px;float: left"><rich:calendar  value="#{employeeMB.model.empEduInfo.yearOfPassing}" required="true" requiredMessage="Enter Year Passing"
+				 disabled="#{menuBean.mode eq 'view'}" tabindex="10" id="txt_passingyear" datePattern="yyyy" enableManualInput="true" />
+				 
+				 </td ><td style="width:100px;float:left; text-shadow:maroon;">
+				 
+				 <rich:message for="txt_passingyear"></rich:message>
+				 </td>
 			</tr>
 
 			<tr>
-				<td><h:outputText value="University" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.empEduInfo.univName}" disabled="#{menuBean.mode eq 'view'}"/></td>
-
-
+				<td style="width:100px"> <h:outputText value="University" /></td>
+				<td style="width:150px"><h:inputText styleClass="inputText" value="#{employeeMB.model.empEduInfo.univName}"  required="true" requiredMessage="Enter University"
+				disabled="#{menuBean.mode eq 'view'}" maxlength="50" tabindex="11" id="txt_university"/>
+				
+				</td><td  style="width:140px;float: left; text-shadow:maroon;" align="left">
+                <rich:message for="txt_university"></rich:message>
+               </td>
 			</tr>
-
+          </tbody>
 		</table>
-
-		<table id="Document Details"
-			style="padding-top: 20px; padding-left: 20px">
-
-			<tr>
-				<td colspan="2"><h:outputText value="Document Details"
-						styleClass="FormHeading" /></td>
-			</tr>
-
+       </fieldset>
+       <fieldset class="fieldset">
+		<legend class="legend"><font color="orange" size="4">Document Details</font></legend>
+		<table id="Document Details"  class="table" cellpadding="10"
+			>
+         <tbody>
 			<tr>
 				<td><h:outputText value="Passport Issue" /></td>
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.passportInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" 
+				<td><rich:calendar  value="#{employeeMB.model.passportInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" tabindex="12"
 				id="PASPORT_ISUE_DT" ></rich:calendar></td>
 				<td style="padding-left: 5px"><h:outputText value="Passport Expiry" /></td>
-			  	<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.passportInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}" id="PASPORT_EXP_DT" 
+			  	<td><rich:calendar  value="#{employeeMB.model.passportInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}" id="PASPORT_EXP_DT" tabindex="13"
 				    onchange="pasportDateValidate()"></rich:calendar></td>
 				<td style="padding-left: 5px"><h:outputText value="Passport No" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.passportInfo.ppNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				<td><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.passportInfo.ppNo}" disabled="#{menuBean.mode eq 'view'}" tabindex="14"/></td>
 				<td>
-				<rich:fileUpload  id="upload" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.passportCopyUploadListener}"
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px" >
+				<rich:fileUpload  id="upload" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.passportCopyUploadListener}"  
+                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="passport" />
                		 	<f:attribute name="ownerType" value="employee" />
@@ -141,15 +176,15 @@
 			</tr>
 			<tr>
 				<td><h:outputText value="Visa Issue" /></td>
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.visaInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" id="VISA_ISUE_DT"></rich:calendar></td>
+				<td><rich:calendar  value="#{employeeMB.model.visaInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" id="VISA_ISUE_DT" tabindex="15"></rich:calendar></td>
 				<td style="padding-left: 5px"><h:outputText value="Visa Expiry" /></td>
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.visaInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}" 
+				<td><rich:calendar  value="#{employeeMB.model.visaInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}"  tabindex="16" 
 				id="VISA_EXP_DT" onchange="visaDateValidate()" ></rich:calendar></td>
 				<td style="padding-left: 5px"><h:outputText value="Visa No" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.visaInfo.visaNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				<td><h:inputText styleClass="inputText" maxlength="20"  value="#{employeeMB.model.visaInfo.visaNo}" disabled="#{menuBean.mode eq 'view'}"  tabindex="17"/></td>
 				<td>
 				<rich:fileUpload  id="upload_visa" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp"  fileUploadListener="#{employeeMB.visaCopyUploadListener}"
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px" >
+                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="visa" />
                		 	<f:attribute name="ownerType" value="employee" />
@@ -158,15 +193,15 @@
 			</tr>
 			<tr>
 				<td><h:outputText value="Labor Issue" /></td>  
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.laborInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" id="LABOUR_ISSUE_DT"></rich:calendar></td>
+				<td><rich:calendar  value="#{employeeMB.model.laborInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" id="LABOUR_ISSUE_DT"  tabindex="18"></rich:calendar></td>
 				<td style="padding-left: 5px"><h:outputText value="Labor Expiry" /></td>
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.laborInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}" 
+				<td><rich:calendar  value="#{employeeMB.model.laborInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}"  tabindex="19" 
 				id="LABOUR_EXP_DT"   onchange="laborDateValidate(this);" ></rich:calendar></td>
 				<td style="padding-left: 5px"><h:outputText value="Labor No" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.laborInfo.cardNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				<td><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.laborInfo.cardNo}" disabled="#{menuBean.mode eq 'view'}"   tabindex="20" /></td>
 				<td>
 				<rich:fileUpload  id="upload_labor" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.laborCopyUploadListener}"
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px" >
+                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="labourCard" />
                		 	<f:attribute name="ownerType" value="employee" />
@@ -175,15 +210,15 @@
 			</tr>
 			<tr>
 				<td><h:outputText value="E - ID Issue" /></td>
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.eidInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" id="EID_ISSUE_DT"></rich:calendar></td>
+				<td><rich:calendar  value="#{employeeMB.model.eidInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" id="EID_ISSUE_DT" tabindex="21" ></rich:calendar></td>
 				<td style="padding-left: 5px"><h:outputText value="E - ID Expiry" /></td>
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.eidInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}" 
+				<td><rich:calendar  value="#{employeeMB.model.eidInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}"  tabindex="22"
 		 		id="EID_EXP_DT" onchange="eIdDateValidate(this);"></rich:calendar></td>
 				<td style="padding-left: 5px"><h:outputText value="E - ID No" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.eidInfo.eIdNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				<td><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.eidInfo.eIdNo}" disabled="#{menuBean.mode eq 'view'}"   tabindex="23" /></td>
 				<td>
 				<rich:fileUpload  id="upload_emirates_id" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.eidCopyUploadListener}"
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px" >
+                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="eidCard" />
                		 	<f:attribute name="ownerType" value="employee" />
@@ -192,17 +227,17 @@
 			</tr>
 			<tr>
 				<td><h:outputText value="M - Card Issue" /></td>
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.miInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" id="M_ISSUE_DT"></rich:calendar></td>
+				<td><rich:calendar  value="#{employeeMB.model.miInfo.issueDt}" disabled="#{menuBean.mode eq 'view'}" id="M_ISSUE_DT"  tabindex="24"></rich:calendar></td>
 				<td style="padding-left: 5px"><h:outputText value="M - Card Expiry" /></td>
-				<td><rich:calendar inputClass="inputText" value="#{employeeMB.model.miInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}" 
-				id="M_EXP_DT"  dayDisableFunction="disablementFunction" dayClassFunction="disabledClassesProv" boundaryDatesMode="scroll" ></rich:calendar></td>
+				<td><rich:calendar  value="#{employeeMB.model.miInfo.expiryDt}" disabled="#{menuBean.mode eq 'view'}"  tabindex="25"
+				id="M_EXP_DT"  dayDisableFunction="disablementFunction" dayClassFunction="disabledClassesProv" boundaryDatesMode="scroll"  ></rich:calendar></td>
 
 				<td style="padding-left: 5px"><h:outputText value="M - Card No" /></td>
-				<td><h:inputText styleClass="inputText" value="#{employeeMB.model.miInfo.cardNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				<td><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.miInfo.cardNo}" disabled="#{menuBean.mode eq 'view'}"  tabindex="26"/></td>
 				
 				<td>
 				<rich:fileUpload  id="upload_medical" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.miCopyUploadListener}"
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
+                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="miCard" />
                		 	<f:attribute name="ownerType" value="employee" />
@@ -215,27 +250,26 @@
 			<td colspan="7" style="padding-top: 15px;">
 				<center>
 					<h:button value="Reset"
-						style="min-height: 25px;	min-width: 80px; font-size: 16px; " />
+					styleClass="orange" style="height:30px; width:60px;" />
 					&nbsp;&nbsp;&nbsp;
-
-					<a4j:commandButton id="saveFile" value="Save" rendered="#{menuBean.mode eq 'update'}" styleClass="submitButton"
+					<a4j:commandButton id="saveFile" value="Save" rendered="#{menuBean.mode eq 'update'}" styleClass="green" style="height:30px; width:60px;"
 						execute="@form" actionListener="#{employeeMB.updateEmployee}"
-						style="min-height: 25px; min-width: 80px; font-size: 16px; visibility:visible; " />
+						 />
 					&nbsp;&nbsp;&nbsp;
 
-					<a4j:commandButton id="navToComm" value="Next" 
-						render="centreContentForm" execute="@form"
-						oncomplete="navToComm()"
+					<a4j:commandButton id="navToComm" value="Next" styleClass="green" style="height:30px; width:60px;"
+						render="centreContentForm" execute="@form"    
+						oncomplete="navToComm()" 
 						actionListener="#{employeeMB.updateFileDetails}"
-						style="min-height: 25px; min-width: 80px; font-size: 16px;" />
+						 />
 
 				</center>
 
 			</td>
 		</tr>
-    
+         </tbody>
 		</table>
-   
+   </fieldset>
 		<script >
 			var navToComm =  function() {
 				//alert("reached");
@@ -243,13 +277,16 @@
 				alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
 				 
 				if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true')
-					changeCenterPage('/application/register_employee/communication.xhtml','comm_item');
+				    {
+					 changeCenterPage('/application/register_employee/communication.xhtml','comm_item');
+				     validate(false);
+				    }
 				else
 					alert("Validation Not Passed From Server Side");
 				
 				
 				};
-        
+				
 </script>
 	
 </ui:composition>

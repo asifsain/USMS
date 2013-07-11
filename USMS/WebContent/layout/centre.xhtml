@@ -5,25 +5,28 @@
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
-
-
-	<h:form id="centreContentForm">
+  
+   <h:head></h:head>
+   <h:body>
+   <div class="wrap">
+	<h:form id="centreContentForm" >
+	    <h:outputScript name="application.js" library="javascript"></h:outputScript>
 		<a4j:jsFunction name="changePage" render="centreContentForm" >
 				<a4j:param name="name" assignTo="#{menuBean.pageName}"></a4j:param>
 		</a4j:jsFunction>
-		<a4j:jsFunction name="changeMode" render="centreContentForm"  action="#{employee.resetViewModel}">
+		<a4j:jsFunction name="changeMode" render="centreContentForm"  action="#{employeeMB.resetViewModel}">
 			<a4j:param name="mode" assignTo="#{menuBean.mode}"></a4j:param>  
 		</a4j:jsFunction>
+		<a4j:jsFunction name="validate" render="centreContentForm"  >
+			<a4j:param name="value" assignTo="#{employeeMB.registrationAgent.prevStepValidationStatus}"></a4j:param>  
+		</a4j:jsFunction>
+		
 		<ui:include src="#{menuBean.pageName}"></ui:include>
 <!-- 		<ui:include src="/application/register_employee/file.xhtml"></ui:include>  -->  
          
-
-
-
-	</h:form>
-	
-	
+    </h:form>
+	</div>
+	</h:body>
 	
 
 

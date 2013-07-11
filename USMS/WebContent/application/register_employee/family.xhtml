@@ -9,17 +9,19 @@
 <h:head>
   
 </h:head>
-<body>
-	<ui:composition>
+<h:body>
+	<ui:composition>   
 	
 	<h:outputScript name="family.js" library="javascript"></h:outputScript>
 		<ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
-			<table id="Family_Details:1" 
-				style="padding-top: 20px; padding-left: 20px; ">
-				
+		    <fieldset class="fieldset">
+		     <legend class="legend" ><font color="orange" size="4">Family Details</font></legend>
+			<table id="Family_Details:1"  class="table" cellpadding="10"
+				>
+				<tbody>
 				<tr>
 					<td><h:selectBooleanCheckbox id="cb_hasSpouse" value="#{employeeMB.model.hasSpouse}" onclick="spouseSelected(this)" /> &nbsp; <h:outputText
-							value="Family Details - Spouse" styleClass="FormHeading" /></td>
+							value="Spouse" styleClass="FormHeading" /></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="First Name" /></td>
@@ -69,7 +71,7 @@
 
 				<tr >
 					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employeeMB.model.hasChild1}" id="cb_hasChild1" onclick="child1Selected(this)" /> &nbsp; <h:outputText
-							value="Family Details - Child 1" styleClass="FormHeading" /></td>
+							value="Child 1" styleClass="FormHeading" /></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="First Name" /></td>
@@ -120,7 +122,7 @@
 
 				<tr>
 					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employeeMB.model.hasChild2}" id="cb_hasChild2" onclick="child2Selected(this)"/> &nbsp; <h:outputText
-							value="Family Details - Child 2" styleClass="FormHeading" /></td>
+							value="Child 2" styleClass="FormHeading" /></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="First Name" /></td>
@@ -165,26 +167,25 @@
                      
 				</tr>
 
-
-<!-- 				<a4j:log level="ALL" popup="false" width="400" height="200"/> -->
 				<tr>
 					<td colspan="7" style="padding-top: 30px;">
 						<center>
 							<h:button value="Reset"
-								style="min-height: 25px;	min-width: 80px; font-size: 16px; " />
+								styleClass="orange" style="height:30px; width:60px;" />
 							&nbsp;&nbsp;&nbsp;
 							<a4j:commandButton id="familyFile" value="Save"   
-							execute="@form"  actionListener="#{employeeMB.updateEmployee}" style="min-height: 25px; min-width: 80px; font-size: 16px;"
+							execute="@form"  actionListener="#{employeeMB.updateEmployee}" styleClass="green" style="height:30px; width:60px;"
 							rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
-							<h:commandButton value="Next"  actionListener="#{employeeMB.updateFamilyDetails}"
-								 render="centreContentForm" disabled="#{menuBean.mode eq 'view'}"
-								style="min-height: 25px; min-width: 80px; font-size: 16px;" />
+							<a4j:commandButton value="Next"  actionListener="#{employeeMB.updateFamilyDetails}"
+								 render="centreContentForm,transactionSucces" disabled="#{menuBean.mode eq 'view'}"
+								 styleClass="green" style="height:30px; width:60px;"  oncomplete="changePage('/application/register_employee/success_transaction.xhtml')" />
 						</center>
 					</td>
 				</tr>  
 
-
+             </tbody>
 			</table>
+			</fieldset>
 			<script >
 	
 			
@@ -192,12 +193,15 @@
 					alert("reached");
 					alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
 					if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true')
+						{
 						changeCenterPage('/application/register_employee/airticket_reimb.xhtml','airticket_item');
+					    validate(false);
+						}
 					else
 						alert("Validation Not Passed From Server Side")
 					};
 			
 			</script>
 	</ui:composition>
-</body>
+</h:body>
 </html>

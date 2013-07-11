@@ -7,30 +7,40 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
 <h:head>
-  
+    <h:outputStylesheet name="kickstart-buttons.css"  library="css"/>
+ 
 </h:head> 
-<body>
-
-   <h:form id="mainForm">
-   <div style="float:left;">
-   	<label>Employee ID/Employee Name</label>
-   		<h:inputText value="#{employeeMB.model.empInfo.firstName}" id="empid"/>
-   		<a4j:commandButton action="#{employeeMB.searchEmployee}" value="Search"  render="table" execute="@form"  id="btnSearch" oncomplete="navToComm()" />
-           
-  </div>
-<!--    added by tariq -->
-<br></br><br></br>
+<h:body>
+    <ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>  
+       
+    <fieldset class="fieldset" style="width: 70%">  
+  <legend class="legend"><font color="orange" size="4">Search Detail</font></legend>
+   <h:form id="mainForm" prependId="false">
+   <table  class="table" cellpadding="10" style="width: 70%;border: 0px">
+   <tr>
+        <td>
+   	    <label>Employee ID/First Name: </label>
+   	   </td> <td>
+   	    	<h:inputText value="#{employeeMB.model.empSearchInfo}" id="empid" styleClass="inputText" />
+   		</td>
+   		<td>     
+   		<a4j:commandButton action="#{employeeMB.searchEmployee}" value="Search"  styleClass="green" style="height:30px; width:60px;" render="table" execute="@form"  id="btnSearch" oncomplete="navToComm()" />
+        </td>   
+   </tr>
+  </table>
+ 
 
   
 <div align="right" id="tablediv" style="visibility:hidden; float:left;right:50px;top:200px;height:100%; width:500px; margin-left:20px;">
 
  <rich:dataTable  value="#{employeeMB.model.empList}"  var="record"  id="table" style="width:100%;height:100%;text-align:center"
-    styleClass="searchTable"
-   headerClass="searchTableHeader"
-   rowClasses="searchTableOddRow,searchTableEvenRow">
-       <rich:column  width="25%">
+    styleClass="stable" rows="5"  
+    onRowMouseOver="this.style.backgroundColor='#F1F1F1'"      
+    onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'" 
+    rowClasses="odd-row,even-row">
+       <rich:column  width="25%">  
      <f:facet name="header">
-       <h:outputText  value="ID" ></h:outputText>
+       <h:outputText  value="EMP No" ></h:outputText>
        </f:facet>
        <h:outputText value="#{record.empNo}"></h:outputText>
     </rich:column>
@@ -54,23 +64,29 @@
       <h:outputText  value="Action" ></h:outputText>
      </f:facet>
        <a4j:commandLink     action="#{employeeMB.selectEmployee}" execute="@this" oncomplete="navToFileDetail()" id="updateBtn" rendered="#{menuBean.mode !='saladj'}" >
-          <f:setPropertyActionListener target="#{employee.model.empInfo}" value="#{record}"></f:setPropertyActionListener>
+          <f:setPropertyActionListener target="#{employeeMB.model.empInfo}" value="#{record}"></f:setPropertyActionListener>
           <h:graphicImage      value="/resources/images/editrecord.gif"/>
        </a4j:commandLink>
        <a4j:commandLink   oncomplete="navToSalaryAdj()"  action="#{salaryProcessMB.selectEmployee}"  execute="@this"  id="salProcess" rendered="#{menuBean.mode eq 'saladj'}">
           <f:setPropertyActionListener target="#{salaryProcessMB.model.empInfo}" value="#{record}"></f:setPropertyActionListener>
           <h:graphicImage     value="/resources/images/addrecord.gif"/>
-       </a4j:commandLink>
+       </a4j:commandLink> 
     </rich:column>
-  
+    <f:facet name="footer">
+       <rich:dataScroller for="table"   
+                maxPages="10" renderIfSinglePage="false" boundaryControls="hide" fastControls="hide"/>  
+      </f:facet>
   
     </rich:dataTable>   
-    </div>
+    </div>   
     <a4j:jsFunction  name="update" action="#{employeeMB.updateEmployee}">
             
     </a4j:jsFunction>
     
-   </h:form>
+   </h:form>  
+    
+   </fieldset> 
+ 
         <script >
 			   var navToComm =  function() {
 				   
@@ -89,9 +105,11 @@
   	  					 changePage('/application/salary_process/salary_adjustment.xhtml');
   	  					 alert("Validation Not Passed From Server Side");
   	  					};
+  	  			
+  	  				
                 	
 		</script>
-</body> 
+</h:body> 
 
      
 

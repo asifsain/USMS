@@ -7,182 +7,218 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head></h:head>
-<body>
+<h:body>
 	<ui:composition>
 			<ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
-			<table id="Communication_Details_Permanent"
-				style="padding-top: 20px; padding-left: 20px">
-				<tr>
-					<td colspan="4"><h:outputText value="Communication Permanent"
-							styleClass="FormHeading" /></td>
-				</tr>
+				<fieldset class="fieldset">
+		        <legend class="legend"><font color="orange" size="4">Communication Permanent</font></legend>
+			     <table id="Communication_Details_Permanent" class="table" cellpadding="10" >
+			    <tbody>
 		  		<tr>
-					<td><h:outputText value="Address Line 1" /></td>
-					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"   value="#{employeeMB.model.permAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Address Line 1" /></td>
+					<td colspan="3" style="width:150px"><h:inputText styleClass="inputText" style="width: 100%" required="true" id="testAdrLine1"  value="#{employeeMB.model.permAddr.addr1}" 
+					 disabled="#{menuBean.mode eq 'view'}" maxlength="400"  requiredMessage="Please Enter Address1"/></td>
+				    <td style="width: 100px"><rich:message for="testAdrLine1" /></td>
+				    <td style="width: 100px"></td>    
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				 
 				</tr>
 				<tr>
-					<td><h:outputText value="Address Line 2" /></td>
-					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"   value="#{employeeMB.model.permAddr.addr2}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Address Line 2" /></td>
+					<td colspan="3" style="width:150px"><h:inputText  maxlength="400" styleClass="inputText" style="width:100%"   value="#{employeeMB.model.permAddr.addr2}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				
 				</tr> 
 				<tr>
-					<td><h:outputText value="City" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.permAddr.city}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="City" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" id="txt_pcity" value="#{employeeMB.model.permAddr.city}"
+					 disabled="#{menuBean.mode eq 'view'}" maxlength="100" required="true" requiredMessage="Enter City"/></td>
+				    <td style="width: 100px"><rich:message for="txt_pcity"></rich:message> </td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
 				</tr>
 				<tr>
-					<td><h:outputText value="State" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.permAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="State" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="100" required="true" requiredMessage="Enter State" id="txt_pstate" value="#{employeeMB.model.permAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
+                   <td style="width: 100px"><rich:message for="txt_pstate" /></td>
+				
 
-					<td>&nbsp;</td>
-
-					<td><h:outputText value="Postal Code" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.permAddr.postalCode}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Postal Code" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="20" id="txt_PCode" required="true" requiredMessage="Enter Postal Code" value="#{employeeMB.model.permAddr.postalCode}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				    <td style="width: 100px"><rich:message for="txt_PCode"></rich:message> </td>
 				</tr>
 				<tr>
-					<td><h:outputText value="Country" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.permAddr.country}" disabled="#{menuBean.mode eq 'view'}" /></td>
+					<td style="width:140px"><h:outputText value="Country" /></td>
+					<td style="width:200px"><h:inputText id="txt_PCntry" maxlength="50" styleClass="inputText" required="true" value="#{employeeMB.model.permAddr.country}" disabled="#{menuBean.mode eq 'view'}" requiredMessage="Enter Country"/></td>
+				     <td style="width: 100px"><rich:message for="txt_PCntry"></rich:message> </td>
+				     <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
 				</tr>
 				<tr>
-					<td><h:outputText value="Contact Person First Name" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.permAddr.contPrsnFName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Contact Person First Name" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="50" value="#{employeeMB.model.permAddr.contPrsnFName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+                    <td style="width: 100px"></td>
 
-					<td>&nbsp;</td>
-
-					<td><h:outputText value="Relation" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.permAddr.rel}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Relation" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="50" value="#{employeeMB.model.permAddr.rel}" disabled="#{menuBean.mode eq 'view'}"/></td>
+			        <td style="width: 100px"></td>
 				</tr>
 				<tr>
-					<td><h:outputText value="Contact Person Last Name" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.permAddr.contPrsnLName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Contact Person Last Name" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="50" value="#{employeeMB.model.permAddr.contPrsnLName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+                     <td style="width: 100px"></td>
+			
 
-					<td>&nbsp;</td>
-
-					<td><h:outputText value="Tel No" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.permAddr.telNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Tel No" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.permAddr.telNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				    <td style="width: 100px"></td>
 				</tr>
+				</tbody>
 			</table>
+           </fieldset>
+           <fieldset class="fieldset">
+		        <legend class="legend"><font color="orange" size="4">Communication Local</font></legend>
+			<table id="Communication_Details_Local" class="table" cellpadding="10">
+			<tbody>
 
-			<table id="Communication_Details_Local"
-				style="padding-top: 20px; padding-left: 20px">
 				<tr>
-					<td colspan="4"><h:outputText value="Communication Local"
-							styleClass="FormHeading" /></td>
+					<td style="width:140px"><h:outputText value="Address Line 1" /></td>
+					<td colspan="3" style="width:150px"><h:inputText maxlength="100" styleClass="inputText" id="txt_LAddr1" required="true" requiredMessage="Enter Addres1" style="width:100%"   value="#{employeeMB.model.localAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				    <td style="width: 100px"><rich:message for="txt_LAddr1" /></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="Address Line 1" /></td>
-					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"   value="#{employeeMB.model.localAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Address Line 2" /></td>
+					<td colspan="3" style="width:150px"><h:inputText maxlength="100" styleClass="inputText" style="width:100%"  value="#{employeeMB.model.localAddr.addr2}" disabled="#{menuBean.mode eq 'view'}"/></td>
+			        <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+			
 				</tr>
 
 				<tr>
-					<td><h:outputText value="Address Line 2" /></td>
-					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"  value="#{employeeMB.model.localAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="City" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="50" id="txt_lcity" required="true" requiredMessage="Enter City" value="#{employeeMB.model.localAddr.city}" disabled="#{menuBean.mode eq 'view'}"/></td>
+				    <td style="width: 100px"><rich:message for="txt_lcity"></rich:message> </td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
+				    <td style="width: 100px"></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="City" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.localAddr.city}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="State" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="50" id="txt_lstate" required="true" requiredMessage="Enter State" value="#{employeeMB.model.localAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+					 <td style="width: 100px"><rich:message for="txt_lstate" /></td>
+
+					<td style="width:140px"><h:outputText value="Postal Code" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="20" id="txt_lCode" required="true" requiredMessage="Enter State Code" value="#{employeeMB.model.localAddr.postalCode}" disabled="#{menuBean.mode eq 'view'}"/></td>
+			        <td style="width: 100px"><rich:message for="txt_lCode"></rich:message> </td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="State" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.localAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
-
-					<td>&nbsp;</td>
-
-					<td><h:outputText value="Postal Code" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.localAddr.postalCode}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Country" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="50" value="#{employeeMB.model.localAddr.country}" required="true" requiredMessage="Enter Country" id="txt_lcontry" disabled="#{menuBean.mode eq 'view'}"/></td>
+				    <td style="width: 100px"><rich:message for="txt_lcontry"></rich:message> </td>
 				</tr>
-
-				<tr>
-					<td><h:outputText value="Country" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.localAddr.country}" disabled="#{menuBean.mode eq 'view'}"/></td>
-				</tr>
+				</tbody>
 			</table>
-
-			<table id="Communication_Details_Emergency"
-				style="padding-top: 20px; padding-left: 20px">
+            </fieldset>
+              <fieldset class="fieldset">
+		        <legend class="legend"><font color="orange" size="4">Communication Emergency</font></legend>
+			   <table id="Communication_Details_Emergency"  class="table" cellpadding="10" >
+			
+               <tbody>
 				<tr>
-					<td colspan="4"><h:outputText value="Communication Emergency"
-							styleClass="FormHeading" /></td>
+					<td style="width:140px"><h:outputText value="Address Line 1" /></td>
+					<td colspan="5" style="width:200px"><h:inputText maxlength="100" styleClass="inputText" style="width: 60%"  value="#{employeeMB.model.emgrAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="Address Line 1" /></td>
-					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"  value="#{employeeMB.model.emgrAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Address Line 2" /></td>
+					<td colspan="5" style="width:200px"><h:inputText maxlength="100" styleClass="inputText" style="width: 60%"   value="#{employeeMB.model.emgrAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="Address Line 2" /></td>
-					<td colspan="5"><h:inputText styleClass="inputText" style="width: 100%"   value="#{employeeMB.model.emgrAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="City" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="50" value="#{employeeMB.model.emgrAddr.city}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="City" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.emgrAddr.city}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="State" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="50" value="#{employeeMB.model.emgrAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+					
+
+					<td style="width:140px"><h:outputText value="Postal Code" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.emgrAddr.postalCode}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="State" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.emgrAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
-
-					<td>&nbsp;</td>
-
-					<td><h:outputText value="Postal Code" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.emgrAddr.postalCode}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Country" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="50" value="#{employeeMB.model.emgrAddr.country}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="Country" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.emgrAddr.country}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Contact Person First Name" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="40" value="#{employeeMB.model.emgrAddr.contPrsnFName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+
+				
+
+					<td style="width:140px"><h:outputText value="Relation" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="40" value="#{employeeMB.model.emgrAddr.rel}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 
 				<tr>
-					<td><h:outputText value="Contact Person First Name" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.emgrAddr.contPrsnFName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Contact Person Last Name" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="40" value="#{employeeMB.model.emgrAddr.contPrsnLName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
-					<td>&nbsp;</td>
+				
 
-					<td><h:outputText value="Relation" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.emgrAddr.rel}" disabled="#{menuBean.mode eq 'view'}"/></td>
-				</tr>
-
-				<tr>
-					<td><h:outputText value="Contact Person Last Name" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.emgrAddr.contPrsnLName}" disabled="#{menuBean.mode eq 'view'}"/></td>
-
-					<td>&nbsp;</td>
-
-					<td><h:outputText value="Tel No" /></td>
-					<td><h:inputText styleClass="inputText" value="#{employeeMB.model.emgrAddr.telNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td style="width:140px"><h:outputText value="Tel No" /></td>
+					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.emgrAddr.telNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 
 				<tr>
 					<td colspan="7" style="padding-top: 15px;">
 						<center>
 							<h:button value="Reset"
-								style="min-height: 25px;	min-width: 80px; font-size: 16px; " />
+								styleClass="orange" style="height:30px; width:60px;" />
 							 &nbsp;&nbsp;&nbsp;
 					    	<a4j:commandButton id="communicationFile" value="Save"   
-					    	 execute="@form"  actionListener="#{employeeMB.updateEmployee}" style="min-height: 25px; min-width: 80px; font-size: 16px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
-							<a4j:commandButton value="Next" actionListener="#{employeeMB.updateCommunicationDetails}" render="centreContentForm" oncomplete="navToBank()" style="min-height: 25px; min-width: 80px; font-size: 16px;"/>
+					    	 execute="@form"  actionListener="#{employeeMB.updateEmployee}" styleClass="green" style="height:30px; width:60px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
+							<a4j:commandButton value="Next" actionListener="#{employeeMB.updateCommunicationDetails}" render="centreContentForm" oncomplete="navToBank()" styleClass="green" style="height:30px; width:60px;"/>
 						</center>
 					</td>
 				</tr>
+				</tbody>
 			</table>
-		
+		</fieldset>
 		<script >
 	
 			
 			var navToBank =  function() {
 				//alert("reached");
 				alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
-				if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true')
+				if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true'){
 					changeCenterPage('/application/register_employee/bank.xhtml','comm_item');
+				    validate(false);
+			    }
 				else
 					alert("Validation Not Passed From Server Side")
 				};
 			
 		</script>
 	</ui:composition>
-</body>
+</h:body>
 </html>

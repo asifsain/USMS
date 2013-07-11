@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    
+</h:head>
+<h:body >
+  <ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
+  <center>
+<table class="table" style="width:250px;height:300px;border: 0px" align="center">
+    <tr>
+      <td>
+       <rich:messages   globalOnly="true" layout="table" id="transactionSucces" ajaxRendered="true">
+	   </rich:messages>
+	   </td>
+	   
+	   </tr>
+	   <tr><td style="font: bold;font-family: sans-serif;font-size: 20px;color: green;" align="center"><b>Transaction Successful</b></td></tr>
+   </table>
+  </center>
+</h:body>
+</html>

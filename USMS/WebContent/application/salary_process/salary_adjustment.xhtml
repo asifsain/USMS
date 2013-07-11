@@ -12,25 +12,24 @@
 <h:body>
 <ui:composition>
 	<ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
-   <table id="Salary_adjustment" style="padding-top: 20px; padding-left: 20px; width:500px">
-
-			<tr>
-				<td><h:outputText value="Adjustment Detail" styleClass="FormHeading" /></td>
-			</tr>
+	  <fieldset class="fieldset">
+		<legend class="legend"><font color="orange" size="4">Adjustment Detail</font></legend>
+       <table id="Salary_adjustment" class="table" cellpadding="10" style="width: 75%" align="center">
+               <tbody>
                <tr>
-				<td><h:outputText value="Employee Id" /></td>
-				<td><h:inputText styleClass="inputText" value="#{salaryProcessMB.model.empInfo.empNo}"   disabled="true"/></td>
+				<td style="width: 100px"><h:outputText value="Employee Id :" /></td>
+				<td style="width: 100px"><h:inputText styleClass="inputText" value="#{salaryProcessMB.model.empInfo.empNo}" size="25"   disabled="true"/></td>
 
 			</tr>
 			<tr>
-				<td><h:outputText value="Employee Name" /></td>
-				<td><h:inputText styleClass="inputText" value="#{salaryProcessMB.model.empInfo.firstName}"  disabled="true" /></td>
+				<td style="width:140px"><h:outputText value="Employee Name :" /></td>
+				<td style="width:200px"><h:inputText styleClass="inputText" value="#{salaryProcessMB.model.empInfo.firstName} #{salaryProcessMB.model.empInfo.lastName}" size="25"  disabled="true" /></td>
 
 			</tr>  
 			
 			<tr>
-				<td><h:outputText value="Adjustment Type" /></td>
-				<td><h:selectOneMenu  id="adjustmentType"   value="#{salaryProcessMB.model.empSalAdj.adjType}" style="width: 80%; background-color: #FBEFEF; font-size: 16px;  text-indent: 5px;">
+				<td style="width:140px"><h:outputText value="Adjustment Type :" /></td>
+				<td style="width:200px"><h:selectOneMenu  id="adjustmentType"   value="#{salaryProcessMB.model.empSalAdj.adjType}" styleClass="select">
 				    <f:selectItem itemLabel="Medical Reimb - Employee" itemValue="medicalReimb_employee"/>
 					<f:selectItem itemLabel="Medical Reimb - Child 1" itemValue="medicalReimb_Child1"/>
 					<f:selectItem itemLabel="Medical Reimb - Child 2" itemValue="medicalReimb_Child2"/>
@@ -48,38 +47,36 @@
 				
 			</tr>
 			<tr>
-				<td><h:outputText value="Adjustment Date" /></td>
-				<td><rich:calendar   inputClass="inputText" value="#{salaryProcessMB.model.empSalAdj.adjDt}" id="arjDate"></rich:calendar></td>
+				<td style="width:140px"><h:outputText value="Adjustment Date :" /></td>
+				<td style="width:200px"><rich:calendar   value="#{salaryProcessMB.model.empSalAdj.adjDt}" id="arjDate"></rich:calendar></td>
 
 			</tr>
 			<tr>
-				<td><h:outputText value="Adjustment Amount" /></td>
-				<td><h:inputText styleClass="inputText" value="#{salaryProcessMB.model.empSalAdj.amt}"  id="adjAmount" onblur="validateNumber(this)" /> </td>
-            </tr>
-                <tr>
-                <td>&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;</td>
-                <td>
-                <h:selectOneRadio value="#{salaryProcessMB.model.empSalAdj.amtAdjFlag}">
+				<td style="width:140px"><h:outputText value="Adjustment Amount :" /></td>
+				<td style="width:200px"><h:inputText styleClass="inputText" size="25" value="#{salaryProcessMB.model.empSalAdj.amt}"  id="adjAmount" onblur="validateNumber(this)" />
+				
+				 <h:selectOneRadio value="#{salaryProcessMB.model.empSalAdj.amtAdjFlag}" style="border:0px;width:200px;">
                  <f:selectItem itemLabel="Debit" itemValue="D"></f:selectItem>
-                 <f:selectItem itemLabel="Credit" itemValue="C"></f:selectItem>
+                 <f:selectItem itemLabel="Credit" itemValue="C"></f:selectItem> 
                 </h:selectOneRadio>
-                </td> 
-               
-			</tr>
+				 </td>
+           
+            </tr>
+        
 			<tr>
-				<td><h:outputText value="Adjustment Description"/></td>
-				<td style="padding-bottom: 15px"><h:inputText styleClass="inputText" value="#{salaryProcessMB.model.empSalAdj.desc2}" id="adjDescription"/></td>
+				<td style="width:140px"><h:outputText value="Adjustment Description :"/></td>
+				<td style="padding-bottom: 15px;width:200px" ><h:inputText styleClass="inputText" size="25" value="#{salaryProcessMB.model.empSalAdj.desc2}" id="adjDescription"/></td>
 
-			</tr>
+			</tr>    
 
 				<tr>
-				<td><h:outputText value="Aproved By" /></td>
-				<td><h:inputText styleClass="inputText" value="#{salaryProcessMB.model.empSalAdj.apprBy}"  id="aproveBy" /></td>
+				<td style="width:140px"><h:outputText value="Aproved By :" /></td>
+				<td style="width:200px"><h:inputText styleClass="inputText" size="25" value="#{salaryProcessMB.model.empSalAdj.apprBy}"  id="aproveBy" /></td>
 
 			</tr>
 			 <tr>
-				<td><h:outputText value="File Upload"/></td>
-				<td><rich:fileUpload  id="softCopy" acceptedTypes="jpg,pdf, gif, png, bmp,txt,xls,xlsx" execute="@this" fileUploadListener="#{salaryProcessMB.salAdjSoftFileUploadListener}"
+				<td style="width:140px"><h:outputText value="File Upload :"/></td>
+				<td style="width:200px"><rich:fileUpload  id="softCopy" acceptedTypes="jpg,pdf, gif, png, bmp,txt,xls,xlsx" execute="@this" fileUploadListener="#{salaryProcessMB.salAdjSoftFileUploadListener}"
                 		 ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1"   style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none"/>
                		 	<f:attribute name="fileType" value=" Salary_Adjustment"/>
@@ -94,59 +91,57 @@
 	<tr>
 				<td colspan="7" style="padding-top: 15px;">
 					<center>
-<!-- 							<h:button  value="Reset"  style="min-height: 25px;	min-width: 80px; font-size: 16px; "/>  -->
-							<a4j:commandButton style="min-height: 25px;	min-width: 80px; font-size: 16px; " value="Reset" execute="@this" render="@form" actionListener="#{salaryProcessMB.resetAdjustment}"/>
+							<a4j:commandButton styleClass="orange" style="height:30px; width:60px;" value="Reset" execute="@this" render="@form" actionListener="#{salaryProcessMB.resetAdjustment}"/>
 							&nbsp;&nbsp;&nbsp;
 							<a4j:commandButton id="savebtn" value="Save"    execute="@form"   actionListener="#{salaryProcessMB.saveSalAdj}"
-							  style="min-height: 25px; min-width: 80px; font-size: 16px;" />
+							  styleClass="green" style="height:30px; width:60px;"/>
 					</center>
 				</td>
 			</tr>
+			</tbody>
             </table>
+            </fieldset>
             <br/>
-            
-            <table style="padding-top: 20px; padding-left: 20px; width:800px">
-             <tr >
-				<td style="width:200px;vertical-align: middle;"><h:outputText value="Adjustment History"  styleClass="FormHeading" /></td>
-							  
-			</tr>
-			</table>
-			  <table style="padding-top: 10px; padding-left: 20px; width:300px">
-			<tr > 
-			    <td><h:outputText value="Month:" /></td>
-			     <td style="height:100px;vertical-align: middle;">
-<!-- 			     <my:inputDate  value="#{salaryProcessMB.model.selectedMonth}"  ></my:inputDate> -->
-			         <h:selectOneMenu  value="#{salaryProcessMB.model.month}" >
+             <fieldset class="fieldset">
+		     <legend class="legend"><font color="orange" size="4">Adjustment History</font></legend>
+              
+			  <table class="table" cellpadding="10" style="width: 50%;">
+			  <tbody>
+			     <tr > 
+			    <td><h:outputText value="Month:" />&nbsp;&nbsp; 
+			     <h:selectOneMenu  value="#{salaryProcessMB.model.month}" >
                        <f:selectItems value="#{salaryProcessMB.model.months}"></f:selectItems>
-                     
+                       
                      </h:selectOneMenu>
-			     </td>
+			      </td>
+<!-- 			     <td style="height:100px;vertical-align: middle;"> -->
+                 
+			        
+<!-- 			     </td> -->
 				  
-				  <td><h:outputText value="Year:" /></td>
-				
-                   <td style="height:100px;vertical-align: middle;">
-<!--                    <my:inputYear value="#{salaryProcessMB.model.selectedYear}"></my:inputYear> -->
-                     <h:selectOneMenu value="#{salaryProcessMB.model.year}" >
+				  <td><h:outputText value="Year:" />&nbsp;&nbsp;
+				     <h:selectOneMenu value="#{salaryProcessMB.model.year}" >
                      <f:selectItems value="#{salaryProcessMB.model.years}"></f:selectItems>
                      
                      </h:selectOneMenu>
-                   
-                   
-                   </td>
-                   <td>&nbps;</td>
+				  </td>
+				
+                  
+                 
                       
                      <td><a4j:commandButton value="Search" execute="@form"   actionListener="#{salaryProcessMB.selectSalAdj}" oncomplete="showHistry()" 
- 							render="table"  style="min-height: 20px; min-width: 50px; font-size: 12px;"/></td> 
+ 							render="table"    styleClass="green" style="height:30px; width:60px;"/></td> 
                 
 			  </tr>
+			  </tbody>
            </table>
             
-<div align="right" id="salArjustnent" style="visibility:hidden; float:left;right:50px;top:200px;height:100%; width:500px; margin-left:20px;">
+            <div align="right" id="salArjustnent" style="visibility:hidden; float:left;right:50px;top:200px;height:100%; width:500px; margin-left:20px;">
 
- <rich:dataTable  value="#{salaryProcessMB.model.salaryArjList}"  var="record"  id="table" style="width:100%;height:100%;text-align:center"
-    styleClass="searchTable"
-    headerClass="searchTableHeader"
-    rowClasses="searchTableOddRow,searchTableEvenRow">
+         <rich:dataTable  value="#{salaryProcessMB.model.salaryArjList}"  var="record"  id="table" style="width:100%;height:100%;text-align:center"
+                styleClass="searchTable"  
+               headerClass="searchTableHeader"
+                rowClasses="searchTableOddRow,searchTableEvenRow">
        <rich:column  width="15%">
      <f:facet name="header">
        <h:outputText  value="Adjustment Type" ></h:outputText>
@@ -191,10 +186,12 @@
       
     </rich:column>
   
-  
+     <f:facet name="footer">
+         <rich:dataScroller id="scroller" for="table" maxPages="10" renderIfSinglePage="false" boundaryControls="hide" fastControls="hide" />     
+     </f:facet>
     </rich:dataTable>
     </div>
-		 
+	</fieldset>	 
 		      <script >
 			        var showHistry =  function() {
 				   

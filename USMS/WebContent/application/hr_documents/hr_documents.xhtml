@@ -8,19 +8,30 @@
       xmlns:my="http://java.sun.com/jsf/composite/components">  
      
   
-<h:head></h:head>      
+<h:head>
+     
+</h:head>      
 <h:body>      
   <ui:composition>
+  <style type="text/css">
+        
+      .rf-cal-c{
+         width:2px;
+         height:2px;
+         
+       }
+    </style>   
 	  <ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
- 
-    <div style="float:left;">
-     <table>  
+     
+     <fieldset class="fieldset" style="width:85%; height: 100%">
+       <legend class="legend"><font color="orange" size="4">HR Document </font></legend>
+     <table class="table" cellpadding="10" style="width: 70%;border: 0px">  
       <tr>
        <td>
-       <h:outputText value="Type Of Document"></h:outputText>&nbsp;&nbsp;
+       <h:outputText value="Type Of Document :"></h:outputText>&nbsp;&nbsp;
 		</td>
 		<td>	  
-			   <h:selectOneMenu  value="#{documentGenerationMB.docModel.hrDocuments.docType}">
+			   <h:selectOneMenu  value="#{documentGenerationMB.docModel.hrDocuments.docType}" styleClass="select">
 			     <f:selectItem itemLabel="General Experice Letter" itemValue="GENERAL_EXP_LETTER"></f:selectItem>
 			     <f:selectItem itemLabel="End Service Experice Letter" itemValue="END_SERVICE_EXP_LETTER"></f:selectItem>
 			     <f:selectItem itemLabel="Final Settlement" itemValue="FINAL_SETELMENT"></f:selectItem>
@@ -31,30 +42,41 @@
 	   </td>   
 		</tr>
 		<tr> 
-			<td style="text-align: left: ;">  
-	      <h:outputText value="Date"></h:outputText>	</td>	  
+	 		<td style="text-align: left: ;">  
+	      <h:outputText value="Date :" ></h:outputText>	</td>	  
        <td>
-          <rich:calendar value="#{documentGenerationMB.docModel.hrDocuments.date}"></rich:calendar> 
-       </td> 
-         </tr>	
-          </table>
-          
-    	<label>Employee ID/Name</label>&nbsp;&nbsp;
-   		<h:inputText value="#{documentGenerationMB.docModel.name}" id="empid"/>
-   		<a4j:commandButton action="#{documentGenerationMB.searchAllEmployee}" value="Search"  render="pdftable" execute="@form"  id="btnSearch" oncomplete="showEmpDeail()" />
-           
-    </div>
-    <br/> <br/>  <br/> <br/> <br/><br/><br/>
+          <rich:calendar direction="autoRight"  value="#{documentGenerationMB.docModel.hrDocuments.date}"  id="DOC_DT" required="true" requiredMessage="Enter Date"
+           datePattern="dd-MM-yyyy"  inputStyle="input_calander" inputClass="input_calander" styleClass="rf-cal-c" ></rich:calendar> 
+       </td>           
+       <td style="width: 100px"><rich:message for="DOC_DT"/></td>  
+         </tr>	  
+       <tr>      
+          <td>
+    	<label>Employee ID/First Name:</label>
+    	</td>    
+    	<td>
+   		<h:inputText value="#{documentGenerationMB.docModel.name}" id="empid" styleClass="inputText"/>
+   		 </td><td>
+   		<a4j:commandButton action="#{documentGenerationMB.searchAllEmployee}" value="Search"  render="pdftable" execute="@form"  id="btnSearch" oncomplete="showEmpDeail()" 
+   		 styleClass="green" style="height:30px; width:60px;"/>
+         </td>
+          </tr> 
+     </table>
+  
    
   
      
-    <div  id="salarySlip" style="visibility:hidden; float:left; right:5px;top:20px;height:50%; width:400px; margin-left:20px;">
-     <rich:dataTable value="#{documentGenerationMB.docModel.empList}" var="pdfrecord"  id="pdftable" style="width:100%;text-align:center">
+    <div  id="salarySlip" style="visibility:hidden; float:left; right:5px;top:20px;height:50%; width:70%; margin-left:20px;">
+     <rich:dataTable value="#{documentGenerationMB.docModel.empList}" var="pdfrecord"  id="pdftable" 
+      style="width:100%;text-align:center"
+      rowClasses="searchTableOddRow,searchTableEvenRow" rows="10"
+      onRowMouseOver="this.style.backgroundColor='#B5F3FB'"
+      onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
     
       <rich:column   width="25%">
        <f:facet name="header"><h:outputText  value="Select" ></h:outputText> 
       </f:facet>
-      <h:selectBooleanCheckbox value="#{pdfrecord.flag}" disabled="#{!pdfrecord.flag}">
+      <h:selectBooleanCheckbox value="#{pdfrecord.flag}" disabled="#{pdfrecord.salayStatus eq 'generated'}">
 <!--         <a4j:ajax event="change" render="pdftable"></a4j:ajax> -->
      </h:selectBooleanCheckbox>
       </rich:column>
@@ -77,20 +99,23 @@
        </f:facet>
      
         <h:commandLink    value="View" target="_blank" id="view_Experience_Letter" action="#{documentGenerationMB.viewpdfDocuments}"
-         disabled="#{pdfrecord.flag}" >
+         disabled="#{pdfrecord.salayStatus ne'generated'}" >
          <f:setPropertyActionListener target="#{documentGenerationMB.docModel.empInfo}" value="#{pdfrecord}" ></f:setPropertyActionListener>
           
         </h:commandLink>  
   
      </rich:column>
+       <f:facet name="footer">
+         <rich:dataScroller id="scroller" for="pdftable" maxPages="10" renderIfSinglePage="false" boundaryControls="hide" fastControls="hide" />     
+     </f:facet>
       </rich:dataTable>
-    <br></br>
-     <div align="right">
-      <a4j:commandButton render="pdftable" execute="@form" style="min-height: 25px; min-width: 80px; font-size: 16px;" value="Generate" actionListener="#{documentGenerationMB.generatePDFDocument}" id="btn_Sal_Slip"></a4j:commandButton> &nbsp;&nbsp;
-     
-    </div >  
+   
+    <div align="right">
+      <a4j:commandButton render="pdftable" execute="@form"  styleClass="green" style="height:30px; width:60px;"  value="Generate" actionListener="#{documentGenerationMB.generatePDFDocument}" id="btn_Sal_Slip"></a4j:commandButton> &nbsp;&nbsp;
+    </div> 
+  
     </div>       
-
+</fieldset>
          <script >
 
            $(document).ready(function(){

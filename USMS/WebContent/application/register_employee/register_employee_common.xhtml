@@ -6,15 +6,18 @@
 	 xmlns:f="http://java.sun.com/jsf/core"
 	 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head></h:head>
-<body>
-	
+<h:head>
+     <h:outputStylesheet name="kickstart-buttons.css"  library="css"/>
+    
+  </h:head>
+<h:body>
 		<h:inputHidden id="prevStepValidatedStatus" value="#{employeeMB.registrationAgent.prevStepValidationStatus}"  />
 <!-- 		<h:inputHidden id="mode" value="#{employee.registrationAgent.mode}"  /> -->
-		 &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; <rich:messages  globalOnly="true" layout="table" id="globalMsg">
+		 &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; 
+		 <rich:messages  globalOnly="true" layout="table" id="globalMsg" style="font: bold;font-family: sans-serif;font-size: 20px;color: green;" align="center">
 		 
 		</rich:messages>
-		 	 	 
+		 	 	   
     <rich:popupPanel id="confirmation" width="250" height="150">
             <f:facet name="header">Confirmation</f:facet>
            <h:panelGrid>
@@ -29,8 +32,16 @@
 	          onclick="#{rich:component('confirmation')}.hide();return false" />
                </h:panelGroup>
              </h:panelGrid>
-        </rich:popupPanel> 
-       		 
+        </rich:popupPanel>   
+        
+        <a4j:status>
+            <f:facet name="start">
+                <h:graphicImage value="/resources/images/ai.gif" style="width:40px; height:40px;" alt="ai" />
+            </f:facet>
+        </a4j:status> 
+      
+     
+	 
 	
-</body>
+</h:body>  
 </html>
