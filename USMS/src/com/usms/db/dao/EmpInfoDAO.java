@@ -28,9 +28,9 @@ public class EmpInfoDAO {
 			System.out.println("reached 5");
 			//empList.addAll(em.createQuery("SELECT e FROM usms.emp_info e", EmpInfo.class).getResultList());
 			 ut.begin();
-			  Query q = emm.createQuery("Select A from EmpInfo A where (A.firstName LIKE :name) or (A.EIdInfos.eIdNo LIKE :id)");
+			  Query q = emm.createQuery("Select A from EmpInfo A where (A.firstName LIKE :name) or (A.empNo LIKE :id)");
 			  q.setParameter("name", "%"+id+"%");
-			  q.setParameter("id", "%"+id+"%");
+			  q.setParameter("id", "%"+id+"%");   
 			  empList = q.getResultList();
 		//	empList.add(em.find(EmpInfo.class, 1));
 			System.out.println("reached 3");
@@ -104,6 +104,30 @@ public class EmpInfoDAO {
 		}
 	}
         
-      //------------------ Update Employee DAO Function-----------------------------
-        
+      //------------------ check availibility-----------------------------
+	
+	public EmpInfo checkIdAvailibility(String empNo, EntityManager emm,UserTransaction ut)
+	  {
+		System.out.println("reached on update DAO function");
+		EmpInfo empInfo=null;
+		try {
+			ut.begin();
+			  Query q = emm.createQuery("Select A from EmpInfo A where(A.empNo =:id)");
+			  q.setParameter("id",empNo);
+			  empInfo=(EmpInfo)q.getSingleResult();
+			ut.commit();
+		 } catch (Exception e) {
+			System.out.println(e.getMessage());
+			// et.rollback();
+			try {
+				ut.rollback();
+			} catch (IllegalStateException | SecurityException
+					| SystemException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return empInfo;
+	  }
+       
 }

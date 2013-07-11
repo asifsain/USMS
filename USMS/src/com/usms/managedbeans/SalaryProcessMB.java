@@ -114,7 +114,7 @@ public class SalaryProcessMB
 	   {
 		 System.out.println("In select Salary Arjustment");
 	     System.out.println( model.getSelectedYear());
-		 int empId=model.getEmpSalAdj().getEmpInfo().getEmpNo();
+		 String empId=model.getEmpSalAdj().getEmpInfo().getEmpNo();
 	     List<EmpAdjTrx> list=empSalAdjustdao.selectSalArjustment(empId, model.getMonth(), model.getYear(), em, ut);
 		 model.setSalaryArjList(list);
 		
@@ -194,10 +194,12 @@ public class SalaryProcessMB
 		    List <EmpInfo> list= empSalAdjustdao.selectAllEmployee(ut,em);
 		    for(EmpInfo empInfo:list)
 		     {
-		    	System.out.println(empInfo.getEmpAdjTrxs().size());
+		    	System.out.println(empInfo.getEmpSalTrxs());
+		    	System.out.println(empInfo.getEmpSalaryInfos());
+		    	if(empInfo.getEmpSalaryInfos()!=null)
 		    	empInfo.getTotalAdj(model.getYear(),model.getMonth(), empInfo.getEmpAdjTrxs(),empInfo.getEmpSalaryInfos().getTotal());
 		    	for(EmpSalTrx salTrx: empInfo.getEmpSalTrxs())
-		    	 {
+		    	 {   
 		    		System.out.println(empInfo.getEmpSalTrxs().size());
 		    		System.out.println(empInfo.getFirstName());
 		    		System.out.println(salTrx.getSalTrxMonth());
@@ -205,7 +207,7 @@ public class SalaryProcessMB
 		    			&&salTrx.getFromDt()!=null	&& (salTrx.getFromDt().getYear()+1900)==model.getYear())
 		    		 {
 		    			empInfo.setSalayStatus("Processed");
-		    			empInfo.setFlag(false);
+		    			empInfo.setFlag(false);   
 		    			break;
 		    		 }
 		    			  

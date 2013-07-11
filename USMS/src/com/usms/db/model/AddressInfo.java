@@ -16,7 +16,7 @@ public class AddressInfo implements Serializable {
 	@Id
 	private int id;
 
-	@Column(name="ADDR_1")
+	@Column(name="ADDR_1")  
 	private String addr1;
 
 	@Column(name="ADDR_2")
@@ -175,7 +175,7 @@ public class AddressInfo implements Serializable {
 		return this.telNo;
 	}
 
-	public void setTelNo(String telNo) {
+	public void setTelNo(String telNo) {   
 		this.telNo = telNo;
 	}
 

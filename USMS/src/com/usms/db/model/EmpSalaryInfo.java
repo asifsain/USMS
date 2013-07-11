@@ -41,7 +41,7 @@ public class EmpSalaryInfo implements Serializable {
 	@JoinColumn(name="EMP_INFO_EMP_NO", referencedColumnName="EMP_NO")
 	private EmpInfo empInfo;
 
-	public EmpSalaryInfo() {
+	public EmpSalaryInfo() {    
 	}
 
 	public int getId() {

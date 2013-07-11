@@ -18,14 +18,16 @@ import com.usms.db.model.PassportInfo;
 import com.usms.db.model.VisaInfo;
 
 public class EmployeeViewModel {
-
+    
+	private String empSearchInfo;
+	
 	public EmployeeViewModel(String mode) {
 		// TODO Auto-generated constructor stub
 		
 		
 		switch (mode) {
 		case "register":
-			empInfo = new EmpInfo();
+			empInfo = new EmpInfo();  
 
 			permAddr = new AddressInfo();
 			permAddr.setAddrType("PERMANENT");
@@ -118,7 +120,10 @@ public class EmployeeViewModel {
 			break;
 		}
 	}
-
+    
+	
+	 
+	
 	public void consolidateEmployee() {
 		// -------------- address ---------------------
 
@@ -246,6 +251,15 @@ public class EmployeeViewModel {
 	
 		
 
+	}
+	// -------------- searchInfo getter Setter---------------------
+	
+	public String getEmpSearchInfo() {
+		return empSearchInfo;
+	}
+
+	public void setEmpSearchInfo(String empSearchInfo) {
+		this.empSearchInfo = empSearchInfo;
 	}
 
 	public void splitEmployee()
@@ -703,6 +717,12 @@ public class EmployeeViewModel {
 		public void setEmpList(List<EmpInfo> empList) {
 			this.empList = empList;
 		}
+		
+   public void setTotalSalary(EmpInfo empInfo)
+     {   
+	   empInfo.getEmpSalaryInfos().setTotal(empInfo.getEmpSalaryInfos().getBasic()+empInfo.getEmpSalaryInfos().getTransport()+
+			   empInfo.getEmpSalaryInfos().getHousing()+empInfo.getEmpSalaryInfos().getOtherAllow());
+      }
 	
 
 }

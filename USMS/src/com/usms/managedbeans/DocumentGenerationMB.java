@@ -253,7 +253,7 @@ public class DocumentGenerationMB {
 				String filesRoot = appBean.applicationPropreties.getProperty("filesRoot");
 				String path=filesRoot + File.separator +"ExperienceLetter"+File.separator+empInfo.getEmpNo()+ File.separator;
 				docModel.getHrDocuments().setSoftFilePath(path+empInfo.getFirstName()+"_"+"GeneralExpLetter.pdf");
-				docModel.consolidateHrDocuments(empInfo);
+				docModel.consolidateHrDocuments(empInfo);  
 				docDAO.insertEmpHrDocuments(docModel.getHrDocuments(), em, ut);
 				USMSPDFDocumentGeneration.create_GeneralEXP_Letter_Pdf(empInfo, path);
 		     }
@@ -303,7 +303,7 @@ public class DocumentGenerationMB {
 		    }
 		 else if(docModel.getHrDocuments().getDocType().equalsIgnoreCase("FINAL_SETELMENT"))
 		   {
-			 this.generatePDFFinalSettlement();
+			 this.generatePDFFinalSettlement();  
 		   }
 		 else if(docModel.getHrDocuments().getDocType().equalsIgnoreCase("BENEFICIARY_DETAIL"))
 		    { 
@@ -362,16 +362,17 @@ public class DocumentGenerationMB {
 		{	
 		   for(EmpInfo empInfo:docModel.getEmpList())
 		    {
+			   empInfo.setFlag(false); 
 			 for(HrDocuments docs:empInfo.getHrDocuments())
 			 {
 				 if(docs.getDocType().equalsIgnoreCase(docModel.getHrDocuments().getDocType()))
 				 {
-					empInfo.setFlag(false); 
+					empInfo.setSalayStatus("generated");
 					break;
 				 }
 				 else
 				 {
-					 empInfo.setFlag(true); 
+					 empInfo.setSalayStatus("pending");
 				 }
 			 }
 		    }

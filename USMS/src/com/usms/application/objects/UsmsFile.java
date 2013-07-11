@@ -13,7 +13,7 @@ public class UsmsFile implements Serializable {
 	    private byte[] data;
 	    
 	    private String relativePath;
-	    private int empNo;
+	    private String empNo;
 
 	    public String getRelativePath() {
 			return relativePath;
@@ -25,11 +25,13 @@ public class UsmsFile implements Serializable {
         
 		
 
-		public int getEmpNo() {
+		
+
+		public String getEmpNo() {
 			return empNo;
 		}
 
-		public void setEmpNo(int empNo) {
+		public void setEmpNo(String empNo) {
 			this.empNo = empNo;
 		}
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -95,8 +96,8 @@ public class EmployeeMB {
 		// Search The Employees From the DB and Populate the DB In the Table
 		// accordingly
 		// if only 1 result is fetched then show the file details page
-		System.out.println(model.getEmpInfo().getFirstName());
-		List<EmpInfo> empList = empInfodao.fetchAllEmpInfo(model.getEmpInfo().getFirstName(), em, ut);
+		System.out.println(model.getEmpSearchInfo());
+		List<EmpInfo> empList = empInfodao.fetchAllEmpInfo(model.getEmpSearchInfo(), em, ut);
 		
 		model.setEmpList(empList);
 	}
@@ -104,7 +105,7 @@ public class EmployeeMB {
 	public void addEmployee() 
 	{
 		
-	}
+	}  
 	
 	public void selectEmployee()
 	{
@@ -180,8 +181,11 @@ public class EmployeeMB {
 		System.out.println(model.getEmpSalInfo());
 		
 		if(registrationAgent.validateSalInfo(model))
+		{
 			System.out.println("reached update salary Detail - validation passed");
+			
 			// redirect to next page
+		}		
 		else
 			System.out.println("reached update salary Detail - validation failed");
 			// stay on the same page
@@ -212,21 +216,23 @@ public class EmployeeMB {
 		saveUploadedFiles();
 
 		model.consolidateEmployee();
-		
+		model.setTotalSalary(model.getEmpInfo());
 		empInfodao.saveEmployee(model.getEmpInfo(), em, ut);
-
-	}
+		String message = appBean.applicationPropreties.getProperty("INSERT_SUCCESS");
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));    
+	}   
 	
 	//------------------ Update the Employee Detail(added by Tariq)-----------------------------
 	 
 	public void updateEmployee() 
-	{
+	{  
 		System.out.println("Reached at file update Function");
 		System.out.println(model.getEmpInfo().getAddressInfos().get(0).getAddr1());
 		System.out.println(model.getEmpInfo().getFirstName());
 		System.out.println(model.getEmpInfo().getEmpBankInfos());
 		System.out.println(model.getEmpInfo().getEmpSalaryInfos());
 		System.out.println(model.getEmpInfo().getEmpLaborInfos());
+		model.setTotalSalary(model.getEmpInfo());  
 		empInfodao.updateEmployee(model.getEmpInfo(), em, ut);
 		
 		String message = appBean.applicationPropreties.getProperty("UPDATE_SUCCESS");
@@ -533,14 +539,30 @@ public class EmployeeMB {
 	//------------------ Reset Model-----------------------------
 	 public void resetViewModel()
 	 {
-	   System.out.println("In the resetModelView");
-	   String mode=(String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("mode");
-	   if(mode.equalsIgnoreCase("add"))
+	    System.out.println("In the resetModelView");
+	    model.setEmpSearchInfo("");
+	    String mode=(String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("mode");
+	    if(mode.equalsIgnoreCase("add"))
 	     {
 	      model=new EmployeeViewModel("register");
 	     }
+	   
 	 }
-	
-	
+	//---------------------  Availibility of Employee Number ------------------------------
+	 
+	 public void checkIdAvailibility()
+	    {
+		  System.out.println(" In the checkIdAvailibility");
+		  EmpInfo empInfo=empInfodao.checkIdAvailibility(model.getEmpInfo().getEmpNo(), em, ut);
+		  if(empInfo!=null)
+		    {
+			  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Employee No Already exists", "Employeee No Already exists"));
+			  model.getEmpInfo().setEmpNo("");  
+		    }
+			  
+		 
+	    }
+	 
+	   
 
 }

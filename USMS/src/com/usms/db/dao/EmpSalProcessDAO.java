@@ -53,7 +53,7 @@ public class EmpSalProcessDAO
 	}
 	
 	
-	public List<EmpAdjTrx> selectSalArjustment(int empId, int month,int Year,EntityManager emm, UserTransaction ut)
+	public List<EmpAdjTrx> selectSalArjustment(String empId, int month,int Year,EntityManager emm, UserTransaction ut)
 	     {
 		System.out.println("Reached in SalArjustment DAO");
 		List<EmpAdjTrx> arjlist= new ArrayList<>();
@@ -99,7 +99,7 @@ public class EmpSalProcessDAO
 		  {
 			ut.begin();
 			em.getEntityManagerFactory().getCache().evictAll();
-			Query q=em.createQuery("Select e from EmpInfo e");
+			Query q=em.createQuery("Select A from EmpInfo A ");
 			empList =q.getResultList();
 			ut.commit(); 
 		  }catch (Exception e)   
@@ -116,7 +116,7 @@ public class EmpSalProcessDAO
 		  }
 		return empList;
 	  }
-	 public List<EmpAdjTrx> selectAdjustmentDetail(UserTransaction ut,EntityManager em,int Year,int month,int empNo)
+	 public List<EmpAdjTrx> selectAdjustmentDetail(UserTransaction ut,EntityManager em,int Year,int month,String empNo)
 	    {
 		    System.out.println("In the Arjustment detail detail");
 			List<EmpAdjTrx>  arjustmentDetail=new ArrayList<>();
@@ -127,7 +127,7 @@ public class EmpSalProcessDAO
 				 q.setParameter("year",Year);
 		         q.setParameter("month", (month+1));   
 		         q.setParameter("id", empNo);
-		       arjustmentDetail=q.getResultList();
+		        arjustmentDetail=q.getResultList();   
 		       ut.commit();
 			  }catch (Exception e)   
 			  {

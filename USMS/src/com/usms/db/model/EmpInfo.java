@@ -21,11 +21,10 @@ public class EmpInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="EMP_NO")
-	private int empNo;
+	private String empNo;  
       
-	@Column(name="FIRST_NAME")
+	@Column(name="FIRST_NAME")   
 	private String firstName;
 
 	@Column(name="LAST_NAME")
@@ -45,7 +44,7 @@ public class EmpInfo implements Serializable {
     
 	//only for to show the total Arjustment in a month
 	@Transient
-	private float totalAdj;
+	private float totalAdj;  
 	
 	@Transient
 	private boolean flag=true;
@@ -56,7 +55,7 @@ public class EmpInfo implements Serializable {
 	@Transient
 	private float tatalPayable;
 	//bi-directional many-to-one association to AddressInfo
-	@OneToMany(mappedBy="empInfo", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="empInfo", cascade=CascadeType.ALL)  
 	private List<AddressInfo> addressInfos;
 
 	//bi-directional many-to-one association to EIdInfo
@@ -95,7 +94,7 @@ public class EmpInfo implements Serializable {
 	private List<EmpSalTrx> empSalTrxs;
 
 	//bi-directional many-to-one association to EmpSalaryInfo
-	@OneToOne(mappedBy="empInfo", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy="empInfo", cascade=CascadeType.ALL)          
 	//@OneToOne(mappedBy="empInfo")
 	private EmpSalaryInfo empSalaryInfos;
 
@@ -121,13 +120,16 @@ public class EmpInfo implements Serializable {
 		
 	}
 
-	public int getEmpNo() {
-		return this.empNo;
+
+	public String getEmpNo() {
+		return empNo;
 	}
 
-	public void setEmpNo(int empNo) {
+	public void setEmpNo(String empNo) {
 		this.empNo = empNo;
 	}
+
+
 
 	public String getFirstName() {
 		return this.firstName;
