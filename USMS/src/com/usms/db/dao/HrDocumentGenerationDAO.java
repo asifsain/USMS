@@ -28,18 +28,18 @@ public class HrDocumentGenerationDAO {
 			System.out.println("reached 5");
 			  ut.begin();
 			  em.getEntityManagerFactory().getCache().evictAll();
-			  Query q = em.createQuery("Select A from EmpInfo A where (A.firstName LIKE :name) or (A.EIdInfos.eIdNo LIKE :id)");
+			  Query q = em.createQuery("Select A from EmpInfo A where (A.firstName LIKE :name) or (A.empNo LIKE :id)");  
 			  q.setParameter("name", "%"+id+"%");
 			  q.setParameter("id", "%"+id+"%");
 			  empList = q.getResultList();
 			  ut.commit();
 			
-		    } catch (Exception e) {
+		    } catch (Exception e) {  
 			System.out.println(e.getMessage());
 		//	ut.rollback();
 		  }
 		return empList;
-	    }
+	    }    
 	
 	//------------------------------------Insert into Emp_Hr_Documents---------------
 	
