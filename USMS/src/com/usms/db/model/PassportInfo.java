@@ -40,7 +40,8 @@ public class PassportInfo implements Serializable {
 
 	//bi-directional many-to-one association to EmpFamilyInfo
 	@OneToOne
-	@JoinColumn(name="EMP_FAMILY_INFO_ID", referencedColumnName="ID")
+//	@JoinColumn(name="EMP_FAMILY_INFO_ID", referencedColumnName="ID")
+	@JoinColumn(name="EMP_FAMILY_INFO_ID")  
 	private EmpFamilyInfo empFamilyInfo;
 
 	//bi-directional many-to-one association to EmpInfo

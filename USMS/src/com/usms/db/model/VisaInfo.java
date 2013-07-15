@@ -44,7 +44,7 @@ public class VisaInfo implements Serializable {
 
 	//bi-directional many-to-one association to EmpInfo
 	@OneToOne
-	@JoinColumn(name="EMP_INFO_EMP_NO")
+	@JoinColumn(name="EMP_INFO_EMP_NO") 
 	private EmpInfo empInfo;
 
 	public VisaInfo() {

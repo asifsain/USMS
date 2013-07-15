@@ -37,7 +37,8 @@ public class EmpLaborInfo implements Serializable {
 
 	//bi-directional many-to-one association to EmpInfo
 	@OneToOne
-	@PrimaryKeyJoinColumn(name="EMP_INFO_EMP_NO", referencedColumnName="EMP_NO")
+//	@PrimaryKeyJoinColumn(name="EMP_INFO_EMP_NO", referencedColumnName="EMP_NO")
+	@JoinColumn(name="EMP_INFO_EMP_NO")  
 	private EmpInfo empInfo;
 
 	public EmpLaborInfo() {

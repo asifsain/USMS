@@ -41,7 +41,7 @@ public class EmpFamilyInfo implements Serializable {
 	private String relStatus;
 
 	//bi-directional many-to-one association to EIdInfo
-	@OneToOne(mappedBy="empFamilyInfo" , cascade=CascadeType.PERSIST)
+	@OneToOne(mappedBy="empFamilyInfo" , cascade=CascadeType.ALL)
 	private EIdInfo EIdInfos;
 
 	//bi-directional many-to-one association to EmpInfo
@@ -50,15 +50,15 @@ public class EmpFamilyInfo implements Serializable {
 	private EmpInfo empInfo;
 
 	//bi-directional many-to-one association to MiInfo
-	@OneToOne(mappedBy="empFamilyInfo" , cascade=CascadeType.PERSIST)
+	@OneToOne(mappedBy="empFamilyInfo" , cascade=CascadeType.ALL)
 	private MiInfo miInfos;
 
-	//bi-directional many-to-one association to PassportInfo
-	@OneToOne(mappedBy="empFamilyInfo" , cascade=CascadeType.PERSIST)
-	private PassportInfo passportInfos;
+	//bi-directional many-to-one association to PassportInfo  
+	@OneToOne(mappedBy="empFamilyInfo" , cascade=CascadeType.ALL)
+	private PassportInfo passportInfos; 
 
 	//bi-directional many-to-one association to VisaInfo
-	@OneToOne(mappedBy="empFamilyInfo" , cascade=CascadeType.PERSIST)
+	@OneToOne(mappedBy="empFamilyInfo" , cascade=CascadeType.ALL)
 	private VisaInfo visaInfos;
 
 	public EmpFamilyInfo() {

@@ -120,7 +120,7 @@ public class EmpInfo implements Serializable {
 		
 	}
 
-
+  
 	public String getEmpNo() {
 		return empNo;
 	}
