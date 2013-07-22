@@ -107,7 +107,7 @@ public class SalaryProcessMB
 		empSalAdjustdao.saveSalAdjustment(model.getEmpSalAdj(), em, ut);
 		String message = appBean.applicationPropreties.getProperty("ADD_SUCCESS");
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
-
+         resetAdjustment();
 	 }
 	
 	public void selectSalAdj(ActionEvent event)

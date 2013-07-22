@@ -34,7 +34,7 @@ public class EmpInfoDAO {
 			  empList = q.getResultList();
 		//	empList.add(em.find(EmpInfo.class, 1));
 			System.out.println("reached 3");
-			ut.commit();
+	 		ut.commit();    
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -88,7 +88,7 @@ public class EmpInfoDAO {
 			UserTransaction ut) {
 		System.out.println("reached on update DAO function");
 		try {
-			ut.begin();
+		  	ut.begin();
 			emm.merge(empInfo);
 			ut.commit();
 		} catch (Exception e) {

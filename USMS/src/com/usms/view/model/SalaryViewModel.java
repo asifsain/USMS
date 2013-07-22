@@ -96,7 +96,7 @@ public class SalaryViewModel {
 	}
 
 	//-------------------------Salary Process--------------------
-	
+	private boolean checkAllNone=true;
 	private List<EmpInfo> empList;
 	private List<EmpAdjTrx> adjustmentList;
 	private String salaryOption="I";
@@ -210,6 +210,12 @@ public class SalaryViewModel {
 	 public void setMonths(List<SelectItem> months) {
 		this.months = months;
 	  }
+	public boolean isCheckAllNone() {
+		return checkAllNone;
+	}
+	public void setCheckAllNone(boolean checkAllNone) {
+		this.checkAllNone = checkAllNone;
+	}
    
 	
 	 

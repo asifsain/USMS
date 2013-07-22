@@ -1,7 +1,18 @@
 package com.usms.view.model;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.usms.application.objects.UsmsFile;
 import com.usms.db.model.AddressInfo;
@@ -359,13 +370,20 @@ public class EmployeeViewModel {
 						continue;
 						
 					if (empFamily.getRel().equalsIgnoreCase("SPOUSE"))
+					  {
 						spouseInfo = empFamily;
-						
+						hasSpouse=true;
+					  }	
 					if (empFamily.getRel().equalsIgnoreCase("CHILD1"))
+					  {
 						child1Info = empFamily;
-					
+						hasChild1=true;
+					  }
 					if (empFamily.getRel().equalsIgnoreCase("CHILD2"))
+					  {
 						child2Info = empFamily;
+						hasChild2=true;
+					  }
 				}
 				
 			} 
@@ -606,7 +624,7 @@ public class EmployeeViewModel {
 
 	// --------------------------- Spouse Info ------------
 
-	private boolean hasSpouse = true;
+	private boolean hasSpouse ;
 
 	private EmpFamilyInfo spouseInfo;
 
@@ -628,7 +646,7 @@ public class EmployeeViewModel {
 
 	// --------------------------- Child1 Info ------------
 
-	private boolean hasChild1 = true;
+	private boolean hasChild1 ;
 
 	private EmpFamilyInfo child1Info;
 
@@ -650,7 +668,7 @@ public class EmployeeViewModel {
 
 	// --------------------------- Child2 Info ------------
 
-	private boolean hasChild2 = true;
+	private boolean hasChild2 ;
 
 	private EmpFamilyInfo child2Info;
 
@@ -723,6 +741,68 @@ public class EmployeeViewModel {
 	   empInfo.getEmpSalaryInfos().setTotal(empInfo.getEmpSalaryInfos().getBasic()+empInfo.getEmpSalaryInfos().getTransport()+
 			   empInfo.getEmpSalaryInfos().getHousing()+empInfo.getEmpSalaryInfos().getOtherAllow());
       }
+	
+	// --------------- Constant---------------
+	private static final int DEFAULT_BUFFER_SIZE = 10240;
+    
+	// --------------- View Documents---------------
+	public String viewDocuments(String path) 
+     {
+		String filePath = path;
+		String fileType=path.substring(path.lastIndexOf('.')+1);
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
+	//	HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+		  
+		File file = new File(filePath);
+		BufferedInputStream input = null;
+		BufferedOutputStream output = null;
+		try {
+		    
+			input = new BufferedInputStream(new FileInputStream(file),
+					DEFAULT_BUFFER_SIZE);
+			response.reset();
+			response.setHeader("Content-Type", "application"+"/"+fileType); 
+		//	response.setHeader("Content-Type", "application"+"/"+fileType); 
+			response.setHeader("Content-Length", String.valueOf(file.length())); 
+			response.setHeader("Content-Disposition", "inline; filename=\""
+					+ filePath + "\"");
+			output = new BufferedOutputStream(response.getOutputStream(),
+					DEFAULT_BUFFER_SIZE);
+			byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+			int length;
+			while ((length = input.read(buffer)) > 0) {
+				output.write(buffer, 0, length);
+			}
+     
+			output.flush();
+			
+		
+		} catch (IOException e) {
+			e.getStackTrace();
+		}
+
+		finally {
+			close(output);
+			close(input);
+		}
+	  
+		facesContext.responseComplete();
+		return "";
+	}
+
+	private static void close(Closeable resource) {
+		if (resource != null) {
+			try {
+				resource.close();
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+		}
+	}
 	
 
 }

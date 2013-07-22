@@ -20,6 +20,7 @@
 		<class>com.usms.db.model.EmployerDetail</class>
 		<properties>
 			<property name="eclipselink.logging.level.sql" value="FINE"/>
+			<property name="eclipselink.cache.shared.default" value="false"/> 
 		</properties>
 	</persistence-unit>
 </persistence>

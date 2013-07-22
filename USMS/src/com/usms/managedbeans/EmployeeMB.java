@@ -231,7 +231,7 @@ public class EmployeeMB {
 		System.out.println(model.getEmpInfo().getFirstName());
 		System.out.println(model.getEmpInfo().getEmpBankInfos());
 		System.out.println(model.getEmpInfo().getEmpSalaryInfos());
-		System.out.println(model.getEmpInfo().getEmpLaborInfos());
+		System.out.println(model.getEmpInfo().getEmpLaborInfos());  
 		model.setTotalSalary(model.getEmpInfo());  
 		empInfodao.updateEmployee(model.getEmpInfo(), em, ut);
 		
@@ -261,7 +261,7 @@ public class EmployeeMB {
 		// added by Tariq
 		if (model.empVisaFile != null) 
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empVisaFile, filesRoot);
 
 			// added by Tariq
 			model.getVisaInfo().setSoftFilePath(relativePath);
@@ -270,7 +270,7 @@ public class EmployeeMB {
 		//added by Tariq
 		if(model.empEIDFile!= null)
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empEIDFile, filesRoot);
 
 			// added by Tariq
 			model.getEidInfo().setSoftFilePath(relativePath);
@@ -280,7 +280,7 @@ public class EmployeeMB {
 		//added by Tariq
 		if(model.empLabourCardFile!= null)
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empLabourCardFile, filesRoot);
 
 			// added by Tariq
 			model.getLaborInfo().setSoftFilePath(relativePath);
@@ -289,7 +289,7 @@ public class EmployeeMB {
 				
 		if(model.empMIFile!= null)
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empMIFile, filesRoot);
 
 			// added by Tariq
 			model.getMiInfo().setSoftFilePath(relativePath);
@@ -298,7 +298,7 @@ public class EmployeeMB {
 				
 		if(model.spousePassportFile!= null)
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.spousePassportFile, filesRoot);
 
 			// added by Tariq
 			model.getSpouseInfo().getPassportInfos().setSoftFilePath(relativePath);
@@ -307,7 +307,7 @@ public class EmployeeMB {
 				
 		if(model.spouseMIFile!= null)
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.spouseMIFile, filesRoot);
 
 			// added by Tariq
 			model.getSpouseInfo().getMiInfos().setSoftFilePath(relativePath);
@@ -316,7 +316,7 @@ public class EmployeeMB {
 		
 		if(model.child1PassportFile!= null)
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.child1PassportFile, filesRoot);
 
 			// added by Tariq
 			model.getChild1Info().getPassportInfos().setSoftFilePath(relativePath);
@@ -324,7 +324,7 @@ public class EmployeeMB {
 		
 		if(model.child1MIFile!= null)
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.child1MIFile, filesRoot);
 
 			// added by Tariq
 			model.getChild1Info().getMiInfos().setSoftFilePath(relativePath);
@@ -333,7 +333,7 @@ public class EmployeeMB {
 		
 		if(model.child2PassportFile!= null)
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.child2PassportFile, filesRoot);
 
 			// added by Tariq
 			model.getChild2Info().getPassportInfos().setSoftFilePath(relativePath);
@@ -342,7 +342,7 @@ public class EmployeeMB {
 		
 		if(model.child2MIFile!= null)
 		{
-			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.empPassportFile, filesRoot);
+			String relativePath = USMSFileUploadHelper.saveUsmsFile(model.child2MIFile, filesRoot);
 
 			// added by Tariq
 			model.getChild2Info().getMiInfos().setSoftFilePath(relativePath);
@@ -410,12 +410,12 @@ public class EmployeeMB {
 		model.empVisaFile = USMSFileUploadHelper.createUsmsFileData(new UsmsFile(), event);
 		
 		// setting the employee number in the usms file object - because it is used in creating the file path
-				model.empPassportFile.setEmpNo(model.getEmpInfo().getEmpNo());
+				model.empVisaFile.setEmpNo(model.getEmpInfo().getEmpNo());
 		
 		if(model.filesToUploadList == null)
 			model.filesToUploadList = new ArrayList<UsmsFile>();
 		
-		model.filesToUploadList.add(model.empPassportFile);
+		model.filesToUploadList.add(model.empVisaFile);
 	}
 	
 	public void eidCopyUploadListener(FileUploadEvent event)
@@ -556,13 +556,77 @@ public class EmployeeMB {
 		  EmpInfo empInfo=empInfodao.checkIdAvailibility(model.getEmpInfo().getEmpNo(), em, ut);
 		  if(empInfo!=null)
 		    {
-			  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Employee No Already exists", "Employeee No Already exists"));
+			  FacesContext.getCurrentInstance().addMessage("centreContentForm:txt_empNo", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Employee No Already exists", "Employeee No Already exists"));
 			  model.getEmpInfo().setEmpNo("");  
 		    }
 			  
 		 
-	    }
+	    }  
 	 
-	   
-
+		//--------------------- View Documents ------------------------------  
+	 
+	  public String viewEmployeePassportFile()
+	   {
+		  model.viewDocuments(model.getEmpInfo().getPassportInfos().getSoftFilePath());
+		    
+		  return "";
+	   }
+	  
+	  public String viewEmployeeVisaFile()
+	   {
+		  model.viewDocuments(model.getEmpInfo().getVisaInfos().getSoftFilePath());
+		    
+		  return "";
+	   }
+	  public String viewEmployeeLaborFile()
+	   {
+		  model.viewDocuments(model.getEmpInfo().getEmpLaborInfos().getSoftFilePath());
+		    
+		  return "";
+	   }
+	  public String viewEmployeeEIdFile()
+	   {
+		  model.viewDocuments(model.getEmpInfo().getEIdInfos().getSoftFilePath());
+		    
+		  return "";
+	   }
+	  
+	  public String viewEmployeeMFile()
+	   {
+		  model.viewDocuments(model.getEmpInfo().getMiInfos().getSoftFilePath());
+		    
+		  return ""; 
+	   }
+	  public String viewSpousePassportFile()
+	   {
+		  model.viewDocuments(model.getSpouseInfo().getPassportInfos().getSoftFilePath());
+		  return "";
+	   }
+	  public String viewSpouseMFile()
+	   {
+		  model.viewDocuments(model.getSpouseInfo().getMiInfos().getSoftFilePath());
+		  return "";
+	   }
+	  public String viewChild1PassportFile()
+	   {
+		  model.viewDocuments(model.getChild1Info().getPassportInfos().getSoftFilePath());
+		  return "";
+	   }
+	  public String viewChild1MFile()
+	   {
+		  model.viewDocuments(model.getChild1Info().getMiInfos().getSoftFilePath());
+		  return "";
+	   }
+	  
+	  public String viewChild2PassportFile()
+	   {
+		  model.viewDocuments(model.getChild2Info().getPassportInfos().getSoftFilePath());
+		  return "";
+	   }
+	  public String viewChild2MFile()
+	   {
+		  model.viewDocuments(model.getChild2Info().getMiInfos().getSoftFilePath());
+		  return "";
+	   }
+       
 }
