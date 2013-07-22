@@ -7,15 +7,14 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
 <h:head>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script type="text/javascript" src="WebContent/resources/javascript/jquery.snippet.min.js"></script>                           
     <script type="text/javascript" src="WebContent/resources/javascript/kickstart.js"></script>                               
     <link rel="stylesheet" type="text/css" href="WebContent/resources/css/kickstart.css" media="all" />                  
     <link rel="stylesheet" type="text/css" href="WebContent/resources/css/style.css" media="all" /> 
 </h:head>
 
-<h:form id="headerForm" >
+<h:form id="headerForm" >  
     
     <h:graphicImage   name="toplogo.jpg" library="images"></h:graphicImage>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -23,7 +22,7 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    <h:commandLink action="/login.xhtml" actionListener="#{menuBean.logout}" value="Logout"  />
    <h:outputText value="#{menuBean.pageName}" />
-   
+ 
 </h:form>
   
     

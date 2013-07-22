@@ -51,7 +51,7 @@
 							<h:button value="Reset"
 								styleClass="orange" style="height:30px; width:60px;" />
 							   &nbsp;&nbsp;&nbsp;
-							 <a4j:commandButton id="bankFile" value="Save"    execute="@form"  actionListener="#{employeeMB.updateEmployee}" 
+							 <a4j:commandButton id="bankFile" value="Save" oncomplete="#{rich:component('confirmation')}.show();"   execute="@form"  actionListener="#{employeeMB.updateEmployee}" 
 							 styleClass="green" style="height:30px; width:60px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
 							<a4j:commandButton value="Next" oncomplete="navToSalary();" render="centreContentForm" actionListener="#{employeeMB.updateBankDetails}" styleClass="green" style="height:30px; width:60px;"/>
 						</center>
@@ -65,7 +65,7 @@
 			
 				var navToSalary =  function() {
 					//alert("reached");
-					alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
+					
 					if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true'){
 						changeCenterPage('/application/register_employee/salary.xhtml','sal_item');
 					    validate(false);

@@ -41,7 +41,7 @@
 				    <td style="width: 100px"></td>
 				    <td style="width: 100px"></td>
 				    <td style="width: 100px"></td>
-				</tr>
+				</tr>  
 				<tr>
 					<td style="width:140px"><h:outputText value="State" /></td>
 					<td style="width:200px"><h:inputText styleClass="inputText" maxlength="100" required="true" requiredMessage="Enter State" id="txt_pstate" value="#{employeeMB.model.permAddr.state}" disabled="#{menuBean.mode eq 'view'}"/></td>
@@ -146,7 +146,7 @@
 
 				<tr>
 					<td style="width:140px"><h:outputText value="Address Line 2" /></td>
-					<td colspan="5" style="width:200px"><h:inputText maxlength="100" styleClass="inputText" style="width: 60%"   value="#{employeeMB.model.emgrAddr.addr1}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td colspan="5" style="width:200px"><h:inputText maxlength="100" styleClass="inputText" style="width: 60%"   value="#{employeeMB.model.emgrAddr.addr2}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 
 				<tr>
@@ -195,7 +195,7 @@
 							<h:button value="Reset"
 								styleClass="orange" style="height:30px; width:60px;" />
 							 &nbsp;&nbsp;&nbsp;
-					    	<a4j:commandButton id="communicationFile" value="Save"   
+					    	<a4j:commandButton id="communicationFile" value="Save"   oncomplete="#{rich:component('confirmation')}.show();"
 					    	 execute="@form"  actionListener="#{employeeMB.updateEmployee}" styleClass="green" style="height:30px; width:60px;" rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
 							<a4j:commandButton value="Next" actionListener="#{employeeMB.updateCommunicationDetails}" render="centreContentForm" oncomplete="navToBank()" styleClass="green" style="height:30px; width:60px;"/>
 						</center>
@@ -209,7 +209,7 @@
 			
 			var navToBank =  function() {
 				//alert("reached");
-				alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
+				
 				if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true'){
 					changeCenterPage('/application/register_employee/bank.xhtml','comm_item');
 				    validate(false);

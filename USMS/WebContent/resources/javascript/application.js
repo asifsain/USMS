@@ -101,8 +101,23 @@ function clearForm(formObjSelector) {
     		
     	     });
      });
-
- 
+      
+ function checkAllCheckboxesInTable(obj){
+	   if(obj.checked){
+           $(".checkBoxClass").each(function()
+       	      {  
+        	    if( $(this).prop('disabled')==false)       
+        	          $(this).prop('checked', true); 
+       		   });
+             }  
+	      else {
+	    	  $(".checkBoxClass").each(function()
+	    	      {  
+	    	         $(this).prop('checked', false); 
+	    	      });
+	          };
+     
+   };
    
 
 

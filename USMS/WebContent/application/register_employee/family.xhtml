@@ -20,13 +20,18 @@
 				>
 				<tbody>
 				<tr>
-					<td><h:selectBooleanCheckbox id="cb_hasSpouse" value="#{employeeMB.model.hasSpouse}" onclick="spouseSelected(this)" /> &nbsp; <h:outputText
-							value="Spouse" styleClass="FormHeading" /></td>
-				</tr>
-				<tr>
+					<td><h:selectBooleanCheckbox  id="cb_hasSpouse" value="#{employeeMB.model.hasSpouse}" disabled="#{menuBean.mode eq 'view'}" onclick="spouseSelected(this)"  >
+                    <a4j:ajax event="change" render="spouse_upload_pasport,spouse_upload_medical"></a4j:ajax>
+					 
+					</h:selectBooleanCheckbox> &nbsp; <h:outputText  
+							 value="Spouse" styleClass="FormHeading"   />
+						
+						</td>  
+			    </tr>
+				   <tr>  
 					<td><h:outputText value="First Name" /></td>
 					<td><h:inputText id="it_spouse_firstName" styleClass="inputText" value="#{employeeMB.model.spouseInfo.firstName}" 
-					disabled="#{menuBean.mode eq 'view'}" /></td>
+					 disabled="#{menuBean.mode eq 'view'}" /></td>
 					
 					<td>&nbsp;</td>
 
@@ -43,14 +48,17 @@
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="spouse_upload_pasport" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.spousePassportCopyUploadListener}"
-                		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
+					<td><rich:fileUpload  id="spouse_upload_pasport"  acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.spousePassportCopyUploadListener}"
+                	     disabled="#{(!(employeeMB.model.hasSpouse)) or (menuBean.mode eq 'view')}" 	ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="passport" />
                		 	<f:attribute name="ownerType" value="spouse" />
-           		  </rich:fileUpload></td>
+           		  </rich:fileUpload></td>  
+           		  <td>
+           		  <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewSpousePassportFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.spouseInfo.passportInfos.softFilePath ne null )}"></h:commandLink>
+           		  </td>
 
-				</tr>
+				</tr>  
 				<tr>
 					<td><h:outputText value="Medical Insurance Card No" /></td>
 					<td><h:inputText id="it_spouse_miCardNo" styleClass="inputText" value="#{employeeMB.model.spouseInfo.miInfos.cardNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
@@ -58,27 +66,33 @@
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="spouse_upload_medical" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.spousemiCopyUploadListener}"
-                		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
+					<td><rich:fileUpload  id="spouse_upload_medical"  acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.spousemiCopyUploadListener}"
+                	    disabled="#{(!(employeeMB.model.hasSpouse)) or (menuBean.mode eq 'view')}" 	ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="miCard" />
                		 	<f:attribute name="ownerType" value="spouse" />
            		 </rich:fileUpload></td>
-
+                  <td>
+           		  <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewSpouseMFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.spouseInfo.miInfos.softFilePath ne null )}"></h:commandLink>
+           		  </td>  
 				</tr>
 
 
 
 				<tr >
-					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employeeMB.model.hasChild1}" id="cb_hasChild1" onclick="child1Selected(this)" /> &nbsp; <h:outputText
-							value="Child 1" styleClass="FormHeading" /></td>
+					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employeeMB.model.hasChild1}" disabled="#{menuBean.mode eq 'view'}" id="cb_hasChild1" onclick="child1Selected(this)" >
+					    <a4j:ajax event="change" render="child1_upload_passport,child1_upload_medical"></a4j:ajax>
+					</h:selectBooleanCheckbox>
+					 &nbsp; <h:outputText
+							value="Child 1" styleClass="FormHeading"  disabled="#{menuBean.mode eq 'view'}" /></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="First Name" /></td>
-					<td><h:inputText id="it_child1_firstName" styleClass="inputText" value="#{employeeMB.model.child1Info.firstName}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child1_firstName" styleClass="inputText" value="#{employeeMB.model.child1Info.firstName}" 
+					 disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td>&nbsp;</td>
-
+  
 					<td><h:outputText value="Middle Name" /></td>
 					<td><h:inputText id="it_child1_middleName" styleClass="inputText" value="not available" disabled="#{menuBean.mode eq 'view'}"/></td>
 
@@ -92,37 +106,40 @@
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="child1_upload_passport" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child1PassportCopyUploadListener}"
-                		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
+					<td><rich:fileUpload  id="child1_upload_passport"  acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child1PassportCopyUploadListener}"
+                	    disabled="#{(!(employeeMB.model.hasChild1)) or (menuBean.mode eq 'view')}"	ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="passport" />
                		 	<f:attribute name="ownerType" value="child1" />
            		     </rich:fileUpload>
                      </td>
-
+                     <td>
+           		  <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewChild1PassportFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.child1Info.passportInfos.softFilePath ne null )}"></h:commandLink>
+           		  </td>
 				</tr>
 				<tr>
 					<td><h:outputText value="Medical Insurance Card No" /></td>
-					<td><h:inputText id="it_child1_miCardNo" styleClass="inputText" value="#{employeeMB.model.child1Info.miInfos.cardNo}" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child1_miCardNo" styleClass="inputText" value="#{employeeMB.model.child1Info.miInfos.cardNo}" disabled="#{ menuBean.mode eq 'view'}"/></td>
 
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="child1_upload_medical" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child1miCopyUploadListener}"
-                		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
+					<td><rich:fileUpload  id="child1_upload_medical" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child1miCopyUploadListener}"
+                	     disabled="#{(!(employeeMB.model.hasChild1)) or (menuBean.mode eq 'view')}"	ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="miCard" />
                		 	<f:attribute name="ownerType" value="child1" />
            		  </rich:fileUpload></td>
-
+                        <td>
+           		  <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewChild1MFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.child1Info.miInfos.softFilePath ne null )}"></h:commandLink>
+           		  </td> 
 				</tr>
-
-
-
-
 				<tr>
-					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employeeMB.model.hasChild2}" id="cb_hasChild2" onclick="child2Selected(this)"/> &nbsp; <h:outputText
-							value="Child 2" styleClass="FormHeading" /></td>
+					<td style="padding-top: 30px;"><h:selectBooleanCheckbox value="#{employeeMB.model.hasChild2}" disabled="#{menuBean.mode eq 'view'}" id="cb_hasChild2" onclick="child2Selected(this)">
+					 <a4j:ajax event="change" render="child2_upload_passport,child2_upload_medical"></a4j:ajax>
+					
+					</h:selectBooleanCheckbox> &nbsp; <h:outputText
+							value="Child 2" styleClass="FormHeading"  disabled="#{menuBean.mode eq 'view'}" /></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="First Name" /></td>
@@ -134,7 +151,7 @@
 					<td><h:inputText id="it_child2_middleName" styleClass="inputText" value="not available"  disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td><h:outputText value="Last Name" /></td>
-					<td><h:inputText id="it_child2_lastName" styleClass="inputText" value="#{employeeMB.model.child2Info.lastName}"  disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child2_lastName" styleClass="inputText" value="#{employeeMB.model.child2Info.lastName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 				</tr>
 				<tr>
 					<td><h:outputText value="Passport No" /></td>
@@ -143,13 +160,15 @@
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="child2_upload_passport" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child2PassportCopyUploadListener}"
-                		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
+					<td><rich:fileUpload  id="child2_upload_passport"  acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child2PassportCopyUploadListener}"
+                	    disabled="#{(!(employeeMB.model.hasChild2)) or (menuBean.mode eq 'view')}" 	ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="passport" />
                		 	<f:attribute name="ownerType" value="child2" />
            		 </rich:fileUpload></td>
-
+                        <td>
+           		  <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewChild2PassportFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.child2Info.passportInfos.softFilePath ne null )}"></h:commandLink>
+           		  </td> 
 				</tr>
 				<tr>
 					<td><h:outputText value="Medical Insurance Card No" /></td>
@@ -158,13 +177,15 @@
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Upload" /></td>
-					<td><rich:fileUpload  id="child2_upload_medical" acceptedTypes="jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child2miCopyUploadListener}"
-                		ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
+					<td><rich:fileUpload  id="child2_upload_medical"  acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.child2miCopyUploadListener}"
+                	 disabled="#{(!(employeeMB.model.hasChild2)) or (menuBean.mode eq 'view')}"	ontyperejected="alert('Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:250px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="miCard" />
-               		 	<f:attribute name="ownerType" value="child2" />
+               		 	<f:attribute name="ownerType" value="child2" /> 
            		  </rich:fileUpload></td>
-                     
+                      <td>
+           		  <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewChild2MFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.child2Info.miInfos.softFilePath ne null )}"></h:commandLink>
+           		  </td>    
 				</tr>
 
 				<tr>
@@ -173,10 +194,10 @@
 							<h:button value="Reset"
 								styleClass="orange" style="height:30px; width:60px;" />
 							&nbsp;&nbsp;&nbsp;
-							<a4j:commandButton id="familyFile" value="Save"   
+							<a4j:commandButton id="familyFile" value="Save"    oncomplete="#{rich:component('confirmation')}.show();"
 							execute="@form"  actionListener="#{employeeMB.updateEmployee}" styleClass="green" style="height:30px; width:60px;"
 							rendered="#{menuBean.mode eq 'update'}"/>  &nbsp;&nbsp;&nbsp;
-							<a4j:commandButton value="Next"  actionListener="#{employeeMB.updateFamilyDetails}"
+							<a4j:commandButton value="Next"  actionListener="#{employeeMB.updateFamilyDetails}" rendered="#{menuBean.mode eq 'add'}"
 								 render="centreContentForm,transactionSucces" disabled="#{menuBean.mode eq 'view'}"
 								 styleClass="green" style="height:30px; width:60px;"  oncomplete="changePage('/application/register_employee/success_transaction.xhtml')" />
 						</center>
@@ -185,13 +206,25 @@
 
              </tbody>
 			</table>
-			</fieldset>
+			</fieldset>  
 			<script >
-	
-			
+			   $(document).ready(function(){
+				   
+				   var spouse_check = jQuery("#centreContentForm\\:cb_hasSpouse");
+				   if(spouse_check.prop('checked')==false){  
+				    $("INPUT[type=text]").attr("disabled", "disabled");
+				   
+				 
+				    var child1_check = jQuery("#centreContentForm\\:cb_hasChild1");
+				    var child2_check = jQuery("#centreContentForm\\:cb_hasChild2"); 
+				    var spouseFile= jQuery("#centreContentForm\\:ful_spouse_passportUpload");
+				    child1_check .prop('disabled',true); 
+				    child2_check .prop('disabled',true);     
+				   } 
+			    });         
+			 
 				var navToAirTicketReimb =  function() {
-					alert("reached");
-					alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
+					
 					if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true')
 						{
 						changeCenterPage('/application/register_employee/airticket_reimb.xhtml','airticket_item');
@@ -200,7 +233,7 @@
 					else
 						alert("Validation Not Passed From Server Side")
 					};
-			
+			  
 			</script>
 	</ui:composition>
 </h:body>

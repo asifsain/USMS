@@ -8,8 +8,17 @@
   
    <h:head></h:head>
    <h:body>
+     
    <div class="wrap">
+     <center>
+      <a4j:status>
+            <f:facet name="start">
+                <h:graphicImage value="/resources/images/ai.gif" style="width:40px; height:40px;" alt="ai" />
+            </f:facet>
+        </a4j:status> 
+        </center>
 	<h:form id="centreContentForm" >
+	  
 	    <h:outputScript name="application.js" library="javascript"></h:outputScript>
 		<a4j:jsFunction name="changePage" render="centreContentForm" >
 				<a4j:param name="name" assignTo="#{menuBean.pageName}"></a4j:param>
@@ -25,6 +34,7 @@
 <!-- 		<ui:include src="/application/register_employee/file.xhtml"></ui:include>  -->  
          
     </h:form>
+     
 	</div>
 	</h:body>
 	

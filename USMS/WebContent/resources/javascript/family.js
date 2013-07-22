@@ -7,7 +7,7 @@ var spouseElements = Array("centreContentForm:it_spouse_firstName",
 "centreContentForm:it_spouse_middleName",
 "centreContentForm:it_spouse_lastName",
 "centreContentForm:it_spouse_passportNo",
-"ful_spouse_passportUpload",
+"centreContentForm:ful_spouse_passportUpload",
 "centreContentForm:it_spouse_miCardNo",
 "ful_spouse_miUpload");
 //
@@ -35,19 +35,22 @@ var checkboxElements = Array("centreContentForm:cb_hasChild1", "centreContentFor
 
 var spouseSelected = function(obj) {
 	
-	var allElements = spouseElements.concat(child1Elements, child2Elements, checkboxElements);
+	var allElements = spouseElements.concat(checkboxElements);
 	if(obj.checked)
 	{
 		$J.each( allElements, function( index, value ) {  
 			value = value.replace(/:/g, "\\:");
 			$J("#" + value).removeAttr("disabled");
+			
 		});
+	
 	}
 	else
 	{
 		$J.each( allElements, function( index, value ) {  
 			value = value.replace(/:/g, "\\:");
-			$J("#" + value).attr("disabled","true");			
+			$J("#" + value).attr("disabled","true");  
+			
 		});
 	}
 };

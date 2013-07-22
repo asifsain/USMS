@@ -168,9 +168,11 @@ tr.alt {
 	
    }
 
-.rf-cal-c {
+.rf-cal-c{
 	width: 20px;
 	height: 20px;
+	max-height:20px;
+	max-width:20px; 
 }
 
 .rich-calendar-popup{  
@@ -178,4 +180,15 @@ tr.alt {
      background-color: green;
       max-width: 100px;
       max-height: 100px;
-           }
+   }
+ .myModelClass{
+    font-size:15px;
+    font-family:sans-serif;
+    border-color:orange;  
+    font-weight:bold;
+    background-color: white; 
+    color: green;
+    font-style: normal; 
+    background-position: center;
+    
+}

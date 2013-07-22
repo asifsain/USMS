@@ -45,22 +45,25 @@
                    
                    </td>
                   <td style="height:100px;vertical-align: top;"><a4j:commandButton value="Search" execute="@form"    oncomplete="showEmpDeail()" actionListener="#{documentGenerationMB.searchEmployee}"
- 							render="pdftable,btn_Sal_Slip,btn_Exp_lt,btn_Sal_Certificate"   styleClass="green" style="height:30px; width:60px;"/></td> 
+ 							render="paySlip,btn_Sal_Slip,btn_Exp_lt,btn_Sal_Certificate"   styleClass="green" style="height:30px; width:60px;"/></td> 
                 
 			  </tr>
          </table>
    
     <div id="salarySlip" style="visibility:hidden; float:left;right:50px;top:0px;height:50%; width:500px; margin-left:20px;">
-     <rich:dataTable value="#{documentGenerationMB.model.empSalarySlpList}" var="pdfrecord"  
-     id="pdftable" style="width:100%;text-align:center" rowClasses="odd-row,even-row">
+     <rich:dataTable value="#{documentGenerationMB.model.empSalarySlpList}" var="pdfrecord" 
+      onrowmousemove="this.style.backgroundColor='#FFEBDA'"
+      onrowmouseout="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'"   
+     id="paySlip" style="width:100%;text-align:center" rowClasses="odd-row,even-row"  rows="5">
     
      <rich:column   width="25%">  
-     <f:facet name="header"><h:outputText  value="Select" ></h:outputText> 
+     <f:facet name="header"><h:outputText  value="Select All" ></h:outputText> <br></br> 
+        <h:selectBooleanCheckbox value="#{salaryProcessMB.model.checkAllNone}" onchange="checkAllCheckboxesInTable(this);" />  
       </f:facet>
-    <h:selectBooleanCheckbox value="#{pdfrecord.empInfo.flag}" >
-        <a4j:ajax event="change" render="pdftable"></a4j:ajax>
+    <h:selectBooleanCheckbox value="#{pdfrecord.empInfo.flag}" styleClass="checkBoxClass">     
+
     </h:selectBooleanCheckbox>  
-     </rich:column>
+     </rich:column>   
        <rich:column   width="25%">
       <f:facet name="header"><h:outputText  value="EMP No" ></h:outputText> 
      </f:facet>
@@ -70,11 +73,11 @@
     <f:facet name="header">
     <h:outputText  value="NAME" ></h:outputText> 
     </f:facet>
-     <h:outputText  value="#{pdfrecord.empInfo.firstName}"></h:outputText>
+     <h:outputText  value="#{pdfrecord.empInfo.firstName} #{pdfrecord.empInfo.lastName}"></h:outputText>
      </rich:column>
     <rich:column   width="25%">
     <f:facet name="header">
-    <h:outputText  value="Month" ></h:outputText> 
+    <h:outputText  value="MONTH" ></h:outputText> 
     </f:facet>
     <h:outputText  value="#{pdfrecord.salTrxMonth}"></h:outputText>
     </rich:column>
@@ -88,10 +91,13 @@
     
      </h:commandLink>  
     </rich:column>
+        <f:facet name="footer">
+         <rich:dataScroller id="scroller"  execute="paySlip" for="paySlip" maxPages="10" renderIfSinglePage="false" boundaryControls="hide" fastControls="hide" />     
+     </f:facet>
     </rich:dataTable>
       <br></br>
     <div align="right">
-     <a4j:commandButton  render="pdftable" styleClass="green" style="height:30px; width:70px;" value="SalarySlip" actionListener="#{documentGenerationMB.generatePDFSalarySlipBulk}" id="btn_Sal_Slip"></a4j:commandButton> &nbsp;&nbsp;
+     <a4j:commandButton  render="paySlip" styleClass="green" style="height:30px; width:70px;" value="SalarySlip" actionListener="#{documentGenerationMB.generatePDFSalarySlipBulk}" id="btn_Sal_Slip"></a4j:commandButton> &nbsp;&nbsp;
       <a4j:commandButton   styleClass="green" style="height:30px; width:80px;" value="GenerateWPS" actionListener="#{documentGenerationMB.generateWPSDocument}" id="btn_WSPS_File"></a4j:commandButton>
     </div>
     </div>       
@@ -125,7 +131,7 @@
 		   
          };
                  
-  </script>
+  </script>  
   </ui:composition>
 </h:body> 
 

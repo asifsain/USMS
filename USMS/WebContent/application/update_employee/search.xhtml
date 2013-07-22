@@ -33,20 +33,20 @@
   
 <div align="right" id="tablediv" style="visibility:hidden; float:left;right:50px;top:200px;height:100%; width:500px; margin-left:20px;">
 
- <rich:dataTable  value="#{employeeMB.model.empList}"  var="record"  id="table" style="width:100%;height:100%;text-align:center"
+ <rich:dataTable  value="#{employeeMB.model.empList}"  var="record"  id="table"  noDataLabel="No Emplooyee is Found" style="width:100%;height:100%;text-align:center"
     styleClass="stable" rows="5"  
-    onRowMouseOver="this.style.backgroundColor='#F1F1F1'"      
-    onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'" 
+    onrowmousemove="this.style.backgroundColor='#FFEBDA'"
+     onrowmouseout="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'" 
     rowClasses="odd-row,even-row">
        <rich:column  width="25%">  
-     <f:facet name="header">
+         <f:facet name="header"> 
        <h:outputText  value="EMP No" ></h:outputText>
        </f:facet>
        <h:outputText value="#{record.empNo}"></h:outputText>
     </rich:column>
-     <rich:column   width="25%">
+     <rich:column   width="25%"> 
       <f:facet name="header">
-       <h:outputText  value="NAME" ></h:outputText> 
+       <h:outputText  value="FIRST NAME" ></h:outputText> 
       </f:facet>
        <h:outputText  value="#{record.firstName}"></h:outputText>
     </rich:column>
@@ -54,7 +54,7 @@
      
      <rich:column  width="25%">
      <f:facet name="header">
-      <h:outputText  value="Last Name" ></h:outputText>
+      <h:outputText  value="LAST NAME" ></h:outputText>
      </f:facet>
         <h:outputText value="#{record.lastName}"></h:outputText>
     </rich:column>
@@ -95,15 +95,15 @@
                   };
                   
                    var navToFileDetail =  function() {
-  					 alert("reached");
+  					
   					 changeCenterPage('/application/register_employee/file.xhtml','file_item');
-  					 alert("Validation Not Passed From Server Side");
+  					// alert("Validation Not Passed From Server Side");
   					};
   					
   					 var navToSalaryAdj= function() {
-  	  					 alert("reached");
+  	  					
   	  					 changePage('/application/salary_process/salary_adjustment.xhtml');
-  	  					 alert("Validation Not Passed From Server Side");
+  	  				//	 alert("Validation Not Passed From Server Side");
   	  					};
   	  			
   	  				

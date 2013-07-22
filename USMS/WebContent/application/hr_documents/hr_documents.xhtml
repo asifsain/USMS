@@ -69,19 +69,19 @@
     <div  id="salarySlip" style="visibility:hidden; float:left; right:5px;top:20px;height:50%; width:70%; margin-left:20px;">
      <rich:dataTable value="#{documentGenerationMB.docModel.empList}" var="pdfrecord"  id="pdftable" 
       style="width:100%;text-align:center"
-      rowClasses="searchTableOddRow,searchTableEvenRow" rows="10"
-      onRowMouseOver="this.style.backgroundColor='#B5F3FB'"
-      onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
+       rowClasses="odd-row,even-row" rows="5" 
+      onrowmouseover="this.style.backgroundColor='#FFEBDA'"
+      onrowmouseout="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'">
     
       <rich:column   width="25%">
        <f:facet name="header"><h:outputText  value="Select" ></h:outputText> 
       </f:facet>
       <h:selectBooleanCheckbox value="#{pdfrecord.flag}" disabled="#{pdfrecord.salayStatus eq 'generated'}">
-<!--         <a4j:ajax event="change" render="pdftable"></a4j:ajax> -->
+
      </h:selectBooleanCheckbox>
       </rich:column>
      <rich:column   width="25%">
-       <f:facet name="header"><h:outputText  value="ID" ></h:outputText> 
+       <f:facet name="header"><h:outputText  value="EMP No" ></h:outputText> 
      </f:facet>
       <h:outputText  value="#{pdfrecord.empNo}"></h:outputText> 
        </rich:column>
@@ -89,7 +89,7 @@
      <f:facet name="header">
     <h:outputText  value="NAME" ></h:outputText> 
      </f:facet>
-      <h:outputText  value="#{pdfrecord.firstName}"></h:outputText>
+      <h:outputText  value="#{pdfrecord.firstName} #{pdfrecord.lastName}"></h:outputText>
      </rich:column>
      
 

@@ -58,14 +58,14 @@
 				<td style="width:150px">
 				 
 					 <rich:calendar id="JOING_DT" tabindex="4"  value="#{employeeMB.model.empEmploymentInfo.joiningDt}" disabled="#{menuBean.mode eq 'view'}"
-					 required="true" requiredMessage="Enter Date"  inputStyle="width: 60 px; height : 200 px;" datePattern="dd/MM/yyyy" enableManualInput="true">  
+					 required="true" requiredMessage="Enter Date"   inputStyle="width: 60 px; height : 200 px;" datePattern="dd/MM/yyyy" enableManualInput="true">  
 					</rich:calendar>
 					</td><td>  
-					<rich:message for="JOING_DT"></rich:message>
+					<rich:message for="JOING_DT"></rich:message> 
 			    	</td>
-			   
+			     
   
-			</tr>  
+			</tr>   
 			<tr>
 				<td style="width:100px"><h:outputText value="Emp No:" /></td>
 				<td style="width:150px"><h:inputText id="txt_empNo" required="true"    requiredMessage="Enter Employee Number" maxlength="10" styleClass="inputText" value="#{employeeMB.model.empInfo.empNo}" disabled="#{menuBean.mode ne'add'}" tabindex="5">
@@ -167,11 +167,13 @@
 				<td><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.passportInfo.ppNo}" disabled="#{menuBean.mode eq 'view'}" tabindex="14"/></td>
 				<td>
 				<rich:fileUpload  id="upload" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.passportCopyUploadListener}"  
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
+                	  rendered="#{menuBean.mode ne'view'}"	ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="passport" />
                		 	<f:attribute name="ownerType" value="employee" />
            		 </rich:fileUpload>
+           		</td> <td>
+           		 <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewEmployeePassportFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.passportInfo.softFilePath ne null )}"></h:commandLink>
 				</td>
 			</tr>
 			<tr>
@@ -184,11 +186,13 @@
 				<td><h:inputText styleClass="inputText" maxlength="20"  value="#{employeeMB.model.visaInfo.visaNo}" disabled="#{menuBean.mode eq 'view'}"  tabindex="17"/></td>
 				<td>
 				<rich:fileUpload  id="upload_visa" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp"  fileUploadListener="#{employeeMB.visaCopyUploadListener}"
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
+                	  rendered="#{menuBean.mode ne'view'}"	ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="visa" />
                		 	<f:attribute name="ownerType" value="employee" />
            		 </rich:fileUpload>
+           		 </td> <td>
+				  <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewEmployeeVisaFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.visaInfo.softFilePath ne null )}"></h:commandLink>
 				</td>
 			</tr>
 			<tr>
@@ -201,11 +205,13 @@
 				<td><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.laborInfo.cardNo}" disabled="#{menuBean.mode eq 'view'}"   tabindex="20" /></td>
 				<td>
 				<rich:fileUpload  id="upload_labor" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.laborCopyUploadListener}"
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
+                	  rendered="#{menuBean.mode ne'view'}"	ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="labourCard" />
                		 	<f:attribute name="ownerType" value="employee" />
            		 </rich:fileUpload>
+           		 </td> <td>
+				   <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewEmployeeLaborFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.laborInfo.softFilePath ne null )}"></h:commandLink>
 				</td>
 			</tr>
 			<tr>
@@ -218,11 +224,13 @@
 				<td><h:inputText styleClass="inputText" maxlength="20" value="#{employeeMB.model.eidInfo.eIdNo}" disabled="#{menuBean.mode eq 'view'}"   tabindex="23" /></td>
 				<td>
 				<rich:fileUpload  id="upload_emirates_id" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.eidCopyUploadListener}"
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
+                	  rendered="#{menuBean.mode ne'view'}"	ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="eidCard" />
                		 	<f:attribute name="ownerType" value="employee" />
            		 </rich:fileUpload>
+           		 </td> <td>
+				   <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewEmployeeEIdFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.eidInfo.softFilePath ne null )}" ></h:commandLink>
 				</td>
 			</tr>
 			<tr>
@@ -237,14 +245,16 @@
 				
 				<td>
 				<rich:fileUpload  id="upload_medical" acceptedTypes="xls,xlsx,pdf,jpg, gif, png, bmp" fileUploadListener="#{employeeMB.miCopyUploadListener}"
-                		ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px;" >
+                	  rendered="#{menuBean.mode ne'view'}"	ontyperejected="alert('xls,xlsx,pdf,Only JPG, GIF, PNG and BMP files are accepted');" maxFilesQuantity="1" listHeight="1" style="width:200px;" >
                		 	<a4j:ajax event="uploadcomplete" execute="@none" />
                		 	<f:attribute name="fileType" value="miCard" />
                		 	<f:attribute name="ownerType" value="employee" />
            		 </rich:fileUpload>
+           		 </td> <td>
+				 <h:commandLink value="View Files" target="_blank" action="#{employeeMB.viewEmployeeMFile}" rendered="#{(menuBean.mode eq 'view' or menuBean.mode eq 'update') and (employeeMB.model.miInfo.softFilePath ne null )}"></h:commandLink>
 				</td>
 				
-			</tr>
+			</tr>  
 
 			<tr>
 			<td colspan="7" style="padding-top: 15px;">
@@ -253,7 +263,7 @@
 					styleClass="orange" style="height:30px; width:60px;" />
 					&nbsp;&nbsp;&nbsp;
 					<a4j:commandButton id="saveFile" value="Save" rendered="#{menuBean.mode eq 'update'}" styleClass="green" style="height:30px; width:60px;"
-						execute="@form" actionListener="#{employeeMB.updateEmployee}"
+						execute="@form" actionListener="#{employeeMB.updateEmployee}"  oncomplete="#{rich:component('confirmation')}.show();"
 						 />
 					&nbsp;&nbsp;&nbsp;
 
@@ -274,7 +284,6 @@
 			var navToComm =  function() {
 				//alert("reached");
 				//return;
-				alert($J("#centreContentForm\\:prevStepValidatedStatus").attr("value"));
 				 
 				if($J("#centreContentForm\\:prevStepValidatedStatus").attr("value") == 'true')
 				    {
