@@ -15,7 +15,7 @@
       <fieldset class="fieldset" style="width:85%; height: 100%">
        <legend class="legend"><font color="orange" size="4">Pay Slip</font></legend>
    
-        <table class="table" cellpadding="10" style="width: 60%;border: 0px;">
+        <table class="table" cellpadding="10" style="width: 60%;">
         <tr>
         <td>
          <label>Employee ID/First Name:</label>
@@ -60,12 +60,12 @@
      <f:facet name="header"><h:outputText  value="Select All" ></h:outputText> <br></br> 
         <h:selectBooleanCheckbox value="#{salaryProcessMB.model.checkAllNone}" onchange="checkAllCheckboxesInTable(this);" />  
       </f:facet>
-    <h:selectBooleanCheckbox value="#{pdfrecord.empInfo.flag}" styleClass="checkBoxClass">     
+    <h:selectBooleanCheckbox value="#{pdfrecord.empInfo.flag}"  styleClass="checkBoxClass">     
 
     </h:selectBooleanCheckbox>  
      </rich:column>   
        <rich:column   width="25%">
-      <f:facet name="header"><h:outputText  value="EMP No" ></h:outputText> 
+      <f:facet name="header"><h:outputText  value="EMP No" ></h:outputText>   
      </f:facet>
      <h:outputText  value="#{pdfrecord.empInfo.empNo}"></h:outputText> 
     </rich:column>
@@ -97,8 +97,8 @@
     </rich:dataTable>
       <br></br>
     <div align="right">
-     <a4j:commandButton  render="paySlip" styleClass="green" style="height:30px; width:70px;" value="SalarySlip" actionListener="#{documentGenerationMB.generatePDFSalarySlipBulk}" id="btn_Sal_Slip"></a4j:commandButton> &nbsp;&nbsp;
-      <a4j:commandButton   styleClass="green" style="height:30px; width:80px;" value="GenerateWPS" actionListener="#{documentGenerationMB.generateWPSDocument}" id="btn_WSPS_File"></a4j:commandButton>
+     <a4j:commandButton  render="paySlip" styleClass="green" style="height:30px; width:70px;" value="Generate"  oncomplete="#{rich:component('confirmation')}.show();" actionListener="#{documentGenerationMB.generatePDFSalarySlipBulk}" id="btn_Sal_Slip"></a4j:commandButton> &nbsp;&nbsp;
+       
     </div>
     </div>       
 

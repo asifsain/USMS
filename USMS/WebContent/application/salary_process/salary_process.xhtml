@@ -6,12 +6,9 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:my="http://java.sun.com/jsf/composite/components"> 
-   
-<h:head>
-      
-</h:head>     
+       
 
-<h:body style="margin-top: 0px;">
+  
 <ui:composition>  
      <style>
        .processed{
@@ -143,7 +140,7 @@
       
     </rich:dataTable>
     <br />
-    <a4j:commandButton  id="processbtn"  value="Process"  styleClass="green" style="height:30px; width:60px;" 
+    <a4j:commandButton  id="processbtn"  value="Process"  styleClass="green" style="height:30px; width:60px;" oncomplete="#{rich:component('confirmation')}.show();"
       actionListener="#{salaryProcessMB.bulkSalaryProcess}" render="table"/>
     </div>
     </fieldset>
@@ -216,5 +213,5 @@
       
          
 </ui:composition> 
-</h:body>
+
 </html>

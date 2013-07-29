@@ -25,7 +25,7 @@
      
      <fieldset class="fieldset" style="width:85%; height: 100%">
        <legend class="legend"><font color="orange" size="4">HR Document </font></legend>
-     <table class="table" cellpadding="10" style="width: 70%;border: 0px">  
+     <table class="table" cellpadding="10" style="width: 70%;">  
       <tr>
        <td>
        <h:outputText value="Type Of Document :"></h:outputText>&nbsp;&nbsp;
@@ -111,7 +111,7 @@
       </rich:dataTable>
    
     <div align="right">
-      <a4j:commandButton render="pdftable" execute="@form"  styleClass="green" style="height:30px; width:60px;"  value="Generate" actionListener="#{documentGenerationMB.generatePDFDocument}" id="btn_Sal_Slip"></a4j:commandButton> &nbsp;&nbsp;
+      <a4j:commandButton render="pdftable" execute="@form"  styleClass="green" style="height:30px; width:60px;" oncomplete="#{rich:component('confirmation')}.show();"  value="Generate" actionListener="#{documentGenerationMB.generatePDFDocument}" id="btn_Sal_Slip"></a4j:commandButton> &nbsp;&nbsp;
     </div> 
   
     </div>       

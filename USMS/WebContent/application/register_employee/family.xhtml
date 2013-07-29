@@ -36,7 +36,7 @@
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Middle Name" /></td>
-					<td><h:inputText id="it_spouse_middleName" styleClass="inputText" value="not available" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_spouse_middleName" styleClass="inputText" value="#{employeeMB.model.spouseInfo.middleName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td><h:outputText value="Last Name" /></td>
 					<td><h:inputText id="it_spouse_lastName" styleClass="inputText" value="#{employeeMB.model.spouseInfo.lastName}" disabled="#{menuBean.mode eq 'view'}"/></td>
@@ -91,10 +91,10 @@
 					<td><h:inputText id="it_child1_firstName" styleClass="inputText" value="#{employeeMB.model.child1Info.firstName}" 
 					 disabled="#{menuBean.mode eq 'view'}"/></td>
 
-					<td>&nbsp;</td>
+					<td>&nbsp;</td>   
   
 					<td><h:outputText value="Middle Name" /></td>
-					<td><h:inputText id="it_child1_middleName" styleClass="inputText" value="not available" disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child1_middleName" styleClass="inputText" value="#{employeeMB.model.child1Info.middleName}" disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td><h:outputText value="Last Name" /></td>
 					<td><h:inputText id="it_child1_lastName" styleClass="inputText" value="#{employeeMB.model.child1Info.lastName}" disabled="#{menuBean.mode eq 'view'}"/></td>
@@ -148,7 +148,7 @@
 					<td>&nbsp;</td>
 
 					<td><h:outputText value="Middle Name" /></td>
-					<td><h:inputText id="it_child2_middleName" styleClass="inputText" value="not available"  disabled="#{menuBean.mode eq 'view'}"/></td>
+					<td><h:inputText id="it_child2_middleName" styleClass="inputText" value="#{employeeMB.model.child2Info.middleName}"  disabled="#{menuBean.mode eq 'view'}"/></td>
 
 					<td><h:outputText value="Last Name" /></td>
 					<td><h:inputText id="it_child2_lastName" styleClass="inputText" value="#{employeeMB.model.child2Info.lastName}" disabled="#{menuBean.mode eq 'view'}"/></td>

@@ -18,15 +18,17 @@
 
             font-style: italic;
 
-          }  
+            } 
+        
       
 
- </style>
+      </style>
 
 	   <ui:include src="/application/register_employee/register_employee_common.xhtml"></ui:include>
 		<h:outputScript name="file.js" library="javascript"></h:outputScript>
 		<fieldset class="fieldset">
 		<legend class="legend"><font color="orange" size="4">File Details</font></legend>
+		   
 		<table id="Initial Details" class="table" cellpadding="10" 
 			>
 			<tbody>    
@@ -43,7 +45,7 @@
 				 
 
 				<td style="width:100px"><h:outputText value="Middle Name:" /></td>
-				<td style="width:150px"><h:inputText styleClass="inputText" value="not available" 	maxlength="50" disabled="#{menuBean.mode eq 'view'}" tabindex="2"
+				<td style="width:150px"><h:inputText styleClass="inputText" value="#{employeeMB.model.empInfo.middleName}" 	maxlength="50" disabled="#{menuBean.mode eq 'view'}" tabindex="2"
 				/></td> 
 				<td style="width:140px " align="left">&nbps;</td> 
 			</tr>
@@ -53,15 +55,16 @@
 				tabindex="3"/></td>
 
 				<td style="width:100px">&nbps;</td>
-
+               
 				<td ><h:outputText value="Date Of Joining:" /></td>
 				<td style="width:150px">
-				 
+				   
 					 <rich:calendar id="JOING_DT" tabindex="4"  value="#{employeeMB.model.empEmploymentInfo.joiningDt}" disabled="#{menuBean.mode eq 'view'}"
-					 required="true" requiredMessage="Enter Date"   inputStyle="width: 60 px; height : 200 px;" datePattern="dd/MM/yyyy" enableManualInput="true">  
+					 required="true" requiredMessage="Enter Date" inputSize="20"   datePattern="dd/MM/yyyy" enableManualInput="true" inputClass="rich-calendar-popup">  
 					</rich:calendar>
+			
 					</td><td>  
-					<rich:message for="JOING_DT"></rich:message> 
+					<rich:message for="JOING_DT"></rich:message>   
 			    	</td>
 			     
   
@@ -103,6 +106,7 @@
 			
           </tbody>
 		</table>
+	
 		</fieldset>
        <fieldset class="fieldset">
 		<legend class="legend" ><font color="orange" size="4">Education Details</font></legend>
@@ -263,7 +267,7 @@
 					styleClass="orange" style="height:30px; width:60px;" />
 					&nbsp;&nbsp;&nbsp;
 					<a4j:commandButton id="saveFile" value="Save" rendered="#{menuBean.mode eq 'update'}" styleClass="green" style="height:30px; width:60px;"
-						execute="@form" actionListener="#{employeeMB.updateEmployee}"  oncomplete="#{rich:component('confirmation')}.show();"
+						execute="@form" actionListener="#{employeeMB.updateEmployee}"  oncomplete="#{rich:component('confirmation')}.show();" 
 						 />
 					&nbsp;&nbsp;&nbsp;
 

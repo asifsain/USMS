@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+<!--   <link href="#{request.contextPath}/css/styles.css" rel="stylesheet" type="text/css"/>       -->
+  <title>HR Management - Unique Solutions</title>
+ <style>
+   .errorDetails{
+      font-family: sans-serif;
+      font-size: large;
+      color: red;  
+      
+   
+   }
+ 
+ </style>
+</h:head>
+    
+<h:body >
+ 
+  <center>
+  <div style="height: 100%;width: 60%;">
+  <fieldset class="fieldset">
+		<legend class="legend"><font color="orange" size="4">Error Message</font></legend>
+   <h:graphicImage url="/resources/images/error.png" style="height:100px;width:250px;"></h:graphicImage>
+   
+<!--     <div class="highlighted errorMessage" style=""> -->   
+<!--         <h:outputText escape="false"  -->    
+<!--                       value="Some Error Has Occured"/> -->
+<!--     </div> -->
+    <br/><br/>   
+    <div class="errorDetails" >
+    <h:form>
+       <h:commandLink value="Go Back"  action="composition/home"/>
+     </h:form>
+        Error details: <br/>
+        <h:outputLabel value="#{flash['errorDetails']}" />  
+      
+      <rich:messages  globalOnly="true" layout="table" id="globalMsg" style="font: bold;font-family: sans-serif;font-size: 20px;color: green;" align="center">
+	  </rich:messages>       
+    </div>
+    </fieldset>       
+    </div>
+  </center>
+    
+</h:body>
+</html>

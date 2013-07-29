@@ -17,9 +17,9 @@
             </f:facet>
         </a4j:status> 
         </center>
-	<h:form id="centreContentForm" >
+	<h:form id="centreContentForm">
 	  
-	    <h:outputScript name="application.js" library="javascript"></h:outputScript>
+	    <h:outputScript name="application.js" library="javascript"></h:outputScript>  
 		<a4j:jsFunction name="changePage" render="centreContentForm" >
 				<a4j:param name="name" assignTo="#{menuBean.pageName}"></a4j:param>
 		</a4j:jsFunction>
@@ -31,7 +31,7 @@
 		</a4j:jsFunction>
 		
 		<ui:include src="#{menuBean.pageName}"></ui:include>
-<!-- 		<ui:include src="/application/register_employee/file.xhtml"></ui:include>  -->  
+  
          
     </h:form>
      

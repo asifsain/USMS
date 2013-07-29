@@ -28,7 +28,7 @@
 				<li id="item4" onclick="resetRightMenu()">Adjustments</li>
 				<li id="item5" onclick="resetRightMenu()">Monthly Salary</li>
 				<li id="item6" onclick="resetRightMenu()">Pay Slip</li>
-				<li id="item7" onclick="resetRightMenu()">Salary Payment Instruction</li>
+				<li id="item7" onclick="resetRightMenu()">WPS File</li>
 			    <li id="item8" onclick="resetRightMenu()">HR Documents</li>
 			</ol>
 		</div>
@@ -166,7 +166,15 @@
 		//$J("#emp_management_view").css("visibility", "visible");
 		
 	});
-	
+	$J("#item7").click(function() {  
+		changePage('/application/salary_process/wps_file.xhtml');
+		changeMode("wps");
+		//setMgmtSubmenuMode("view");
+		//$J("#emp_management_add").css("visibility", "hidden");
+		//$J("#emp_management_update").css("visibility", "hidden");
+		//$J("#emp_management_view").css("visibility", "visible");
+		
+	});
 	$J("#item8").click(function() {  
 		changePage('/application/hr_documents/hr_documents.xhtml');
 		changeMode("hrdocument");
