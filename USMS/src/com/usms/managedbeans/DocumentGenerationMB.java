@@ -1,7 +1,11 @@
 package com.usms.managedbeans;
 
 import java.io.File;
+import java.io.Serializable;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -26,7 +30,9 @@ import com.usms.view.model.SalaryViewModel;
 
 @ManagedBean
 @ViewScoped
-public class DocumentGenerationMB {
+public class DocumentGenerationMB implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@ManagedProperty(value = "#{ApplicationBean}")
 	private ApplicationBean appBean;
@@ -112,59 +118,6 @@ public class DocumentGenerationMB {
            } 
 	 
 
-	
-	 
-//	 public String viewPDFExpLetter() 
-//	       {
-//		     String filePath=model.getEmpSalTrx().getSoftFilePath();  
-//		     FacesContext facesContext = FacesContext.getCurrentInstance();
-//             ExternalContext externalContext = facesContext.getExternalContext();
-//             HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
-//             File file = new File(filePath);
-//             BufferedInputStream input = null;
-//             BufferedOutputStream output = null;
-//            try {
-//            
-//              input = new BufferedInputStream(new FileInputStream(file), DEFAULT_BUFFER_SIZE);
-//          
-//              response.reset();
-//              response.setHeader("Content-Type", "application/pdf");
-//              response.setHeader("Content-Length", String.valueOf(file.length()));
-//              response.setHeader("Content-Disposition", "inline; filename=\"" + filePath + "\"");
-//              output = new BufferedOutputStream(response.getOutputStream(), DEFAULT_BUFFER_SIZE);
-//              byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
-//              int length;
-//              while ((length = input.read(buffer)) > 0) {
-//                 output.write(buffer, 0, length);
-//              }
-//
-//     
-//              output.flush();
-//             } catch(IOException e)
-//              {
-//             	 e.getStackTrace();
-//              }
-//            
-//            finally {
-//            close(output);
-//            close(input);
-//          }
-//         facesContext.responseComplete();
-    //      return "";
-   //      }
-//	        private static void close(Closeable resource) {
-//	            if (resource != null) {
-//	              try {
-//	                 resource.close();
-//	                } catch (IOException e) {
-//	                
-//	                e.printStackTrace();
-//	            }
-//	        }
-//	    }
-   
-
-
 	 public void generatePDFFinalSettlement() 
 	     {
 		 for (EmpInfo empInfo : docModel.getEmpList()) 
@@ -191,12 +144,12 @@ public class DocumentGenerationMB {
 			 if (salModel.getEmpInfo().isFlag())
 			    {
 				String filesRoot = appBean.applicationPropreties.getProperty("filesRoot");
-				String path=filesRoot + File.separator +"SalarySlip"+File.separator+ salModel.getEmpInfo().getEmpNo()+ File.separator;
+				String path=filesRoot + File.separator +"SalarySlip"+File.separator+ model.getYear()+ File.separator+salModel.getSalTrxMonth()+File.separator;
 	 			USMSPDFDocumentGeneration.Create_SalarySlip_Pdf(salModel,path);
-				salModel.setSoftFilePath(path+salModel.getEmpName()+"_"+salModel.getSalTrxMonth()+"_"+"SalarySlip.pdf");
+				salModel.setSoftFilePath(path+"Salary_Slip"+"-"+salModel.getEmpInfo().getEmpNo()+"-"+salModel.getEmpInfo().getLastName()+".pdf");
 				empSalProcessdao.updateSalaryTrx(salModel, ut, em);
 			    }
-		     }
+		     }   
 		    this.searchEmployee();
 		    String message = appBean.applicationPropreties.getProperty("SALARYSLIP_SUCCESS");
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
@@ -320,12 +273,17 @@ public class DocumentGenerationMB {
 		    String month=docModel.getMonthFromInt(model.getMonth());
 		    docModel.getHrDocuments().setSoftFilePath(path+ month+ "_"+"WPS.sif");
 	  	    docModel.setEmployerDetail(docDAO.selectEmployerDetail(em, ut));
+	  	    docModel.getHrDocuments().setMonth(docModel.getMonthFromInt(model.getMonth()));
+	  	    docModel.getHrDocuments().setYear(model.getYear());
+	  	    docModel.getHrDocuments().setDate(new Date());
+	  	    docModel.getHrDocuments().setDocType("WPS_FILE");
+	  	    docDAO.insertEmpHrDocuments(docModel.getHrDocuments(), em, ut);
 	  	    USMSPDFDocumentGeneration.create_WPS_Pdf(model.getEmpSalarySlpList(), path,model.getMonth(),model.getYear(),docModel.getEmployerDetail(),month);
 	  	    String message = appBean.applicationPropreties.getProperty("DOCUMENT_SUCCESS");
 	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 	   }      
-	      
-	public String viewpdfDocuments()
+	        
+	public String viewpdfDocuments()  
 	   {
 		System.out.println("In the document generation");
 		for(HrDocuments hrDocs:docModel.getEmpInfo().getHrDocuments())

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,16 +40,18 @@ import com.usms.view.model.SalaryViewModel;
 
 @ManagedBean
 @ViewScoped
-public class SalaryProcessMB
+public class SalaryProcessMB implements Serializable
 {
    
+	private static final long serialVersionUID = 1L;
+
 	@ManagedProperty(value = "#{ApplicationBean}")
 	private ApplicationBean appBean;
 
 	public ApplicationBean getAppBean()
 	{
 		return appBean;
-	}
+	}  
 
 	public void setAppBean(ApplicationBean appBean)
 	{
@@ -260,7 +263,7 @@ public class SalaryProcessMB
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
 		this.selectAllEmployee();
 	  }
-             
+               
   
 }
 

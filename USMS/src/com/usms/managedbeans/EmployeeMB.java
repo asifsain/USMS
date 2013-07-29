@@ -1,5 +1,6 @@
 package com.usms.managedbeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +31,10 @@ import com.usms.view.model.EmployeeViewModel;
 
 @ManagedBean
 @ViewScoped
-public class EmployeeMB {
+public class EmployeeMB implements Serializable {
 
-	
-	
+	private static final long serialVersionUID = 1L;
+
 	@ManagedProperty(value="#{ApplicationBean}")
 	private ApplicationBean appBean;
 	
@@ -64,6 +65,7 @@ public class EmployeeMB {
 	//----------------------- Getter & Setter - View Model -------------------------------------
 	
 	private EmployeeViewModel model;
+
 	
 	public EmployeeViewModel getModel() {
 		return model;
@@ -97,7 +99,8 @@ public class EmployeeMB {
 		// accordingly
 		// if only 1 result is fetched then show the file details page
 		System.out.println(model.getEmpSearchInfo());
-		List<EmpInfo> empList = empInfodao.fetchAllEmpInfo(model.getEmpSearchInfo(), em, ut);
+    	List<EmpInfo> empList = empInfodao.fetchAllEmpInfo(model.getEmpSearchInfo(), em, ut);
+	
 		
 		model.setEmpList(empList);
 	}
@@ -219,7 +222,8 @@ public class EmployeeMB {
 		model.setTotalSalary(model.getEmpInfo());
 		empInfodao.saveEmployee(model.getEmpInfo(), em, ut);
 		String message = appBean.applicationPropreties.getProperty("INSERT_SUCCESS");
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));    
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));  
+		
 	}   
 	
 	//------------------ Update the Employee Detail(added by Tariq)-----------------------------

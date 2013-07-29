@@ -35,6 +35,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
+import com.usms.db.model.EmpAdjTrx;
 import com.usms.db.model.EmpInfo;
 import com.usms.db.model.EmpSalTrx;
 import com.usms.db.model.EmployerDetail;
@@ -59,11 +60,10 @@ public class USMSPDFDocumentGeneration {
        
 		try {
 			Document doc = new Document(PageSize.A4);
-			File newfile = new File(filepath);
+			File newfile = new File(filepath);  
 			newfile.mkdirs();
-			OutputStream file = new FileOutputStream(new File(newfile + "/"
-					+ empSalTrx.getEmpName() + "_" + empSalTrx.getSalTrxMonth()
-					+ "_" + "SalarySlip.pdf"));
+			OutputStream file = new FileOutputStream(new File(newfile + "/"+"Salary_Slip"+"-"
+					+empSalTrx.getEmpInfo().getEmpNo()+"-"+empSalTrx.getEmpInfo().getLastName()+".pdf"));
 			PdfWriter.getInstance(doc, file);
 			BaseFont bfTimesFoot = BaseFont.createFont(BaseFont.HELVETICA,
 					BaseFont.CP1252, false);
@@ -101,13 +101,6 @@ public class USMSPDFDocumentGeneration {
 			LineSeparator UNDERLINE1 = new LineSeparator(0, 95, null,
 					Element.ALIGN_CENTER, 3);
 			Paragraph pline2 = new Paragraph(new Chunk(UNDERLINE1));
-
-			// PdfPTable table = new PdfPTable(1);
-			// table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_MIDDLE);
-			// // table.addCell(new PdfPCell(new Phrase("Pay Slip  ",
-			// FooterFont1)));
-			// insertCell(table, "PaySlip", Element.ALIGN_CENTER, 1,
-			// bfBold12,BaseColor.WHITE);
 			Paragraph empty2 = new Paragraph("");
 			addEmptyLine(empty2, 1);
 			PdfPTable tablex = new PdfPTable(2);
@@ -152,18 +145,15 @@ public class USMSPDFDocumentGeneration {
 			cell5.setBorder(Rectangle.NO_BORDER);
 			PdfPTable tablex3 = new PdfPTable(2);
 			Format formatter = new SimpleDateFormat("dd-MM-YYYY");
-			//
-
-			// String For_year =
-			// yearformate.format(empSalTrx.getEmpInfo().getEmpEmploymentInfos().getLstWrkDt());
+			
 			String Date_of_join = formatter.format(empSalTrx.getEmpInfo()
 					.getEmpEmploymentInfos().getJoiningDt());
-			// String Date_year=Date_of_join+year;
+		
 			PdfPCell cell6 = new PdfPCell(new Phrase("D.O.J       :"
 					+ Date_of_join, bf12));
 			cell6.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell6.setBorder(Rectangle.NO_BORDER);
-			PdfPCell cell7 = new PdfPCell(new Phrase("AccountNumber"
+			PdfPCell cell7 = new PdfPCell(new Phrase("AccountNumber :"
 					+ empSalTrx.getEmpInfo().getEmpBankInfos().getIbanNo(),
 					bf12));
 			cell7.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
@@ -229,10 +219,19 @@ public class USMSPDFDocumentGeneration {
 					BaseColor.LIGHT_GRAY);
 			insertCell(table_2, "Amount", Element.ALIGN_CENTER, 1, bfBold12,
 					BaseColor.LIGHT_GRAY);
-
+			Float totalDAdj=0f;
+			Float totalCAdj = 0f;
 			Float SAL_AMT = empSalTrx.getSalAmt();
-			Float ADJ_AMT = empSalTrx.getAdjAmt();
-			Float netSalary = SAL_AMT - ADJ_AMT;
+		
+		  //	Float netSalary = SAL_AMT - ADJ_AMT;
+		   for(EmpAdjTrx salAdj:empSalTrx.getEmpInfo().getEmpAdjTrxs())
+		     {
+			   if(salAdj.getAmtAdjFlag().equalsIgnoreCase("C"))
+				totalCAdj=totalCAdj+salAdj.getAmt();
+			   else
+			     totalDAdj=totalDAdj+salAdj.getAmt();
+		     }
+			
 			table_2.setHeaderRows(1);
 
 			insertCell(table_2, "", Element.ALIGN_LEFT, 1, bfBold12,
@@ -249,7 +248,7 @@ public class USMSPDFDocumentGeneration {
 			table_2.addCell(new PdfPCell(new Phrase((Float.toString(basic)),
 					bf12)));
 			table_2.addCell(new PdfPCell(new Phrase("Salary Advance", bf12)));
-			table_2.addCell(new PdfPCell(new Phrase((Float.toString(ADJ_AMT)),
+			table_2.addCell(new PdfPCell(new Phrase((Float.toString(0f)),
 					bf12)));
 			System.out.println(empSalTrx.getEmpInfo().getEmpSalaryInfos());
 
@@ -284,29 +283,27 @@ public class USMSPDFDocumentGeneration {
 			table_2.addCell(new PdfPCell(new Phrase("Expenses Allowance", bf12)));
 			float Other1 = empSalTrx.getEmpInfo().getEmpSalaryInfos()
 					.getOtherAllow();
-			System.out.println(empSalTrx.getEmpInfo().getEmpSalaryInfos()
-					.getOtherAllow());
-			table_2.addCell(new PdfPCell(new Phrase("", FooterFont1)));
+		
+			table_2.addCell(new PdfPCell(new Phrase("", FooterFont1)));   
 			table_2.addCell(new PdfPCell(new Phrase("", FooterFont1)));
 			table_2.addCell(new Phrase((new Phrase("", FooterFont1))));
 
-			insertCell(table_2, "", Element.ALIGN_LEFT, 1, bfBold12,
+			insertCell(table_2, "Other Allowances", Element.ALIGN_LEFT, 1, bf12,
 					BaseColor.WHITE);
-			insertCell(table_2, "", Element.ALIGN_LEFT, 1, bfBold12,
+			insertCell(table_2, Float.toString(totalCAdj), Element.ALIGN_LEFT, 1, bf12,
 					BaseColor.WHITE);
 			insertCell(table_2, "", Element.ALIGN_LEFT, 1, bfBold12,
 					BaseColor.WHITE);
 			insertCell(table_2, "", Element.ALIGN_LEFT, 1, bfBold12,
 					BaseColor.WHITE);
 
-			table_2.addCell(new PdfPCell(new Phrase("Total Earning", bf12)));
+			table_2.addCell(new PdfPCell(new Phrase("Total Earning", bf12)));  
 
 			float total = empSalTrx.getEmpInfo().getEmpSalaryInfos().getTotal();
-			System.out.println(empSalTrx.getEmpInfo().getEmpSalaryInfos()
-					.getTotal());
-			table_2.addCell(new Phrase((Float.toString(SAL_AMT)), bf12));
+
+			table_2.addCell(new Phrase((Float.toString(SAL_AMT+totalCAdj)), bf12));
 			table_2.addCell(new PdfPCell(new Phrase("Total Deduction", bf12)));
-			table_2.addCell(new PdfPCell(new Phrase(Float.toString(ADJ_AMT),
+			table_2.addCell(new PdfPCell(new Phrase(Float.toString(totalDAdj),
 					bf12)));
 			insertCell(table_2, "", Element.ALIGN_LEFT, 1, bfBold12,
 					BaseColor.WHITE);
@@ -314,7 +311,7 @@ public class USMSPDFDocumentGeneration {
 					BaseColor.WHITE);
 			table_2.addCell(new PdfPCell(new Phrase("Net Salary", bf12)));
 
-			table_2.addCell(new PdfPCell(new Phrase(Float.toString(netSalary),
+			table_2.addCell(new PdfPCell(new Phrase(Float.toString(empSalTrx.getTotalAmt()),
 					bf12)));
 			Paragraph empty5 = new Paragraph("");
 			addEmptyLine(empty5, 1);
@@ -1243,9 +1240,7 @@ public class USMSPDFDocumentGeneration {
 			cal.getTime();
 			for (EmpSalTrx salInfo : empSalList) {
 				writer.print("EDR,");
-				writer.write(String.format("%014d",
-						(salInfo.getEmpInfo().getEmpNo()))
-						+ ",");
+				writer.write(String.format("%14s",salInfo.getEmpInfo().getEmpNo()).replace(' ', '0')+ ",");  
 				writer.write(salInfo.getEmpInfo().getEmpBankInfos()
 						.getCbrCode()
 						+ ",");

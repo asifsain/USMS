@@ -27,7 +27,10 @@ public class EmpFamilyInfo implements Serializable {
 
 	@Column(name="FIRST_NAME")
 	private String firstName;
-
+    
+	@Column(name="MIDDLE_NAME")
+	private String middleName;
+	
 	@Column(name="LAST_NAME")
 	private String lastName;
 
@@ -94,6 +97,15 @@ public class EmpFamilyInfo implements Serializable {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+   
+	
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
 
 	public String getRel() {
