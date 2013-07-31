@@ -28,7 +28,7 @@
 			    <td style="height:100px;vertical-align: top;"><h:outputText value="Month:" /></td>
 			     <td style="height:100px;vertical-align: top;">
 			     
-			    <h:selectOneMenu  value="#{documentGenerationMB.model.month}" >
+			    <h:selectOneMenu  value="#{documentGenerationMB.model.month}" id="dMonth">
                        <f:selectItems value="#{documentGenerationMB.model.months}"></f:selectItems>
                 </h:selectOneMenu>
 			     
@@ -38,14 +38,14 @@
 		  		  <td style="height:100px;vertical-align: top;"><h:outputText value="Year:" /></td>
 				
                    <td style="height:100px;vertical-align: top;">
-                   <h:selectOneMenu value="#{documentGenerationMB.model.year}" >
+                   <h:selectOneMenu value="#{documentGenerationMB.model.year}" id="dyear">
                      <f:selectItems value="#{documentGenerationMB.model.years}"></f:selectItems>
                    </h:selectOneMenu>
                    
                    
                    </td>
-                  <td style="height:100px;vertical-align: top;"><a4j:commandButton value="Search" execute="@form"    oncomplete="showEmpDeail()" actionListener="#{documentGenerationMB.searchEmployee}"
- 							render="paySlip,btn_Sal_Slip,btn_Exp_lt,btn_Sal_Certificate"   styleClass="green" style="height:30px; width:60px;"/></td> 
+                  <td style="height:100px;vertical-align: top;"><a4j:commandButton value="Search" execute="txt_Emp_Name,dMonth,dyear"    oncomplete="showEmpDeail()" actionListener="#{documentGenerationMB.searchEmployee}"
+ 							render="paySlip,btn_Sal_Slip,btn_Exp_lt,btn_Sal_Certificate,btn_WSPS_download,btn_WSPS_File"   styleClass="green" style="height:30px; width:60px;"/></td> 
                 
 			  </tr>
          </table>
@@ -80,6 +80,7 @@
     <h:outputText  value="MONTH" ></h:outputText> 
     </f:facet>
     <h:outputText  value="#{pdfrecord.salTrxMonth}"></h:outputText>
+    
     </rich:column>
         <f:facet name="footer">
          <rich:dataScroller id="scroller"  execute="paySlip" for="paySlip" maxPages="10" renderIfSinglePage="false" boundaryControls="hide" fastControls="hide" />     
@@ -87,20 +88,21 @@
     </rich:dataTable>
       <br></br>
     <div align="right">
-       <a4j:commandButton   styleClass="green" style="height:30px; width:80px;" value="Generate" oncomplete="#{rich:component('confirmation')}.show();" actionListener="#{documentGenerationMB.generateWPSDocument}" id="btn_WSPS_File"></a4j:commandButton>
+       <a4j:commandButton execute="@form" disabled="#{documentGenerationMB.docModel.wpsfileStatus eq 'generated'}"  render="btn_WSPS_download" styleClass="green" style="height:30px; width:80px;" value="Generate" oncomplete="#{rich:component('confirmation')}.show();" actionListener="#{documentGenerationMB.generateWPSDocument}" id="btn_WSPS_File"></a4j:commandButton>
        &nbsp; 
-       <a4j:commandButton   styleClass="green" style="height:30px; width:80px;" value="download" actionListener="#{documentGenerationMB.generateWPSDocument}" id="btn_WSPS_download"></a4j:commandButton>
+       <h:commandButton  disabled="#{documentGenerationMB.docModel.wpsfileStatus eq 'Pending'}"  styleClass="green" style="height:30px; width:80px;" value="download" action="#{documentGenerationMB.downloadWPSFile}" id="btn_WSPS_download"></h:commandButton>
+      <h:outputText value="#{documentGenerationMB.docModel.hrDocuments.softFilePath}"></h:outputText>
     </div>
-    </div>       
-
-  </fieldset>
-    
-  
+    </div>              
+     
+  </fieldset>          
+        
+           
    
         <script >
-
+   
            $(document).ready(function(){
-			
+			   
 // 			if(mode_type=='update'){
 // 				$("#tablediv1").hide();
 				

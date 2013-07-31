@@ -19,8 +19,6 @@
             font-style: italic;
 
             } 
-        
-      
 
       </style>
 
@@ -31,7 +29,7 @@
 		   
 		<table id="Initial Details" class="table" cellpadding="10" 
 			>
-			<tbody>    
+			<tbody>      
 		
 			<tr >  
 				<td style="width:100px"><h:outputText value="First Name:" /></td>
@@ -58,15 +56,14 @@
                
 				<td ><h:outputText value="Date Of Joining:" /></td>
 				<td style="width:150px">
-				   
-					 <rich:calendar id="JOING_DT" tabindex="4"  value="#{employeeMB.model.empEmploymentInfo.joiningDt}" disabled="#{menuBean.mode eq 'view'}"
+					 <rich:calendar id="JOING_DT" popup="true" tabindex="4"  value="#{employeeMB.model.empEmploymentInfo.joiningDt}" disabled="#{menuBean.mode eq 'view'}"
 					 required="true" requiredMessage="Enter Date" inputSize="20"   datePattern="dd/MM/yyyy" enableManualInput="true" inputClass="rich-calendar-popup">  
 					</rich:calendar>
 			
 					</td><td>  
 					<rich:message for="JOING_DT"></rich:message>   
 			    	</td>
-			     
+			       
   
 			</tr>   
 			<tr>

@@ -33,16 +33,18 @@
 	        <h:outputText value="From Date :"></h:outputText>  
 	      </td>
 	      <td> 
-	        <rich:calendar id="fromDate"  value="#{salaryProcessMB.model.fromDate}" cellWidth="24px" cellHeight="22px"  inputStyle="width:80px"
+	         <rich:calendar id="fromDate" required="true" requiredMessage="From Date can not be Empty"  value="#{salaryProcessMB.model.fromDate}" cellWidth="24px" cellHeight="22px"  inputStyle="width:80px"
 	         ></rich:calendar>
+	        <rich:message for="fromDate"></rich:message>
 	        </td>
 	       
 	        <td>
 	         <h:outputText value="To Date :"></h:outputText>
 	         </td>
 	         <td>
-	        <rich:calendar id="toDate" value="#{salaryProcessMB.model.toDate}"  cellWidth="24px" cellHeight="22px"  inputStyle="width:80px"
+	        <rich:calendar id="toDate" value="#{salaryProcessMB.model.toDate}"  required="true" requiredMessage="To date Can not be Empty"    inputStyle="width:80px"
 	          onchange="salaryProcess();"></rich:calendar>
+	        <rich:message for="toDate"></rich:message>
 	       </td>
 	           </tr>
 	   
@@ -52,7 +54,7 @@
 			<tr > 
 		 	    <td><h:outputText value="Month:" /></td>
 			     <td style="height:100px;vertical-align: middle;">
-			       <h:selectOneMenu  value="#{salaryProcessMB.model.month}" >
+			       <h:selectOneMenu  value="#{salaryProcessMB.model.month}" id="dMonth">
                        <f:selectItems value="#{salaryProcessMB.model.months}"></f:selectItems>
                    </h:selectOneMenu>
 			     
@@ -61,13 +63,13 @@
 		  		  <td><h:outputText value="Year:" /></td>
 				
                    <td style="height:100px;vertical-align: middle;">
-                    <h:selectOneMenu value="#{salaryProcessMB.model.year}" >
+                    <h:selectOneMenu value="#{salaryProcessMB.model.year}" id="dYear" >
                      <f:selectItems value="#{salaryProcessMB.model.years}"></f:selectItems>
                      
-                     </h:selectOneMenu>
+                     </h:selectOneMenu>   
                    
                    </td>
-                   <td><a4j:commandButton value="Search" execute="@form"    oncomplete="showEmpDeail()" actionListener="#{salaryProcessMB.selectAllEmployee}"
+                   <td><a4j:commandButton value="Search" execute="dMonth,dYear"    oncomplete="showEmpDeail()" actionListener="#{salaryProcessMB.selectAllEmployee}"
  							render="table,processbtn"  styleClass="green" style="height:30px; width:60px;"/></td> 
                   
 			  </tr>
@@ -140,7 +142,7 @@
       
     </rich:dataTable>
     <br />
-    <a4j:commandButton  id="processbtn"  value="Process"  styleClass="green" style="height:30px; width:60px;" oncomplete="#{rich:component('confirmation')}.show();"
+    <a4j:commandButton  id="processbtn"   value="Process"  styleClass="green" style="height:30px; width:60px;" oncomplete="#{rich:component('confirmation')}.show();"
       actionListener="#{salaryProcessMB.bulkSalaryProcess}" render="table"/>
     </div>
     </fieldset>
@@ -152,8 +154,7 @@
 				
 				   
                     };
-                  
-                   
+                    
                    
                    
         </script>
