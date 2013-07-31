@@ -99,6 +99,9 @@ public class DocumentGenerationMB implements Serializable {
 		    System.out.println(model.getEmpInfo().getFirstName());
 		    List<EmpSalTrx> salList =empSalProcessdao.searchEmployee(ut,em,model.getMonthFromInt(model.getMonth()), model.getYear(),model.getEmpName());
 		    model.setEmpSalarySlpList(salList);
+		  
+		    selectWPSFilePath();
+		    System.out.println(docModel.getWpsfileStatus() );
 	    }
 	 
       public void searchAllEmployee()
@@ -281,6 +284,7 @@ public class DocumentGenerationMB implements Serializable {
 	  	    USMSPDFDocumentGeneration.create_WPS_Pdf(model.getEmpSalarySlpList(), path,model.getMonth(),model.getYear(),docModel.getEmployerDetail(),month);
 	  	    String message = appBean.applicationPropreties.getProperty("DOCUMENT_SUCCESS");
 	        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));
+	        selectWPSFilePath();
 	   }      
 	        
 	public String viewpdfDocuments()  
@@ -336,6 +340,27 @@ public class DocumentGenerationMB implements Serializable {
 		    }
 		 }
 	   }
+   //to search the path of generated wps file for the selected month and year	
+	
+	 public void selectWPSFilePath()
+	      {
+	     	 HrDocuments wpsFile=docDAO.selectWpsFilePath(em, ut, docModel.getMonthFromInt(model.getMonth()), model.getYear());
+	     	 if(wpsFile!=null) 
+	     	 {	 
+	     	   docModel.setWpsSoftFilePath(wpsFile.getSoftFilePath());
+	     	   docModel.setWpsfileStatus("generated");
+	     	 }   
+	     	 else    
+	     	   docModel.setWpsfileStatus("Pending"); 
+	      } 
+	 
+	 public String downloadWPSFile()
+	    {
+		 docModel.downloadFile(docModel.getWpsSoftFilePath());
+		
+		 
+		 return "";     
+	    }
 	    
-
+    
 }

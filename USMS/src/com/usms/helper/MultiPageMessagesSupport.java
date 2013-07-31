@@ -26,7 +26,7 @@ public class MultiPageMessagesSupport implements PhaseListener {
      * have arrived here and the response is already complete, then the page is
      * not going to show up: don't display messages yet.
      */
-    // TODO: Blog this (MultiPageMessagesSupport)
+   
     public void beforePhase(final PhaseEvent event)
     {
         FacesContext facesContext = event.getFacesContext();

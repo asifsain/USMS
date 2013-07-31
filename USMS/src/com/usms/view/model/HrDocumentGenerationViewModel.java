@@ -19,7 +19,8 @@ import com.usms.db.model.HrDocuments;
 
 public class HrDocumentGenerationViewModel {
 
-	 
+
+	
 	public HrDocumentGenerationViewModel()
 	     {
 		 hrDocuments=new HrDocuments();
@@ -68,7 +69,9 @@ public class HrDocumentGenerationViewModel {
 	
 	private HrDocuments hrDocuments;  
     private EmployerDetail employerDetail;
-
+    
+	private  String wpsSoftFilePath ;
+	private  String wpsfileStatus="Pending";
 
 	public HrDocuments getHrDocuments() {
 		return hrDocuments;
@@ -83,9 +86,20 @@ public class HrDocumentGenerationViewModel {
 		this.employerDetail = employerDetail;
 	}
 	
+	public String getWpsSoftFilePath() {  
+		return wpsSoftFilePath;
+	}
+	public void setWpsSoftFilePath(String wpsSoftFilePath) {
+		this.wpsSoftFilePath = wpsSoftFilePath;
+	}
+	
+	public String getWpsfileStatus() {
+		return wpsfileStatus;
+	}
+	public void setWpsfileStatus(String wpsfileStatus) {
+		this.wpsfileStatus = wpsfileStatus;
+	}
 	//-------------------------Consolidate HrDocuments--------------------
-	
-	
 	public void consolidateHrDocuments(EmpInfo empInfo)
 	    {
 		  this.hrDocuments.setYear(hrDocuments.getDate().getYear()+1900);   
@@ -125,7 +139,7 @@ public class HrDocumentGenerationViewModel {
         byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
         int length;
         while ((length = input.read(buffer)) > 0) {
-           output.write(buffer, 0, length);
+           output.write(buffer, 0, length);  
          }
 
 
@@ -151,7 +165,44 @@ public class HrDocumentGenerationViewModel {
               e.printStackTrace();
           }
       }
-  }
+    }
+      
+      public void downloadFile(String path)
+        {
+	    System.out.println("Reache in the Download function");
+	    System.out.println(path);
+	    File file = new File(path);
+        FileInputStream in;
+        FacesContext context=FacesContext.getCurrentInstance();
+         HttpServletResponse response=(HttpServletResponse) context.getExternalContext().getResponse();
+          try {
+            if (!file.exists())
+                {
+          // context.addMessage(new ErrorMessage("msg.file.notdownloaded"));
+          // context.setForwardName("failure");
+                } 
+             else{
+           	    response.setContentType("application/octet-stream");
+           	    response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()+ "");
+                   in= new FileInputStream(file);
+                   byte[] buf = new byte[(int)file.length()];
+                   int offset = 0;
+                   int numRead = 0;
+                   while ((offset < buf.length) && ((numRead = in.read(buf, offset, buf.length -offset)) >= 0)) 
+                   {
+                     offset += numRead;
+                   }
+                   in.close();
+		            response.getOutputStream().write(buf);     
+		            response.getOutputStream().flush();
+		            response.getOutputStream().close();
+		            FacesContext.getCurrentInstance().responseComplete();
+                  }
+                  } catch (IOException  e) {
+			
+			        e.printStackTrace();
+   	            }
+		      }
 
 	
 }

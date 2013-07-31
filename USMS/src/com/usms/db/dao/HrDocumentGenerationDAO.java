@@ -87,7 +87,33 @@ public class HrDocumentGenerationDAO {
 			  }
 			return employerDetail;
 	    }
+	  
+	  public HrDocuments selectWpsFilePath(EntityManager em,UserTransaction ut,String month,int year)
+	       {
+		      HrDocuments wpsFilepath=null;
+		      try {
+			        ut.begin();
+			        Query q=em.createQuery("Select e from HrDocuments e where (e.month=:month and e.year=:year and  e.docType=:type)") ;
+			          q.setParameter("month", month);
+					  q.setParameter("year",year);
+				      q.setParameter("type","WPS_File");
+					  
+					  wpsFilepath=  (HrDocuments) q.getSingleResult();
+			        ut.commit();     
+		          } catch (Exception e) {
+				   System.out.println(e.getMessage());
+			      try {  
+					  ut.rollback();
+				      } catch (IllegalStateException | SecurityException
+						| SystemException e1) {
+					 
+					  e1.printStackTrace();
+				       }
+		 
+		          }
+		  
+	        return wpsFilepath;
 	
-	
-
+	   
+	   }
 }

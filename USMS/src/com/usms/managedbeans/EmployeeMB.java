@@ -215,12 +215,12 @@ public class EmployeeMB implements Serializable {
 	{
 		// model.consolidateEmployee();
 		// empInfodao.saveEmployee(model.getEmpInfo(), em, ut);
-
-		saveUploadedFiles();
-
 		model.consolidateEmployee();
 		model.setTotalSalary(model.getEmpInfo());
+		
+		saveUploadedFiles();		
 		empInfodao.saveEmployee(model.getEmpInfo(), em, ut);
+		
 		String message = appBean.applicationPropreties.getProperty("INSERT_SUCCESS");
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(message));  
 		
